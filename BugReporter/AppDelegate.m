@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "AZZWindow.h"
+#import "AZZTouchesCollector.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +19,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [[AZZWindow sharedInstance] setHidden:NO];
+    [AZZTouchesCollector sharedInstance];
     return YES;
 }
 

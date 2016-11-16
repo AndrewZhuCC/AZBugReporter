@@ -7,15 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		490D571E1DDC215A001791E7 /* AZZTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 490D571D1DDC215A001791E7 /* AZZTouch.m */; };
 		49ED14871DD452C90000207A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 49ED14861DD452C90000207A /* main.m */; };
 		49ED148A1DD452C90000207A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 49ED14891DD452C90000207A /* AppDelegate.m */; };
 		49ED148D1DD452C90000207A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49ED148C1DD452C90000207A /* ViewController.m */; };
 		49ED14901DD452C90000207A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49ED148E1DD452C90000207A /* Main.storyboard */; };
 		49ED14921DD452C90000207A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49ED14911DD452C90000207A /* Assets.xcassets */; };
 		49ED14951DD452C90000207A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49ED14931DD452C90000207A /* LaunchScreen.storyboard */; };
+		49ED149E1DD4536C0000207A /* AZZWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 49ED149D1DD4536C0000207A /* AZZWindow.m */; };
+		49F5ADED1DD5A3D700284022 /* UIWindow+SendEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F5ADEC1DD5A3D700284022 /* UIWindow+SendEvent.m */; };
+		49F5ADF01DD5AB7D00284022 /* AZZTouchesCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F5ADEF1DD5AB7D00284022 /* AZZTouchesCollector.m */; };
+		49F5ADF31DD5AD4400284022 /* MyTestButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F5ADF21DD5AD4400284022 /* MyTestButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		490D571C1DDC215A001791E7 /* AZZTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZTouch.h; path = Classes/AZZTouch.h; sourceTree = SOURCE_ROOT; };
+		490D571D1DDC215A001791E7 /* AZZTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZTouch.m; path = Classes/AZZTouch.m; sourceTree = SOURCE_ROOT; };
 		49ED14821DD452C90000207A /* BugReporter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BugReporter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49ED14861DD452C90000207A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		49ED14881DD452C90000207A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -26,6 +33,14 @@
 		49ED14911DD452C90000207A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49ED14941DD452C90000207A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		49ED14961DD452C90000207A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49ED149C1DD4536C0000207A /* AZZWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZWindow.h; path = Classes/AZZWindow.h; sourceTree = SOURCE_ROOT; };
+		49ED149D1DD4536C0000207A /* AZZWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZWindow.m; path = Classes/AZZWindow.m; sourceTree = SOURCE_ROOT; };
+		49F5ADEB1DD5A3D700284022 /* UIWindow+SendEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIWindow+SendEvent.h"; path = "Classes/UIWindow+SendEvent.h"; sourceTree = SOURCE_ROOT; };
+		49F5ADEC1DD5A3D700284022 /* UIWindow+SendEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIWindow+SendEvent.m"; path = "Classes/UIWindow+SendEvent.m"; sourceTree = SOURCE_ROOT; };
+		49F5ADEE1DD5AB7D00284022 /* AZZTouchesCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZTouchesCollector.h; path = Classes/AZZTouchesCollector.h; sourceTree = SOURCE_ROOT; };
+		49F5ADEF1DD5AB7D00284022 /* AZZTouchesCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZTouchesCollector.m; path = Classes/AZZTouchesCollector.m; sourceTree = SOURCE_ROOT; };
+		49F5ADF11DD5AD4400284022 /* MyTestButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTestButton.h; sourceTree = "<group>"; };
+		49F5ADF21DD5AD4400284022 /* MyTestButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTestButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +77,16 @@
 				49ED14891DD452C90000207A /* AppDelegate.m */,
 				49ED148B1DD452C90000207A /* ViewController.h */,
 				49ED148C1DD452C90000207A /* ViewController.m */,
+				49ED149C1DD4536C0000207A /* AZZWindow.h */,
+				49ED149D1DD4536C0000207A /* AZZWindow.m */,
+				49F5ADEE1DD5AB7D00284022 /* AZZTouchesCollector.h */,
+				49F5ADEF1DD5AB7D00284022 /* AZZTouchesCollector.m */,
+				49F5ADEB1DD5A3D700284022 /* UIWindow+SendEvent.h */,
+				49F5ADEC1DD5A3D700284022 /* UIWindow+SendEvent.m */,
+				490D571C1DDC215A001791E7 /* AZZTouch.h */,
+				490D571D1DDC215A001791E7 /* AZZTouch.m */,
+				49F5ADF11DD5AD4400284022 /* MyTestButton.h */,
+				49F5ADF21DD5AD4400284022 /* MyTestButton.m */,
 				49ED148E1DD452C90000207A /* Main.storyboard */,
 				49ED14911DD452C90000207A /* Assets.xcassets */,
 				49ED14931DD452C90000207A /* LaunchScreen.storyboard */,
@@ -154,6 +179,11 @@
 				49ED148D1DD452C90000207A /* ViewController.m in Sources */,
 				49ED148A1DD452C90000207A /* AppDelegate.m in Sources */,
 				49ED14871DD452C90000207A /* main.m in Sources */,
+				49F5ADF01DD5AB7D00284022 /* AZZTouchesCollector.m in Sources */,
+				49F5ADF31DD5AD4400284022 /* MyTestButton.m in Sources */,
+				490D571E1DDC215A001791E7 /* AZZTouch.m in Sources */,
+				49ED149E1DD4536C0000207A /* AZZWindow.m in Sources */,
+				49F5ADED1DD5A3D700284022 /* UIWindow+SendEvent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,6 +342,7 @@
 				49ED149B1DD452C90000207A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
