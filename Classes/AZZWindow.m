@@ -9,11 +9,9 @@
 #import "AZZWindow.h"
 #import "UIWindow+SendEvent.h"
 
-#import "MyTestButton.h"
-
 @interface AZZWindow ()
 
-@property (nonatomic, strong) MyTestButton *button;
+@property (nonatomic, strong) UIButton *button;
 @property (nonatomic, strong) UIPanGestureRecognizer *panGrestureRecognizer;
 @property (nonatomic, assign) CGPoint originalCenter;
 
@@ -44,7 +42,7 @@
     self.rootViewController = [UIViewController new];
     [self.rootViewController.view setHidden:YES];
     
-    _button = [[MyTestButton alloc] initWithFrame:CGRectMake(-25, 300, 50, 50)];
+    _button = [[UIButton alloc] initWithFrame:CGRectMake(-25, 300, 50, 50)];
     _button.layer.cornerRadius = 25;
     _button.layer.backgroundColor = [UIColor yellowColor].CGColor;
     [_button addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];

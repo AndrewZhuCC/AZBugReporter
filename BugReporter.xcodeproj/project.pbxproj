@@ -17,7 +17,6 @@
 		49ED149E1DD4536C0000207A /* AZZWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 49ED149D1DD4536C0000207A /* AZZWindow.m */; };
 		49F5ADED1DD5A3D700284022 /* UIWindow+SendEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F5ADEC1DD5A3D700284022 /* UIWindow+SendEvent.m */; };
 		49F5ADF01DD5AB7D00284022 /* AZZTouchesCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F5ADEF1DD5AB7D00284022 /* AZZTouchesCollector.m */; };
-		49F5ADF31DD5AD4400284022 /* MyTestButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F5ADF21DD5AD4400284022 /* MyTestButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,8 +38,6 @@
 		49F5ADEC1DD5A3D700284022 /* UIWindow+SendEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIWindow+SendEvent.m"; path = "Classes/UIWindow+SendEvent.m"; sourceTree = SOURCE_ROOT; };
 		49F5ADEE1DD5AB7D00284022 /* AZZTouchesCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZTouchesCollector.h; path = Classes/AZZTouchesCollector.h; sourceTree = SOURCE_ROOT; };
 		49F5ADEF1DD5AB7D00284022 /* AZZTouchesCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZTouchesCollector.m; path = Classes/AZZTouchesCollector.m; sourceTree = SOURCE_ROOT; };
-		49F5ADF11DD5AD4400284022 /* MyTestButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTestButton.h; sourceTree = "<group>"; };
-		49F5ADF21DD5AD4400284022 /* MyTestButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTestButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,8 +82,6 @@
 				49F5ADEC1DD5A3D700284022 /* UIWindow+SendEvent.m */,
 				490D571C1DDC215A001791E7 /* AZZTouch.h */,
 				490D571D1DDC215A001791E7 /* AZZTouch.m */,
-				49F5ADF11DD5AD4400284022 /* MyTestButton.h */,
-				49F5ADF21DD5AD4400284022 /* MyTestButton.m */,
 				49ED148E1DD452C90000207A /* Main.storyboard */,
 				49ED14911DD452C90000207A /* Assets.xcassets */,
 				49ED14931DD452C90000207A /* LaunchScreen.storyboard */,
@@ -180,7 +175,6 @@
 				49ED148A1DD452C90000207A /* AppDelegate.m in Sources */,
 				49ED14871DD452C90000207A /* main.m in Sources */,
 				49F5ADF01DD5AB7D00284022 /* AZZTouchesCollector.m in Sources */,
-				49F5ADF31DD5AD4400284022 /* MyTestButton.m in Sources */,
 				490D571E1DDC215A001791E7 /* AZZTouch.m in Sources */,
 				49ED149E1DD4536C0000207A /* AZZWindow.m in Sources */,
 				49F5ADED1DD5A3D700284022 /* UIWindow+SendEvent.m in Sources */,

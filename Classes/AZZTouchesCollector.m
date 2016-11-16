@@ -63,15 +63,12 @@
     UIWindow *window = [[UIApplication sharedApplication] keyWindow];
     UIView *statusBar = [[[UIApplication sharedApplication] valueForKeyPath:@"statusBar"]valueForKeyPath:@"foregroundView"];
     
-    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]){
-        UIGraphicsBeginImageContextWithOptions(window.bounds.size, NO, [UIScreen mainScreen].scale);
-    } else {
-        UIGraphicsBeginImageContext(window.bounds.size);
-    }
+    UIGraphicsBeginImageContextWithOptions(window.bounds.size, NO, 0);
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     [window.layer renderInContext:context];
     [statusBar.layer renderInContext:context];
+    
     for (AZZTouch *touch in touches) {
         CGPoint point = touch.locationInKeyWindow;
         UIColor *color = [UIColor colorWithRed:1 green:0 blue:0 alpha:0.5];
