@@ -9,6 +9,8 @@
 #import "AZZWindow.h"
 #import "UIWindow+SendEvent.h"
 
+#import "AZZJiraLoginViewController.h"
+
 @interface AZZWindow ()
 
 @property (nonatomic, strong) UIButton *button;
@@ -39,13 +41,16 @@
     self.windowLevel = UIWindowLevelStatusBar + 1.f;
     self.backgroundColor = [UIColor clearColor];
     
-    self.rootViewController = [UIViewController new];
+    AZZJiraLoginViewController *loginVC = [[AZZJiraLoginViewController alloc] init];
+    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:loginVC];
+    self.rootViewController = nvc;
     [self.rootViewController.view setHidden:YES];
     
     _button = [[UIButton alloc] initWithFrame:CGRectMake(-25, 300, 50, 50)];
     _button.layer.cornerRadius = 25;
     _button.layer.backgroundColor = [UIColor yellowColor].CGColor;
     [_button addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    _button.layer.zPosition = 1000;
     [self addSubview:_button];
     
     self.panGrestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGrestureRecognized:)];
@@ -54,14 +59,25 @@
 
 - (void)buttonTapped:(UIButton *)button {
     NSLog(@"button tapped");
+    self.rootViewController.view.hidden = !self.rootViewController.view.isHidden;
+    self.hidden = YES;
+    self.hidden = NO;
 }
 
 - (void)becomeKeyWindow {
     NSLog(@"becomeKeyWindow");
 }
 
+- (void)resignKeyWindow {
+    NSLog(@"resignKeyWindow");
+}
+
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
-    return [self.button pointInside:[self.button convertPoint:point fromView:self] withEvent:event] ? self.button : nil;
+    if (self.rootViewController.view.isHidden) {
+        return [self.button pointInside:[self.button convertPoint:point fromView:self] withEvent:event] ? self.button : nil;
+    } else {
+        return [self.button pointInside:[self.button convertPoint:point fromView:self] withEvent:event] ? self.button : [self.rootViewController.view hitTest:point withEvent:event];
+    }
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {

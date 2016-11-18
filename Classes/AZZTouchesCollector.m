@@ -14,6 +14,8 @@
 @property (nonatomic, strong) dispatch_queue_t ioQueue;
 @property (nonatomic, strong) dispatch_source_t timer;
 
+@property (nonatomic, assign) CGContextRef collectorContext;
+
 @end
 
 @implementation AZZTouchesCollector
@@ -60,37 +62,42 @@
 #pragma mark - SnapShot
 
 - (UIImage *)screenShotWithTouches:(NSArray *)touches {
-    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
-    UIView *statusBar = [[[UIApplication sharedApplication] valueForKeyPath:@"statusBar"]valueForKeyPath:@"foregroundView"];
-    
-    UIGraphicsBeginImageContextWithOptions(window.bounds.size, NO, 0);
-    
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    [window.layer renderInContext:context];
-    [statusBar.layer renderInContext:context];
-    
-    for (AZZTouch *touch in touches) {
-        CGPoint point = touch.locationInKeyWindow;
-        UIColor *color = [UIColor colorWithRed:1 green:0 blue:0 alpha:0.5];
-        switch (touch.phase) {
-            case UITouchPhaseBegan:
-                color = [UIColor colorWithRed:0 green:1 blue:0 alpha:0.5];
-                break;
-            case UITouchPhaseMoved:
-                color = [UIColor colorWithRed:0 green:0 blue:1 alpha:0.5];
-                break;
-            default:
-                break;
+    @autoreleasepool {
+        UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+        UIView *statusBar = [[[UIApplication sharedApplication] valueForKeyPath:@"statusBar"]valueForKeyPath:@"foregroundView"];
+        
+        if (!self.collectorContext) {
+            UIGraphicsBeginImageContextWithOptions(window.bounds.size, NO, 0);
+            
+            self.collectorContext = UIGraphicsGetCurrentContext();
         }
-        CGContextAddEllipseInRect(context, CGRectMake(point.x - 8, point.y - 8, 16, 16));
-        CGContextSetFillColorWithColor(context, color.CGColor);
-        CGContextFillPath(context);
+        [window.layer renderInContext:self.collectorContext];
+        [statusBar.layer renderInContext:self.collectorContext];
+        
+        for (AZZTouch *touch in touches) {
+            CGPoint point = touch.locationInKeyWindow;
+            UIColor *color = [UIColor colorWithRed:1 green:0 blue:0 alpha:0.5];
+            switch (touch.phase) {
+                case UITouchPhaseBegan:
+                    color = [UIColor colorWithRed:0 green:1 blue:0 alpha:0.5];
+                    break;
+                case UITouchPhaseMoved:
+                    color = [UIColor colorWithRed:0 green:0 blue:1 alpha:0.5];
+                    break;
+                default:
+                    break;
+            }
+            CGContextAddEllipseInRect(self.collectorContext, CGRectMake(point.x - 8, point.y - 8, 16, 16));
+            CGContextSetFillColorWithColor(self.collectorContext, color.CGColor);
+            CGContextFillPath(self.collectorContext);
+        }
+        
+        UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+        CGContextClearRect(self.collectorContext, window.bounds);
+//        UIGraphicsEndImageContext();
+    
+        return image;
     }
-    
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return image;
 }
 
 - (void)saveImage:(UIImage *)image {
