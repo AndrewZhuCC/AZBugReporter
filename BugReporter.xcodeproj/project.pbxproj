@@ -7,31 +7,45 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		490D571E1DDC215A001791E7 /* AZZTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 490D571D1DDC215A001791E7 /* AZZTouch.m */; };
-		49D93A151DDEC5B10074E00D /* AZZJiraClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D93A141DDEC5B10074E00D /* AZZJiraClient.m */; };
-		49D93A1B1DDECFCE0074E00D /* AZZJiraLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D93A1A1DDECFCE0074E00D /* AZZJiraLoginViewController.m */; };
+		49D93A231DDEE5180074E00D /* AZZJiraProjectsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D93A221DDEE5180074E00D /* AZZJiraProjectsModel.m */; };
+		49D93A271DDEE93B0074E00D /* AZZJiraProjectsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D93A261DDEE93B0074E00D /* AZZJiraProjectsListViewController.m */; };
+		49D93A2A1DDEFCEF0074E00D /* layout-placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 49D93A291DDEFCEF0074E00D /* layout-placeholder.png */; };
+		49D93A341DDF04220074E00D /* AZZJiraLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D93A331DDF04220074E00D /* AZZJiraLoginViewController.m */; };
+		49D93A391DDF04340074E00D /* AZZWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D93A361DDF04340074E00D /* AZZWindow.m */; };
+		49D93A3A1DDF04340074E00D /* UIWindow+SendEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D93A381DDF04340074E00D /* UIWindow+SendEvent.m */; };
+		49D93A441DDF04410074E00D /* AZZJiraClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D93A3D1DDF04410074E00D /* AZZJiraClient.m */; };
+		49D93A451DDF04410074E00D /* AZZTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D93A411DDF04410074E00D /* AZZTouch.m */; };
+		49D93A461DDF04410074E00D /* AZZTouchesCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D93A431DDF04410074E00D /* AZZTouchesCollector.m */; };
 		49ED14871DD452C90000207A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 49ED14861DD452C90000207A /* main.m */; };
 		49ED148A1DD452C90000207A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 49ED14891DD452C90000207A /* AppDelegate.m */; };
 		49ED148D1DD452C90000207A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49ED148C1DD452C90000207A /* ViewController.m */; };
 		49ED14901DD452C90000207A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49ED148E1DD452C90000207A /* Main.storyboard */; };
 		49ED14921DD452C90000207A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49ED14911DD452C90000207A /* Assets.xcassets */; };
 		49ED14951DD452C90000207A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49ED14931DD452C90000207A /* LaunchScreen.storyboard */; };
-		49ED149E1DD4536C0000207A /* AZZWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 49ED149D1DD4536C0000207A /* AZZWindow.m */; };
-		49F5ADED1DD5A3D700284022 /* UIWindow+SendEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F5ADEC1DD5A3D700284022 /* UIWindow+SendEvent.m */; };
-		49F5ADF01DD5AB7D00284022 /* AZZTouchesCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F5ADEF1DD5AB7D00284022 /* AZZTouchesCollector.m */; };
 		D75F465EA99FA827A7F1FFD3 /* libPods-BugReporter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0965C43283F5966068DCED24 /* libPods-BugReporter.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0965C43283F5966068DCED24 /* libPods-BugReporter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BugReporter.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		33FB23EE2FA9F0F9266DE158 /* Pods-BugReporter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BugReporter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BugReporter/Pods-BugReporter.debug.xcconfig"; sourceTree = "<group>"; };
-		490D571C1DDC215A001791E7 /* AZZTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZTouch.h; path = Classes/AZZTouch.h; sourceTree = SOURCE_ROOT; };
-		490D571D1DDC215A001791E7 /* AZZTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZTouch.m; path = Classes/AZZTouch.m; sourceTree = SOURCE_ROOT; };
-		49D93A131DDEC5B10074E00D /* AZZJiraClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraClient.h; path = Classes/AZZJiraClient.h; sourceTree = SOURCE_ROOT; };
-		49D93A141DDEC5B10074E00D /* AZZJiraClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraClient.m; path = Classes/AZZJiraClient.m; sourceTree = SOURCE_ROOT; };
-		49D93A171DDECCEC0074E00D /* AZZJiraConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraConfiguration.h; path = Classes/AZZJiraConfiguration.h; sourceTree = SOURCE_ROOT; };
-		49D93A191DDECFCE0074E00D /* AZZJiraLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraLoginViewController.h; path = Classes/AZZJiraLoginViewController.h; sourceTree = SOURCE_ROOT; };
-		49D93A1A1DDECFCE0074E00D /* AZZJiraLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraLoginViewController.m; path = Classes/AZZJiraLoginViewController.m; sourceTree = SOURCE_ROOT; };
+		49D93A211DDEE5180074E00D /* AZZJiraProjectsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraProjectsModel.h; path = Classes/Model/AZZJiraProjectsModel.h; sourceTree = SOURCE_ROOT; };
+		49D93A221DDEE5180074E00D /* AZZJiraProjectsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraProjectsModel.m; path = Classes/Model/AZZJiraProjectsModel.m; sourceTree = SOURCE_ROOT; };
+		49D93A251DDEE93B0074E00D /* AZZJiraProjectsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraProjectsListViewController.h; path = Classes/ViewController/AZZJiraProjectsListViewController.h; sourceTree = SOURCE_ROOT; };
+		49D93A261DDEE93B0074E00D /* AZZJiraProjectsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraProjectsListViewController.m; path = Classes/ViewController/AZZJiraProjectsListViewController.m; sourceTree = SOURCE_ROOT; };
+		49D93A291DDEFCEF0074E00D /* layout-placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "layout-placeholder.png"; sourceTree = "<group>"; };
+		49D93A321DDF04220074E00D /* AZZJiraLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraLoginViewController.h; path = Classes/ViewController/AZZJiraLoginViewController.h; sourceTree = SOURCE_ROOT; };
+		49D93A331DDF04220074E00D /* AZZJiraLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraLoginViewController.m; path = Classes/ViewController/AZZJiraLoginViewController.m; sourceTree = SOURCE_ROOT; };
+		49D93A351DDF04340074E00D /* AZZWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZWindow.h; path = Classes/Window/AZZWindow.h; sourceTree = SOURCE_ROOT; };
+		49D93A361DDF04340074E00D /* AZZWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZWindow.m; path = Classes/Window/AZZWindow.m; sourceTree = SOURCE_ROOT; };
+		49D93A371DDF04340074E00D /* UIWindow+SendEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIWindow+SendEvent.h"; path = "Classes/Window/UIWindow+SendEvent.h"; sourceTree = SOURCE_ROOT; };
+		49D93A381DDF04340074E00D /* UIWindow+SendEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIWindow+SendEvent.m"; path = "Classes/Window/UIWindow+SendEvent.m"; sourceTree = SOURCE_ROOT; };
+		49D93A3C1DDF04410074E00D /* AZZJiraClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZZJiraClient.h; sourceTree = "<group>"; };
+		49D93A3D1DDF04410074E00D /* AZZJiraClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZZJiraClient.m; sourceTree = "<group>"; };
+		49D93A3E1DDF04410074E00D /* AZZJiraConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZZJiraConfiguration.h; sourceTree = "<group>"; };
+		49D93A401DDF04410074E00D /* AZZTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZZTouch.h; sourceTree = "<group>"; };
+		49D93A411DDF04410074E00D /* AZZTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZZTouch.m; sourceTree = "<group>"; };
+		49D93A421DDF04410074E00D /* AZZTouchesCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZZTouchesCollector.h; sourceTree = "<group>"; };
+		49D93A431DDF04410074E00D /* AZZTouchesCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZZTouchesCollector.m; sourceTree = "<group>"; };
 		49ED14821DD452C90000207A /* BugReporter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BugReporter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49ED14861DD452C90000207A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		49ED14881DD452C90000207A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -42,12 +56,6 @@
 		49ED14911DD452C90000207A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49ED14941DD452C90000207A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		49ED14961DD452C90000207A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		49ED149C1DD4536C0000207A /* AZZWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZWindow.h; path = Classes/AZZWindow.h; sourceTree = SOURCE_ROOT; };
-		49ED149D1DD4536C0000207A /* AZZWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZWindow.m; path = Classes/AZZWindow.m; sourceTree = SOURCE_ROOT; };
-		49F5ADEB1DD5A3D700284022 /* UIWindow+SendEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIWindow+SendEvent.h"; path = "Classes/UIWindow+SendEvent.h"; sourceTree = SOURCE_ROOT; };
-		49F5ADEC1DD5A3D700284022 /* UIWindow+SendEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIWindow+SendEvent.m"; path = "Classes/UIWindow+SendEvent.m"; sourceTree = SOURCE_ROOT; };
-		49F5ADEE1DD5AB7D00284022 /* AZZTouchesCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZTouchesCollector.h; path = Classes/AZZTouchesCollector.h; sourceTree = SOURCE_ROOT; };
-		49F5ADEF1DD5AB7D00284022 /* AZZTouchesCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZTouchesCollector.m; path = Classes/AZZTouchesCollector.m; sourceTree = SOURCE_ROOT; };
 		8957BAEEAE49460388B3B423 /* Pods-BugReporter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BugReporter.release.xcconfig"; path = "Pods/Target Support Files/Pods-BugReporter/Pods-BugReporter.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -83,16 +91,12 @@
 		49D93A0F1DDEABE90074E00D /* AZBugReporter */ = {
 			isa = PBXGroup;
 			children = (
+				49D93A3B1DDF04410074E00D /* Network */,
+				49D93A3F1DDF04410074E00D /* TouchesCollector */,
+				49D93A281DDEFCEF0074E00D /* resources */,
 				49D93A181DDECFAC0074E00D /* Window */,
-				49F5ADEE1DD5AB7D00284022 /* AZZTouchesCollector.h */,
-				49F5ADEF1DD5AB7D00284022 /* AZZTouchesCollector.m */,
-				490D571C1DDC215A001791E7 /* AZZTouch.h */,
-				490D571D1DDC215A001791E7 /* AZZTouch.m */,
-				49D93A131DDEC5B10074E00D /* AZZJiraClient.h */,
-				49D93A141DDEC5B10074E00D /* AZZJiraClient.m */,
-				49D93A171DDECCEC0074E00D /* AZZJiraConfiguration.h */,
-				49D93A191DDECFCE0074E00D /* AZZJiraLoginViewController.h */,
-				49D93A1A1DDECFCE0074E00D /* AZZJiraLoginViewController.m */,
+				49D93A241DDEE51C0074E00D /* Model */,
+				49D93A1D1DDEE2BD0074E00D /* ViewControllers */,
 			);
 			name = AZBugReporter;
 			sourceTree = "<group>";
@@ -100,13 +104,65 @@
 		49D93A181DDECFAC0074E00D /* Window */ = {
 			isa = PBXGroup;
 			children = (
-				49ED149C1DD4536C0000207A /* AZZWindow.h */,
-				49ED149D1DD4536C0000207A /* AZZWindow.m */,
-				49F5ADEB1DD5A3D700284022 /* UIWindow+SendEvent.h */,
-				49F5ADEC1DD5A3D700284022 /* UIWindow+SendEvent.m */,
+				49D93A351DDF04340074E00D /* AZZWindow.h */,
+				49D93A361DDF04340074E00D /* AZZWindow.m */,
+				49D93A371DDF04340074E00D /* UIWindow+SendEvent.h */,
+				49D93A381DDF04340074E00D /* UIWindow+SendEvent.m */,
 			);
 			name = Window;
 			sourceTree = "<group>";
+		};
+		49D93A1D1DDEE2BD0074E00D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				49D93A321DDF04220074E00D /* AZZJiraLoginViewController.h */,
+				49D93A331DDF04220074E00D /* AZZJiraLoginViewController.m */,
+				49D93A251DDEE93B0074E00D /* AZZJiraProjectsListViewController.h */,
+				49D93A261DDEE93B0074E00D /* AZZJiraProjectsListViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		49D93A241DDEE51C0074E00D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				49D93A211DDEE5180074E00D /* AZZJiraProjectsModel.h */,
+				49D93A221DDEE5180074E00D /* AZZJiraProjectsModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		49D93A281DDEFCEF0074E00D /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				49D93A291DDEFCEF0074E00D /* layout-placeholder.png */,
+			);
+			name = resources;
+			path = Classes/resources;
+			sourceTree = SOURCE_ROOT;
+		};
+		49D93A3B1DDF04410074E00D /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				49D93A3C1DDF04410074E00D /* AZZJiraClient.h */,
+				49D93A3D1DDF04410074E00D /* AZZJiraClient.m */,
+				49D93A3E1DDF04410074E00D /* AZZJiraConfiguration.h */,
+			);
+			name = Network;
+			path = Classes/Network;
+			sourceTree = SOURCE_ROOT;
+		};
+		49D93A3F1DDF04410074E00D /* TouchesCollector */ = {
+			isa = PBXGroup;
+			children = (
+				49D93A401DDF04410074E00D /* AZZTouch.h */,
+				49D93A411DDF04410074E00D /* AZZTouch.m */,
+				49D93A421DDF04410074E00D /* AZZTouchesCollector.h */,
+				49D93A431DDF04410074E00D /* AZZTouchesCollector.m */,
+			);
+			name = TouchesCollector;
+			path = Classes/TouchesCollector;
+			sourceTree = SOURCE_ROOT;
 		};
 		49ED14791DD452C90000207A = {
 			isa = PBXGroup;
@@ -216,6 +272,7 @@
 				49ED14951DD452C90000207A /* LaunchScreen.storyboard in Resources */,
 				49ED14921DD452C90000207A /* Assets.xcassets in Resources */,
 				49ED14901DD452C90000207A /* Main.storyboard in Resources */,
+				49D93A2A1DDEFCEF0074E00D /* layout-placeholder.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,14 +332,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				49ED148D1DD452C90000207A /* ViewController.m in Sources */,
-				49D93A1B1DDECFCE0074E00D /* AZZJiraLoginViewController.m in Sources */,
 				49ED148A1DD452C90000207A /* AppDelegate.m in Sources */,
 				49ED14871DD452C90000207A /* main.m in Sources */,
-				49F5ADF01DD5AB7D00284022 /* AZZTouchesCollector.m in Sources */,
-				490D571E1DDC215A001791E7 /* AZZTouch.m in Sources */,
-				49D93A151DDEC5B10074E00D /* AZZJiraClient.m in Sources */,
-				49ED149E1DD4536C0000207A /* AZZWindow.m in Sources */,
-				49F5ADED1DD5A3D700284022 /* UIWindow+SendEvent.m in Sources */,
+				49D93A451DDF04410074E00D /* AZZTouch.m in Sources */,
+				49D93A271DDEE93B0074E00D /* AZZJiraProjectsListViewController.m in Sources */,
+				49D93A3A1DDF04340074E00D /* UIWindow+SendEvent.m in Sources */,
+				49D93A391DDF04340074E00D /* AZZWindow.m in Sources */,
+				49D93A441DDF04410074E00D /* AZZJiraClient.m in Sources */,
+				49D93A341DDF04220074E00D /* AZZJiraLoginViewController.m in Sources */,
+				49D93A461DDF04410074E00D /* AZZTouchesCollector.m in Sources */,
+				49D93A231DDEE5180074E00D /* AZZJiraProjectsModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

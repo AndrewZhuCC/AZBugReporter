@@ -8,14 +8,21 @@
 
 #import "AZZJiraLoginViewController.h"
 #import "AZZJiraClient.h"
+#import "AZZJiraProjectsListViewController.h"
+
+#import "AZZJiraConfiguration.h"
 
 #import <Masonry/Masonry.h>
+#import <MBProgressHUD/MBProgressHUD.h>
+#import <SAMKeychain/SAMKeychain.h>
 
 @interface AZZJiraLoginViewController () <UITextFieldDelegate>
 
 @property (nonatomic, strong) UITextField *tfUserName;
 @property (nonatomic, strong) UITextField *tfPassword;
 @property (nonatomic, strong) UIButton *btnCommit;
+
+@property (nonatomic, strong) MBProgressHUD *hud;
 
 @end
 
@@ -25,6 +32,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.title = @"Login";
     [self setupSubviews];
 }
 
@@ -49,11 +57,23 @@
         password = @"";
     }
     
+    __weak typeof(self) wself = self;
     [[AZZJiraClient sharedInstance] requestLoginWithUserName:userName password:password success:^(NSHTTPURLResponse *response, id responseObject) {
         NSLog(@"success response:%@", responseObject);
+        [SAMKeychain setPassword:self.tfPassword.text forService:AZZJiraKeyChainService account:self.tfUserName.text];
+        wself.hud.label.text = @"Success";
+        AZZJiraProjectsListViewController *listVC = [AZZJiraProjectsListViewController new];
+        [wself.navigationController pushViewController:listVC animated:YES];
     } failure:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
         NSLog(@"fail response:%@ error:%@", responseObject, error);
+        wself.hud.mode = MBProgressHUDModeText;
+        wself.hud.label.text = error.description;
+        [wself.hud hideAnimated:YES afterDelay:3.0];
     }];
+    
+    self.hud.label.text = nil;
+    self.hud.mode = MBProgressHUDModeIndeterminate;
+    [self.hud showAnimated:YES];
 }
 
 #pragma mark - UITextField Delegate
@@ -89,6 +109,14 @@
         make.top.equalTo(self.tfPassword.mas_bottom).with.offset(40);
         make.width.mas_equalTo(200);
     }];
+    
+    NSArray *accounts = [SAMKeychain accountsForService:AZZJiraKeyChainService];
+    if (accounts.count > 0) {
+        NSString *account = [[accounts firstObject] objectForKey:@"acct"];
+        NSString *password = [SAMKeychain passwordForService:AZZJiraKeyChainService account:account];
+        self.tfUserName.text = account;
+        self.tfPassword.text = password;
+    }
 }
 
 - (UITextField *)tfUserName {
@@ -127,6 +155,15 @@
         [self.view addSubview:_btnCommit];
     }
     return _btnCommit;
+}
+
+- (MBProgressHUD *)hud {
+    if (!_hud) {
+        _hud = [[MBProgressHUD alloc] initWithView:self.view];
+        _hud.label.numberOfLines = 0;
+        [self.view addSubview:_hud];
+    }
+    return _hud;
 }
 
 @end

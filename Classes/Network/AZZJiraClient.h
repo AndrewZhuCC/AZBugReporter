@@ -13,13 +13,19 @@ typedef NS_ENUM(NSUInteger, AZZRequestMethodType) {
     AZZRequestMethodType_Post = 1,
 };
 
+typedef void(^AZZJiraSuccessBlock)(NSHTTPURLResponse *response, id responseObject);
+typedef void(^AZZJiraFailBlock)(NSHTTPURLResponse *response, id responseObject, NSError *error);
+
 @interface AZZJiraClient : AFHTTPSessionManager
 
 + (instancetype)sharedInstance;
 
 - (NSURLSessionDataTask *)requestLoginWithUserName:(NSString *)userName
                                           password:(NSString *)password
-                                           success:(void (^)(NSHTTPURLResponse *response, id responseObject))success
-                                           failure:(void (^)(NSHTTPURLResponse *response, id responseObject, NSError *error))failure;
+                                           success:(AZZJiraSuccessBlock)success
+                                           failure:(AZZJiraFailBlock)failure;
+
+- (NSURLSessionDataTask *)requestProjectsListSuccess:(AZZJiraSuccessBlock)success
+                                                fail:(AZZJiraFailBlock)fail;
 
 @end

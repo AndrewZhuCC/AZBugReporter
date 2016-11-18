@@ -35,8 +35,8 @@
                                     body:(NSData *)body
                           uploadProgress:(void (^)(NSProgress * _Nonnull))uploadProgressBlock
                         downloadProgress:(void (^)(NSProgress * _Nonnull))downloadProgressBlock
-                                 success:(void (^)(NSHTTPURLResponse *response, id responseObject))success
-                                 failure:(void (^)(NSHTTPURLResponse *response, id responseObject, NSError *error))failure {
+                                 success:(AZZJiraSuccessBlock)success
+                                 failure:(AZZJiraFailBlock)failure {
     NSURLSessionDataTask *task;
     NSMutableURLRequest *request;
     
@@ -90,8 +90,8 @@
 
 - (NSURLSessionDataTask *)requestLoginWithUserName:(NSString *)userName
                                           password:(NSString *)password
-                                           success:(void (^)(NSHTTPURLResponse *response, id responseObject))success
-                                           failure:(void (^)(NSHTTPURLResponse *response, id responseObject, NSError *error))failure {
+                                           success:(AZZJiraSuccessBlock)success
+                                           failure:(AZZJiraFailBlock)failure {
     NSDictionary *param = @{@"username" : userName,
                             @"password" : password};
     NSError *serializerError = nil;
@@ -125,6 +125,12 @@
     
     [task resume];
     return task;
+}
+
+- (NSURLSessionDataTask *)requestProjectsListSuccess:(AZZJiraSuccessBlock)success
+                                                fail:(AZZJiraFailBlock)fail {
+    return [self requestWithURL:@"project" method:AZZRequestMethodType_Get parameter:nil
+                           body:nil uploadProgress:nil downloadProgress:nil success:success failure:fail];
 }
 
 @end
