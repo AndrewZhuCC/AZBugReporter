@@ -39,12 +39,12 @@
     
     __weak typeof(self) wself = self;
     [[AZZJiraClient sharedInstance] requestProjectsListSuccess:^(NSHTTPURLResponse *response, id responseObject) {
-        NSLog(@"success:\n%@", responseObject);
+//        NSLog(@"success:\n%@", responseObject);
         wself.projects = [AZZJiraProjectsModel getProjectsModelsWithJSONArray:responseObject];
         [wself.hud hideAnimated:YES];
         [wself.tbProjects reloadData];
     } fail:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
-        NSLog(@"fail:\n%@", responseObject);
+//        NSLog(@"fail:\n%@", responseObject);
         wself.hud.label.text = error.description;
         wself.hud.mode = MBProgressHUDModeText;
         [wself.hud hideAnimated:YES afterDelay:3.0];

@@ -16,6 +16,8 @@
 
 @property (nonatomic, assign) CGContextRef collectorContext;
 
+@property (nonatomic, assign) BOOL paused;
+
 @end
 
 @implementation AZZTouchesCollector
@@ -49,9 +51,25 @@
     dispatch_resume(_timer);
 }
 
+#pragma mark - Switches
+
+- (void)pauseCollect:(BOOL)pause {
+    if (self.paused != pause) {
+        if (pause) {
+            dispatch_suspend(self.timer);
+        } else {
+            dispatch_resume(self.timer);
+        }
+        self.paused = pause;
+    }
+}
+
 #pragma mark - Notification
 
 - (void)touchesNotification:(NSNotification *)notification {
+    if (self.paused) {
+        return;
+    }
     dispatch_async(self.ioQueue, ^{
         NSDictionary *dic = [notification userInfo];
         NSArray *touches = [dic objectForKey:@"touches"];

@@ -59,13 +59,13 @@
     
     __weak typeof(self) wself = self;
     [[AZZJiraClient sharedInstance] requestLoginWithUserName:userName password:password success:^(NSHTTPURLResponse *response, id responseObject) {
-        NSLog(@"success response:%@", responseObject);
+//        NSLog(@"success response:%@", responseObject);
         [SAMKeychain setPassword:self.tfPassword.text forService:AZZJiraKeyChainService account:self.tfUserName.text];
         wself.hud.label.text = @"Success";
         AZZJiraProjectsListViewController *listVC = [AZZJiraProjectsListViewController new];
         [wself.navigationController pushViewController:listVC animated:YES];
     } failure:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
-        NSLog(@"fail response:%@ error:%@", responseObject, error);
+//        NSLog(@"fail response:%@ error:%@", responseObject, error);
         wself.hud.mode = MBProgressHUDModeText;
         wself.hud.label.text = error.description;
         [wself.hud hideAnimated:YES afterDelay:3.0];

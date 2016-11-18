@@ -8,6 +8,7 @@
 
 #import "AZZWindow.h"
 #import "UIWindow+SendEvent.h"
+#import "AZZTouchesCollector.h"
 
 #import "AZZJiraLoginViewController.h"
 
@@ -58,8 +59,8 @@
 }
 
 - (void)buttonTapped:(UIButton *)button {
-    NSLog(@"button tapped");
     self.rootViewController.view.hidden = !self.rootViewController.view.isHidden;
+    [[AZZTouchesCollector sharedInstance] pauseCollect:!self.rootViewController.view.hidden];
     self.hidden = YES;
     self.hidden = NO;
 }
@@ -81,7 +82,6 @@
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    NSLog(@"azz window touches began");
 }
 
 - (void)panGrestureRecognized:(UIPanGestureRecognizer *)panGr {

@@ -12,4 +12,6 @@
 
 + (instancetype)sharedInstance;
 
+- (void)pauseCollect:(BOOL)pause;
+
 @end
