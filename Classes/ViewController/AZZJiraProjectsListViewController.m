@@ -9,10 +9,12 @@
 #import "AZZJiraProjectsListViewController.h"
 #import "AZZJiraClient.h"
 #import "AZZJiraProjectsModel.h"
+#import "AZZJiraProjectListCell.h"
 
 #import <AFNetworking/UIKit+AFNetworking.h>
 #import <Masonry/Masonry.h>
 #import <MBProgressHUD/MBProgressHUD.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface AZZJiraProjectsListViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -79,33 +81,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *cellIdentifier = @"projectList";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    }
-    
-    AZZJiraProjectsModel *project = self.projects[indexPath.row];
-    NSString *avatarURLString = project.avatarUrls[@"48x48"];
-    if (avatarURLString.length > 0) {
-        NSURL *avatarURL = [NSURL URLWithString:avatarURLString];
-        if (avatarURL) {
-            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:avatarURL];
-            [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
-            
-            __weak typeof(tableView) tbv = tableView;
-            __weak typeof(cell) wcell = cell;
-            [cell.imageView setImageWithURLRequest:request placeholderImage:[UIImage imageNamed:@"layout-placeholder"] success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
-                wcell.imageView.image = image;
-                [tbv reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-            } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
-            }];
-        }
-    }
-    cell.textLabel.text = project.name;
-    
-    return cell;
+    return [AZZJiraProjectListCell cellWithTableView:tableView model:self.projects[indexPath.row]];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -120,6 +96,7 @@
         _tbProjects.delegate = self;
         _tbProjects.dataSource = self;
         _tbProjects.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+        [_tbProjects registerClass:[AZZJiraProjectListCell class] forCellReuseIdentifier:NSStringFromClass([AZZJiraProjectListCell class])];
         [self.view addSubview:_tbProjects];
     }
     return _tbProjects;

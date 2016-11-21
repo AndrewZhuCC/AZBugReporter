@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4906DE631DE2C75900891D1E /* AZZJiraProjectListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906DE621DE2C75900891D1E /* AZZJiraProjectListCell.m */; };
 		49D93A231DDEE5180074E00D /* AZZJiraProjectsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D93A221DDEE5180074E00D /* AZZJiraProjectsModel.m */; };
 		49D93A271DDEE93B0074E00D /* AZZJiraProjectsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D93A261DDEE93B0074E00D /* AZZJiraProjectsListViewController.m */; };
 		49D93A2A1DDEFCEF0074E00D /* layout-placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 49D93A291DDEFCEF0074E00D /* layout-placeholder.png */; };
@@ -28,6 +29,8 @@
 /* Begin PBXFileReference section */
 		0965C43283F5966068DCED24 /* libPods-BugReporter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BugReporter.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		33FB23EE2FA9F0F9266DE158 /* Pods-BugReporter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BugReporter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BugReporter/Pods-BugReporter.debug.xcconfig"; sourceTree = "<group>"; };
+		4906DE611DE2C75900891D1E /* AZZJiraProjectListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraProjectListCell.h; path = Classes/View/AZZJiraProjectListCell.h; sourceTree = SOURCE_ROOT; };
+		4906DE621DE2C75900891D1E /* AZZJiraProjectListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraProjectListCell.m; path = Classes/View/AZZJiraProjectListCell.m; sourceTree = SOURCE_ROOT; };
 		49D93A211DDEE5180074E00D /* AZZJiraProjectsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraProjectsModel.h; path = Classes/Model/AZZJiraProjectsModel.h; sourceTree = SOURCE_ROOT; };
 		49D93A221DDEE5180074E00D /* AZZJiraProjectsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraProjectsModel.m; path = Classes/Model/AZZJiraProjectsModel.m; sourceTree = SOURCE_ROOT; };
 		49D93A251DDEE93B0074E00D /* AZZJiraProjectsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraProjectsListViewController.h; path = Classes/ViewController/AZZJiraProjectsListViewController.h; sourceTree = SOURCE_ROOT; };
@@ -88,6 +91,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		4906DE641DE2C76000891D1E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4906DE611DE2C75900891D1E /* AZZJiraProjectListCell.h */,
+				4906DE621DE2C75900891D1E /* AZZJiraProjectListCell.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		49D93A0F1DDEABE90074E00D /* AZBugReporter */ = {
 			isa = PBXGroup;
 			children = (
@@ -96,6 +108,7 @@
 				49D93A281DDEFCEF0074E00D /* resources */,
 				49D93A181DDECFAC0074E00D /* Window */,
 				49D93A241DDEE51C0074E00D /* Model */,
+				4906DE641DE2C76000891D1E /* View */,
 				49D93A1D1DDEE2BD0074E00D /* ViewControllers */,
 			);
 			name = AZBugReporter;
@@ -340,6 +353,7 @@
 				49D93A391DDF04340074E00D /* AZZWindow.m in Sources */,
 				49D93A441DDF04410074E00D /* AZZJiraClient.m in Sources */,
 				49D93A341DDF04220074E00D /* AZZJiraLoginViewController.m in Sources */,
+				4906DE631DE2C75900891D1E /* AZZJiraProjectListCell.m in Sources */,
 				49D93A461DDF04410074E00D /* AZZTouchesCollector.m in Sources */,
 				49D93A231DDEE5180074E00D /* AZZJiraProjectsModel.m in Sources */,
 			);

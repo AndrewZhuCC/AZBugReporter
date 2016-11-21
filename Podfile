@@ -12,5 +12,6 @@ target 'BugReporter' do
   pod 'MBProgressHUD', '~> 1.0.0'
   pod 'Mantle', '~> 2.1.0'
   pod 'SAMKeychain'
+  pod 'SDWebImage'
 
 end

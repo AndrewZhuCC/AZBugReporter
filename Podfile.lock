@@ -21,6 +21,9 @@ PODS:
   - Masonry (1.0.2)
   - MBProgressHUD (1.0.0)
   - SAMKeychain (1.5.2)
+  - SDWebImage (3.8.2):
+    - SDWebImage/Core (= 3.8.2)
+  - SDWebImage/Core (3.8.2)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.1.0)
@@ -29,6 +32,7 @@ DEPENDENCIES:
   - Masonry (~> 1.0.2)
   - MBProgressHUD (~> 1.0.0)
   - SAMKeychain
+  - SDWebImage
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -37,7 +41,8 @@ SPEC CHECKSUMS:
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   SAMKeychain: 1865333198217411f35327e8da61b43de79b635b
+  SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
 
-PODFILE CHECKSUM: e883354f092819ad6cb5105626040c7d3c258983
+PODFILE CHECKSUM: 7d6b3144d1cb45b809ecb26618e85763d9f73381
 
 COCOAPODS: 1.1.0.rc.2

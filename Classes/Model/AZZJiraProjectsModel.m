@@ -29,4 +29,8 @@
     return [MTLJSONAdapter modelsOfClass:[AZZJiraProjectsModel class] fromJSONArray:array error:nil];
 }
 
+- (BOOL)isEqual:(AZZJiraProjectsModel *)object {
+    return [object.idNumber isEqualToString:self.idNumber];
+}
+
 @end
