@@ -10,6 +10,7 @@
 #import "AZZJiraClient.h"
 #import "AZZJiraProjectsModel.h"
 #import "AZZJiraProjectListCell.h"
+#import "AZZJiraIssueListViewController.h"
 
 #import <AFNetworking/UIKit+AFNetworking.h>
 #import <Masonry/Masonry.h>
@@ -86,6 +87,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    AZZJiraIssueListViewController *vc = [[AZZJiraIssueListViewController alloc] init];
+    vc.projectModel = self.projects[indexPath.row];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - Views 

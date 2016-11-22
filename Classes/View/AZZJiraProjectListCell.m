@@ -28,9 +28,16 @@
     if (!cell) {
         cell = [[AZZJiraProjectListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([self class])];
     }
-    [cell setupConstraints];
     [cell setupWithModel:model];
     return cell;
+}
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        [self setupConstraints];
+    }
+    return self;
 }
 
 - (void)prepareForReuse {
@@ -40,13 +47,13 @@
 }
 
 - (void)setupConstraints {
-    [self.projectIcon mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [self.projectIcon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView).with.offset(8);
         make.top.equalTo(self.contentView).with.offset(8);
         make.bottom.equalTo(self.contentView).with.offset(-8);
         make.width.equalTo(self.projectIcon.mas_height);
     }];
-    [self.projectName mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [self.projectName mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.projectIcon.mas_right).with.offset(10);
         make.right.equalTo(self.contentView).with.offset(-8);
         make.top.equalTo(self.contentView).with.offset(8);

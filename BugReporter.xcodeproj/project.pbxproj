@@ -8,6 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		4906DE631DE2C75900891D1E /* AZZJiraProjectListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906DE621DE2C75900891D1E /* AZZJiraProjectListCell.m */; };
+		4906DE671DE3D7E100891D1E /* AZZJiraIssueModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906DE661DE3D7E100891D1E /* AZZJiraIssueModel.m */; };
+		4906DE6D1DE3DE8700891D1E /* AZZJiraIssueTypeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906DE6C1DE3DE8700891D1E /* AZZJiraIssueTypeModel.m */; };
+		4906DE701DE3E12200891D1E /* AZZJiraUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906DE6F1DE3E12200891D1E /* AZZJiraUserModel.m */; };
+		4906DE731DE3E2D900891D1E /* AZZJiraIssuePriorityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906DE721DE3E2D900891D1E /* AZZJiraIssuePriorityModel.m */; };
+		4906DE761DE3E4EA00891D1E /* AZZJiraIssueStatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906DE751DE3E4EA00891D1E /* AZZJiraIssueStatusModel.m */; };
+		4906DE791DE3E66B00891D1E /* AZZJiraIssueAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906DE781DE3E66B00891D1E /* AZZJiraIssueAttachment.m */; };
+		4906DE7C1DE3E8E800891D1E /* AZZJiraIssueVersionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906DE7B1DE3E8E800891D1E /* AZZJiraIssueVersionModel.m */; };
+		4906DE7F1DE3EA3A00891D1E /* AZZJiraIssueCommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906DE7E1DE3EA3A00891D1E /* AZZJiraIssueCommentModel.m */; };
+		4906DE821DE3ED3400891D1E /* AZZJiraIssueResolutionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906DE811DE3ED3400891D1E /* AZZJiraIssueResolutionModel.m */; };
+		4906DE851DE41AC900891D1E /* AZZJiraIssueListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906DE841DE41AC900891D1E /* AZZJiraIssueListTableViewCell.m */; };
+		4906DE881DE4394F00891D1E /* AZZJiraIssueListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906DE871DE4394F00891D1E /* AZZJiraIssueListViewController.m */; };
 		49D93A231DDEE5180074E00D /* AZZJiraProjectsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D93A221DDEE5180074E00D /* AZZJiraProjectsModel.m */; };
 		49D93A271DDEE93B0074E00D /* AZZJiraProjectsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D93A261DDEE93B0074E00D /* AZZJiraProjectsListViewController.m */; };
 		49D93A2A1DDEFCEF0074E00D /* layout-placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 49D93A291DDEFCEF0074E00D /* layout-placeholder.png */; };
@@ -31,6 +42,28 @@
 		33FB23EE2FA9F0F9266DE158 /* Pods-BugReporter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BugReporter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BugReporter/Pods-BugReporter.debug.xcconfig"; sourceTree = "<group>"; };
 		4906DE611DE2C75900891D1E /* AZZJiraProjectListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraProjectListCell.h; path = Classes/View/AZZJiraProjectListCell.h; sourceTree = SOURCE_ROOT; };
 		4906DE621DE2C75900891D1E /* AZZJiraProjectListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraProjectListCell.m; path = Classes/View/AZZJiraProjectListCell.m; sourceTree = SOURCE_ROOT; };
+		4906DE651DE3D7E100891D1E /* AZZJiraIssueModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraIssueModel.h; path = Classes/Model/AZZJiraIssueModel.h; sourceTree = SOURCE_ROOT; };
+		4906DE661DE3D7E100891D1E /* AZZJiraIssueModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraIssueModel.m; path = Classes/Model/AZZJiraIssueModel.m; sourceTree = SOURCE_ROOT; };
+		4906DE6B1DE3DE8700891D1E /* AZZJiraIssueTypeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraIssueTypeModel.h; path = Classes/Model/AZZJiraIssueTypeModel.h; sourceTree = SOURCE_ROOT; };
+		4906DE6C1DE3DE8700891D1E /* AZZJiraIssueTypeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraIssueTypeModel.m; path = Classes/Model/AZZJiraIssueTypeModel.m; sourceTree = SOURCE_ROOT; };
+		4906DE6E1DE3E12200891D1E /* AZZJiraUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraUserModel.h; path = Classes/Model/AZZJiraUserModel.h; sourceTree = SOURCE_ROOT; };
+		4906DE6F1DE3E12200891D1E /* AZZJiraUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraUserModel.m; path = Classes/Model/AZZJiraUserModel.m; sourceTree = SOURCE_ROOT; };
+		4906DE711DE3E2D900891D1E /* AZZJiraIssuePriorityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraIssuePriorityModel.h; path = Classes/Model/AZZJiraIssuePriorityModel.h; sourceTree = SOURCE_ROOT; };
+		4906DE721DE3E2D900891D1E /* AZZJiraIssuePriorityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraIssuePriorityModel.m; path = Classes/Model/AZZJiraIssuePriorityModel.m; sourceTree = SOURCE_ROOT; };
+		4906DE741DE3E4EA00891D1E /* AZZJiraIssueStatusModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraIssueStatusModel.h; path = Classes/Model/AZZJiraIssueStatusModel.h; sourceTree = SOURCE_ROOT; };
+		4906DE751DE3E4EA00891D1E /* AZZJiraIssueStatusModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraIssueStatusModel.m; path = Classes/Model/AZZJiraIssueStatusModel.m; sourceTree = SOURCE_ROOT; };
+		4906DE771DE3E66B00891D1E /* AZZJiraIssueAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraIssueAttachment.h; path = Classes/Model/AZZJiraIssueAttachment.h; sourceTree = SOURCE_ROOT; };
+		4906DE781DE3E66B00891D1E /* AZZJiraIssueAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraIssueAttachment.m; path = Classes/Model/AZZJiraIssueAttachment.m; sourceTree = SOURCE_ROOT; };
+		4906DE7A1DE3E8E800891D1E /* AZZJiraIssueVersionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraIssueVersionModel.h; path = Classes/Model/AZZJiraIssueVersionModel.h; sourceTree = SOURCE_ROOT; };
+		4906DE7B1DE3E8E800891D1E /* AZZJiraIssueVersionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraIssueVersionModel.m; path = Classes/Model/AZZJiraIssueVersionModel.m; sourceTree = SOURCE_ROOT; };
+		4906DE7D1DE3EA3A00891D1E /* AZZJiraIssueCommentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraIssueCommentModel.h; path = Classes/Model/AZZJiraIssueCommentModel.h; sourceTree = SOURCE_ROOT; };
+		4906DE7E1DE3EA3A00891D1E /* AZZJiraIssueCommentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraIssueCommentModel.m; path = Classes/Model/AZZJiraIssueCommentModel.m; sourceTree = SOURCE_ROOT; };
+		4906DE801DE3ED3400891D1E /* AZZJiraIssueResolutionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraIssueResolutionModel.h; path = Classes/Model/AZZJiraIssueResolutionModel.h; sourceTree = SOURCE_ROOT; };
+		4906DE811DE3ED3400891D1E /* AZZJiraIssueResolutionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraIssueResolutionModel.m; path = Classes/Model/AZZJiraIssueResolutionModel.m; sourceTree = SOURCE_ROOT; };
+		4906DE831DE41AC900891D1E /* AZZJiraIssueListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraIssueListTableViewCell.h; path = Classes/View/AZZJiraIssueListTableViewCell.h; sourceTree = SOURCE_ROOT; };
+		4906DE841DE41AC900891D1E /* AZZJiraIssueListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraIssueListTableViewCell.m; path = Classes/View/AZZJiraIssueListTableViewCell.m; sourceTree = SOURCE_ROOT; };
+		4906DE861DE4394F00891D1E /* AZZJiraIssueListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraIssueListViewController.h; path = Classes/ViewController/AZZJiraIssueListViewController.h; sourceTree = SOURCE_ROOT; };
+		4906DE871DE4394F00891D1E /* AZZJiraIssueListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraIssueListViewController.m; path = Classes/ViewController/AZZJiraIssueListViewController.m; sourceTree = SOURCE_ROOT; };
 		49D93A211DDEE5180074E00D /* AZZJiraProjectsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraProjectsModel.h; path = Classes/Model/AZZJiraProjectsModel.h; sourceTree = SOURCE_ROOT; };
 		49D93A221DDEE5180074E00D /* AZZJiraProjectsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraProjectsModel.m; path = Classes/Model/AZZJiraProjectsModel.m; sourceTree = SOURCE_ROOT; };
 		49D93A251DDEE93B0074E00D /* AZZJiraProjectsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraProjectsListViewController.h; path = Classes/ViewController/AZZJiraProjectsListViewController.h; sourceTree = SOURCE_ROOT; };
@@ -96,6 +129,8 @@
 			children = (
 				4906DE611DE2C75900891D1E /* AZZJiraProjectListCell.h */,
 				4906DE621DE2C75900891D1E /* AZZJiraProjectListCell.m */,
+				4906DE831DE41AC900891D1E /* AZZJiraIssueListTableViewCell.h */,
+				4906DE841DE41AC900891D1E /* AZZJiraIssueListTableViewCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -132,6 +167,8 @@
 				49D93A331DDF04220074E00D /* AZZJiraLoginViewController.m */,
 				49D93A251DDEE93B0074E00D /* AZZJiraProjectsListViewController.h */,
 				49D93A261DDEE93B0074E00D /* AZZJiraProjectsListViewController.m */,
+				4906DE861DE4394F00891D1E /* AZZJiraIssueListViewController.h */,
+				4906DE871DE4394F00891D1E /* AZZJiraIssueListViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -141,6 +178,24 @@
 			children = (
 				49D93A211DDEE5180074E00D /* AZZJiraProjectsModel.h */,
 				49D93A221DDEE5180074E00D /* AZZJiraProjectsModel.m */,
+				4906DE651DE3D7E100891D1E /* AZZJiraIssueModel.h */,
+				4906DE661DE3D7E100891D1E /* AZZJiraIssueModel.m */,
+				4906DE6B1DE3DE8700891D1E /* AZZJiraIssueTypeModel.h */,
+				4906DE6C1DE3DE8700891D1E /* AZZJiraIssueTypeModel.m */,
+				4906DE801DE3ED3400891D1E /* AZZJiraIssueResolutionModel.h */,
+				4906DE811DE3ED3400891D1E /* AZZJiraIssueResolutionModel.m */,
+				4906DE6E1DE3E12200891D1E /* AZZJiraUserModel.h */,
+				4906DE6F1DE3E12200891D1E /* AZZJiraUserModel.m */,
+				4906DE711DE3E2D900891D1E /* AZZJiraIssuePriorityModel.h */,
+				4906DE721DE3E2D900891D1E /* AZZJiraIssuePriorityModel.m */,
+				4906DE741DE3E4EA00891D1E /* AZZJiraIssueStatusModel.h */,
+				4906DE751DE3E4EA00891D1E /* AZZJiraIssueStatusModel.m */,
+				4906DE771DE3E66B00891D1E /* AZZJiraIssueAttachment.h */,
+				4906DE781DE3E66B00891D1E /* AZZJiraIssueAttachment.m */,
+				4906DE7A1DE3E8E800891D1E /* AZZJiraIssueVersionModel.h */,
+				4906DE7B1DE3E8E800891D1E /* AZZJiraIssueVersionModel.m */,
+				4906DE7D1DE3EA3A00891D1E /* AZZJiraIssueCommentModel.h */,
+				4906DE7E1DE3EA3A00891D1E /* AZZJiraIssueCommentModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -346,16 +401,27 @@
 			files = (
 				49ED148D1DD452C90000207A /* ViewController.m in Sources */,
 				49ED148A1DD452C90000207A /* AppDelegate.m in Sources */,
+				4906DE791DE3E66B00891D1E /* AZZJiraIssueAttachment.m in Sources */,
 				49ED14871DD452C90000207A /* main.m in Sources */,
 				49D93A451DDF04410074E00D /* AZZTouch.m in Sources */,
+				4906DE7F1DE3EA3A00891D1E /* AZZJiraIssueCommentModel.m in Sources */,
 				49D93A271DDEE93B0074E00D /* AZZJiraProjectsListViewController.m in Sources */,
+				4906DE851DE41AC900891D1E /* AZZJiraIssueListTableViewCell.m in Sources */,
+				4906DE7C1DE3E8E800891D1E /* AZZJiraIssueVersionModel.m in Sources */,
+				4906DE881DE4394F00891D1E /* AZZJiraIssueListViewController.m in Sources */,
 				49D93A3A1DDF04340074E00D /* UIWindow+SendEvent.m in Sources */,
 				49D93A391DDF04340074E00D /* AZZWindow.m in Sources */,
 				49D93A441DDF04410074E00D /* AZZJiraClient.m in Sources */,
 				49D93A341DDF04220074E00D /* AZZJiraLoginViewController.m in Sources */,
 				4906DE631DE2C75900891D1E /* AZZJiraProjectListCell.m in Sources */,
 				49D93A461DDF04410074E00D /* AZZTouchesCollector.m in Sources */,
+				4906DE821DE3ED3400891D1E /* AZZJiraIssueResolutionModel.m in Sources */,
+				4906DE6D1DE3DE8700891D1E /* AZZJiraIssueTypeModel.m in Sources */,
+				4906DE671DE3D7E100891D1E /* AZZJiraIssueModel.m in Sources */,
+				4906DE731DE3E2D900891D1E /* AZZJiraIssuePriorityModel.m in Sources */,
+				4906DE701DE3E12200891D1E /* AZZJiraUserModel.m in Sources */,
 				49D93A231DDEE5180074E00D /* AZZJiraProjectsModel.m in Sources */,
+				4906DE761DE3E4EA00891D1E /* AZZJiraIssueStatusModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

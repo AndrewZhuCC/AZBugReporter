@@ -28,4 +28,8 @@ typedef void(^AZZJiraFailBlock)(NSHTTPURLResponse *response, id responseObject, 
 - (NSURLSessionDataTask *)requestProjectsListSuccess:(AZZJiraSuccessBlock)success
                                                 fail:(AZZJiraFailBlock)fail;
 
+- (NSURLSessionDataTask *)requestIssueListByProjectKey:(NSString *)key
+                                               success:(AZZJiraSuccessBlock)success
+                                                  fail:(AZZJiraFailBlock)fail;
+
 @end

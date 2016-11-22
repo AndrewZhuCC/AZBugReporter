@@ -13,5 +13,6 @@ target 'BugReporter' do
   pod 'Mantle', '~> 2.1.0'
   pod 'SAMKeychain'
   pod 'SDWebImage'
+  pod 'UITableView+FDTemplateLayoutCell', '~> 1.5.beta'
 
 end

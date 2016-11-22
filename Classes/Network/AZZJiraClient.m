@@ -133,4 +133,11 @@
                            body:nil uploadProgress:nil downloadProgress:nil success:success failure:fail];
 }
 
+- (NSURLSessionDataTask *)requestIssueListByProjectKey:(NSString *)key
+                                               success:(AZZJiraSuccessBlock)success
+                                                  fail:(AZZJiraFailBlock)fail {
+    NSDictionary *parameter = @{@"jql" : [NSString stringWithFormat:@"project = %@ AND status in (产品需求阶段, 开发中, Reopened)", key]};
+    return [self requestWithURL:@"search" method:AZZRequestMethodType_Get parameter:parameter body:nil uploadProgress:nil downloadProgress:nil success:success failure:fail];
+}
+
 @end

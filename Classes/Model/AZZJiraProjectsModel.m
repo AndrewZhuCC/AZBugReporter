@@ -22,15 +22,11 @@
 }
 
 + (instancetype)getProjectsModelWithDictionary:(NSDictionary *)dic {
-    return [MTLJSONAdapter modelOfClass:[AZZJiraProjectsModel class] fromJSONDictionary:dic error:nil];
+    return [MTLJSONAdapter modelOfClass:[self class] fromJSONDictionary:dic error:nil];
 }
 
 + (NSArray<AZZJiraProjectsModel *> *)getProjectsModelsWithJSONArray:(NSArray *)array {
-    return [MTLJSONAdapter modelsOfClass:[AZZJiraProjectsModel class] fromJSONArray:array error:nil];
-}
-
-- (BOOL)isEqual:(AZZJiraProjectsModel *)object {
-    return [object.idNumber isEqualToString:self.idNumber];
+    return [MTLJSONAdapter modelsOfClass:[self class] fromJSONArray:array error:nil];
 }
 
 @end
