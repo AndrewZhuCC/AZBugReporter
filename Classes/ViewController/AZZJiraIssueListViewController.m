@@ -7,6 +7,8 @@
 //
 
 #import "AZZJiraIssueListViewController.h"
+#import "AZZJiraSelectIssueTypeViewController.h"
+
 #import "AZZJiraIssueListTableViewCell.h"
 #import "AZZJiraIssueModel.h"
 #import "AZZJiraProjectsModel.h"
@@ -31,6 +33,7 @@
     // Do any additional setup after loading the view.
     
     [self setupConstraints];
+    [self setupCreateIssueButton];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -52,6 +55,19 @@
     self.title = self.projectModel.name;
 }
 
+- (void)setupCreateIssueButton {
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Create Issue" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemClicked:)];
+    self.navigationItem.rightBarButtonItem = rightButton;
+}
+
+#pragma mark - Actions
+
+- (void)rightBarButtonItemClicked:(id)sender {
+    AZZJiraSelectIssueTypeViewController *vc = [[AZZJiraSelectIssueTypeViewController alloc] init];
+    vc.projectModel = self.projectModel;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 #pragma mark - Network
 
 - (void)requestIssuesByProjectKey {
@@ -61,7 +77,6 @@
             NSArray *issues = [responseObject objectForKey:@"issues"];
             wself.models = [AZZJiraIssueModel getIssueModelsWithJSONArray:issues];
             [wself.tbIssueList reloadData];
-            NSLog(@"success");
         } else {
             NSLog(@"not dic");
         }

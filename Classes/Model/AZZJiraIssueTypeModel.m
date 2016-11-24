@@ -17,11 +17,16 @@
              @"name"             : @"name",
              @"modelDescription" : @"description",
              @"iconUrl"          : @"iconUrl",
+             @"subtask"          : @"subtask"
              };
 }
 
 + (instancetype)getIssueTypeModelWithDictionary:(NSDictionary *)dic {
     return [MTLJSONAdapter modelOfClass:[self class] fromJSONDictionary:dic error:nil];
+}
+
++ (NSArray<AZZJiraIssueTypeModel *> *)getIssueTypeModelsWithArray:(NSArray *)array {
+    return [MTLJSONAdapter modelsOfClass:[self class] fromJSONArray:array error:nil];
 }
 
 @end

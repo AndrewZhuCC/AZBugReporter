@@ -19,6 +19,9 @@
 		4906DE821DE3ED3400891D1E /* AZZJiraIssueResolutionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906DE811DE3ED3400891D1E /* AZZJiraIssueResolutionModel.m */; };
 		4906DE851DE41AC900891D1E /* AZZJiraIssueListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906DE841DE41AC900891D1E /* AZZJiraIssueListTableViewCell.m */; };
 		4906DE881DE4394F00891D1E /* AZZJiraIssueListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906DE871DE4394F00891D1E /* AZZJiraIssueListViewController.m */; };
+		4906DE8B1DE58AED00891D1E /* AZZJIraIssueTypeFieldsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906DE8A1DE58AED00891D1E /* AZZJIraIssueTypeFieldsModel.m */; };
+		4906DE8E1DE5946900891D1E /* AZZJiraSelectIssueTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906DE8D1DE5946900891D1E /* AZZJiraSelectIssueTypeViewController.m */; };
+		4906DE911DE594B100891D1E /* AZZJiraIssueTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906DE901DE594B100891D1E /* AZZJiraIssueTypeCell.m */; };
 		49D93A231DDEE5180074E00D /* AZZJiraProjectsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D93A221DDEE5180074E00D /* AZZJiraProjectsModel.m */; };
 		49D93A271DDEE93B0074E00D /* AZZJiraProjectsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D93A261DDEE93B0074E00D /* AZZJiraProjectsListViewController.m */; };
 		49D93A2A1DDEFCEF0074E00D /* layout-placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 49D93A291DDEFCEF0074E00D /* layout-placeholder.png */; };
@@ -64,6 +67,12 @@
 		4906DE841DE41AC900891D1E /* AZZJiraIssueListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraIssueListTableViewCell.m; path = Classes/View/AZZJiraIssueListTableViewCell.m; sourceTree = SOURCE_ROOT; };
 		4906DE861DE4394F00891D1E /* AZZJiraIssueListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraIssueListViewController.h; path = Classes/ViewController/AZZJiraIssueListViewController.h; sourceTree = SOURCE_ROOT; };
 		4906DE871DE4394F00891D1E /* AZZJiraIssueListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraIssueListViewController.m; path = Classes/ViewController/AZZJiraIssueListViewController.m; sourceTree = SOURCE_ROOT; };
+		4906DE891DE58AED00891D1E /* AZZJIraIssueTypeFieldsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJIraIssueTypeFieldsModel.h; path = Classes/Model/AZZJIraIssueTypeFieldsModel.h; sourceTree = SOURCE_ROOT; };
+		4906DE8A1DE58AED00891D1E /* AZZJIraIssueTypeFieldsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJIraIssueTypeFieldsModel.m; path = Classes/Model/AZZJIraIssueTypeFieldsModel.m; sourceTree = SOURCE_ROOT; };
+		4906DE8C1DE5946900891D1E /* AZZJiraSelectIssueTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraSelectIssueTypeViewController.h; path = Classes/ViewController/AZZJiraSelectIssueTypeViewController.h; sourceTree = SOURCE_ROOT; };
+		4906DE8D1DE5946900891D1E /* AZZJiraSelectIssueTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraSelectIssueTypeViewController.m; path = Classes/ViewController/AZZJiraSelectIssueTypeViewController.m; sourceTree = SOURCE_ROOT; };
+		4906DE8F1DE594B100891D1E /* AZZJiraIssueTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraIssueTypeCell.h; path = Classes/View/AZZJiraIssueTypeCell.h; sourceTree = SOURCE_ROOT; };
+		4906DE901DE594B100891D1E /* AZZJiraIssueTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraIssueTypeCell.m; path = Classes/View/AZZJiraIssueTypeCell.m; sourceTree = SOURCE_ROOT; };
 		49D93A211DDEE5180074E00D /* AZZJiraProjectsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraProjectsModel.h; path = Classes/Model/AZZJiraProjectsModel.h; sourceTree = SOURCE_ROOT; };
 		49D93A221DDEE5180074E00D /* AZZJiraProjectsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraProjectsModel.m; path = Classes/Model/AZZJiraProjectsModel.m; sourceTree = SOURCE_ROOT; };
 		49D93A251DDEE93B0074E00D /* AZZJiraProjectsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraProjectsListViewController.h; path = Classes/ViewController/AZZJiraProjectsListViewController.h; sourceTree = SOURCE_ROOT; };
@@ -131,6 +140,8 @@
 				4906DE621DE2C75900891D1E /* AZZJiraProjectListCell.m */,
 				4906DE831DE41AC900891D1E /* AZZJiraIssueListTableViewCell.h */,
 				4906DE841DE41AC900891D1E /* AZZJiraIssueListTableViewCell.m */,
+				4906DE8F1DE594B100891D1E /* AZZJiraIssueTypeCell.h */,
+				4906DE901DE594B100891D1E /* AZZJiraIssueTypeCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -169,6 +180,8 @@
 				49D93A261DDEE93B0074E00D /* AZZJiraProjectsListViewController.m */,
 				4906DE861DE4394F00891D1E /* AZZJiraIssueListViewController.h */,
 				4906DE871DE4394F00891D1E /* AZZJiraIssueListViewController.m */,
+				4906DE8C1DE5946900891D1E /* AZZJiraSelectIssueTypeViewController.h */,
+				4906DE8D1DE5946900891D1E /* AZZJiraSelectIssueTypeViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -196,6 +209,8 @@
 				4906DE7B1DE3E8E800891D1E /* AZZJiraIssueVersionModel.m */,
 				4906DE7D1DE3EA3A00891D1E /* AZZJiraIssueCommentModel.h */,
 				4906DE7E1DE3EA3A00891D1E /* AZZJiraIssueCommentModel.m */,
+				4906DE891DE58AED00891D1E /* AZZJIraIssueTypeFieldsModel.h */,
+				4906DE8A1DE58AED00891D1E /* AZZJIraIssueTypeFieldsModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -400,6 +415,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				49ED148D1DD452C90000207A /* ViewController.m in Sources */,
+				4906DE911DE594B100891D1E /* AZZJiraIssueTypeCell.m in Sources */,
 				49ED148A1DD452C90000207A /* AppDelegate.m in Sources */,
 				4906DE791DE3E66B00891D1E /* AZZJiraIssueAttachment.m in Sources */,
 				49ED14871DD452C90000207A /* main.m in Sources */,
@@ -407,6 +423,7 @@
 				4906DE7F1DE3EA3A00891D1E /* AZZJiraIssueCommentModel.m in Sources */,
 				49D93A271DDEE93B0074E00D /* AZZJiraProjectsListViewController.m in Sources */,
 				4906DE851DE41AC900891D1E /* AZZJiraIssueListTableViewCell.m in Sources */,
+				4906DE8E1DE5946900891D1E /* AZZJiraSelectIssueTypeViewController.m in Sources */,
 				4906DE7C1DE3E8E800891D1E /* AZZJiraIssueVersionModel.m in Sources */,
 				4906DE881DE4394F00891D1E /* AZZJiraIssueListViewController.m in Sources */,
 				49D93A3A1DDF04340074E00D /* UIWindow+SendEvent.m in Sources */,
@@ -421,6 +438,7 @@
 				4906DE731DE3E2D900891D1E /* AZZJiraIssuePriorityModel.m in Sources */,
 				4906DE701DE3E12200891D1E /* AZZJiraUserModel.m in Sources */,
 				49D93A231DDEE5180074E00D /* AZZJiraProjectsModel.m in Sources */,
+				4906DE8B1DE58AED00891D1E /* AZZJIraIssueTypeFieldsModel.m in Sources */,
 				4906DE761DE3E4EA00891D1E /* AZZJiraIssueStatusModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

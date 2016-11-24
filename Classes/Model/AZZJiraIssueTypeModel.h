@@ -15,7 +15,9 @@
 @property (nonatomic, copy, readonly) NSString *name;
 @property (nonatomic, copy, readonly) NSString *modelDescription;
 @property (nonatomic, copy, readonly) NSURL *iconUrl;
+@property (nonatomic, assign, readonly) BOOL subtask;
 
 + (instancetype)getIssueTypeModelWithDictionary:(NSDictionary *)dic;
++ (NSArray<AZZJiraIssueTypeModel *> *)getIssueTypeModelsWithArray:(NSArray *)array;
 
 @end

@@ -32,4 +32,8 @@ typedef void(^AZZJiraFailBlock)(NSHTTPURLResponse *response, id responseObject, 
                                                success:(AZZJiraSuccessBlock)success
                                                   fail:(AZZJiraFailBlock)fail;
 
+- (NSURLSessionDataTask *)requestCreateIssueMetaByProjectKey:(NSString *)key
+                                                     success:(AZZJiraSuccessBlock)success
+                                                        fail:(AZZJiraFailBlock)fail;
+
 @end

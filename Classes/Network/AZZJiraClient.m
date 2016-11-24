@@ -140,4 +140,11 @@
     return [self requestWithURL:@"search" method:AZZRequestMethodType_Get parameter:parameter body:nil uploadProgress:nil downloadProgress:nil success:success failure:fail];
 }
 
+- (NSURLSessionDataTask *)requestCreateIssueMetaByProjectKey:(NSString *)key
+                                                     success:(AZZJiraSuccessBlock)success
+                                                        fail:(AZZJiraFailBlock)fail {
+    NSDictionary *parameter = @{@"projectKeys" : key};
+    return [self requestWithURL:@"issue/createmeta" method:AZZRequestMethodType_Get parameter:parameter body:nil uploadProgress:nil downloadProgress:nil success:success failure:fail];
+}
+
 @end
