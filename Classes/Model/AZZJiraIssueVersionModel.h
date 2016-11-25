@@ -18,5 +18,6 @@
 @property (nonatomic, assign, readonly) BOOL released;
 
 + (instancetype)getIssueVersionModelWithDictionary:(NSDictionary *)dic;
++ (NSArray<AZZJiraIssueVersionModel *> *)getVersionModelsFromArray:(NSArray *)array;
 
 @end

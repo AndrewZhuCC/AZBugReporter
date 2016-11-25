@@ -36,4 +36,9 @@ typedef void(^AZZJiraFailBlock)(NSHTTPURLResponse *response, id responseObject, 
                                                      success:(AZZJiraSuccessBlock)success
                                                         fail:(AZZJiraFailBlock)fail;
 
+- (NSURLSessionDataTask *)requestCreateIssueFieldsWithProjectKey:(NSString *)key
+                                                     issueTypeId:(NSString *)issueTypeId
+                                                         success:(AZZJiraSuccessBlock)success
+                                                            fail:(AZZJiraFailBlock)fail;
+
 @end

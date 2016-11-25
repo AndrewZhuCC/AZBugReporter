@@ -16,5 +16,6 @@
 @property (nonatomic, copy, readonly) NSString *idNumber;
 
 + (instancetype)getIssuePriorityModelWithDictionary:(NSDictionary *)dic;
++ (NSArray<AZZJiraIssuePriorityModel *> *)getIssuePriorityModelsWithArray:(NSArray *)array;
 
 @end

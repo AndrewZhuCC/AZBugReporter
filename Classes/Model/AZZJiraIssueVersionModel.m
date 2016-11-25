@@ -25,4 +25,8 @@
     return [MTLJSONAdapter modelOfClass:[self class] fromJSONDictionary:dic error:nil];
 }
 
++ (NSArray<AZZJiraIssueVersionModel *> *)getVersionModelsFromArray:(NSArray *)array {
+    return [MTLJSONAdapter modelsOfClass:[self class] fromJSONArray:array error:nil];
+}
+
 @end

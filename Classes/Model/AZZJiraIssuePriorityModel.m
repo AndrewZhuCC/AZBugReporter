@@ -23,4 +23,8 @@
     return [MTLJSONAdapter modelOfClass:[self class] fromJSONDictionary:dic error:nil];
 }
 
++ (NSArray<AZZJiraIssuePriorityModel *> *)getIssuePriorityModelsWithArray:(NSArray *)array {
+    return [MTLJSONAdapter modelsOfClass:[self class] fromJSONArray:array error:nil];
+}
+
 @end

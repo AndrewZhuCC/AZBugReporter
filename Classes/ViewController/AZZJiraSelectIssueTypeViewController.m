@@ -7,6 +7,8 @@
 //
 
 #import "AZZJiraSelectIssueTypeViewController.h"
+#import "AZZJiraCreateIssueViewController.h"
+
 #import "AZZJiraIssueTypeCell.h"
 
 #import "AZZJiraIssueTypeModel.h"
@@ -20,7 +22,7 @@
 @interface AZZJiraSelectIssueTypeViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tbIssues;
-@property (nonatomic, strong) NSArray *issueTypeModels;
+@property (nonatomic, copy) NSArray<AZZJiraIssueTypeModel *> *issueTypeModels;
 
 @end
 
@@ -31,6 +33,7 @@
     // Do any additional setup after loading the view.
     
     [self setupConstraints];
+    self.title = @"Issue Types";
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -83,6 +86,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    AZZJiraCreateIssueViewController *vc = [[AZZJiraCreateIssueViewController alloc] init];
+    vc.projectModel = self.projectModel;
+    vc.issueTypeModel = self.issueTypeModels[indexPath.row];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - Views

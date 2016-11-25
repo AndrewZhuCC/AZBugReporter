@@ -147,4 +147,14 @@
     return [self requestWithURL:@"issue/createmeta" method:AZZRequestMethodType_Get parameter:parameter body:nil uploadProgress:nil downloadProgress:nil success:success failure:fail];
 }
 
+- (NSURLSessionDataTask *)requestCreateIssueFieldsWithProjectKey:(NSString *)key
+                                                     issueTypeId:(NSString *)issueTypeId
+                                                         success:(AZZJiraSuccessBlock)success
+                                                            fail:(AZZJiraFailBlock)fail {
+    NSDictionary *parameter = @{@"projectKeys"  : key,
+                                @"issuetypeIds" : issueTypeId,
+                                @"expand"       : @"projects.issuetypes.fields"};
+    return [self requestWithURL:@"issue/createmeta" method:AZZRequestMethodType_Get parameter:parameter body:nil uploadProgress:nil downloadProgress:nil success:success failure:fail];
+}
+
 @end

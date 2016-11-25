@@ -50,22 +50,21 @@
 }
 
 - (void)setupConstraints {
-    [self.icon mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [self.icon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(30, 30));
         make.centerY.equalTo(self.lbName);
         make.left.equalTo(self.contentView).with.offset(8);
     }];
-    [self.lbName mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [self.lbName mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.contentView).with.offset(8);
         make.left.equalTo(self.icon.mas_right).with.offset(20);
         make.height.mas_equalTo(40);
     }];
-    [self.lbDescription mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [self.lbDescription mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.lbName).with.offset(-5);
         make.right.equalTo(self.contentView).with.offset(-20);
-        make.top.equalTo(self.lbName.mas_bottom).with.offset(8);
-        make.bottom.equalTo(self.contentView).with.offset(-8);
-        make.height.greaterThanOrEqualTo(self.lbName);
+        make.top.equalTo(self.lbName.mas_bottom);
+        make.bottom.equalTo(self.contentView).with.offset(-12);
     }];
     self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
@@ -75,20 +74,6 @@
     
     self.lbName.text = model.name;
     self.lbDescription.text = model.modelDescription;
-    
-    if (self.lbDescription.text.length == 0) {
-        [self.lbDescription mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeZero);
-        }];
-        [self.lbName mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.contentView).with.offset(8);
-            make.left.equalTo(self.icon.mas_right).with.offset(20);
-            make.height.mas_equalTo(40);
-            make.bottom.equalTo(self.contentView).with.offset(-8);
-        }];
-    } else {
-        [self setupConstraints];
-    }
     
     __weak typeof(self) wself = self;
     [self.icon sd_setImageWithURL:model.iconUrl placeholderImage:[UIImage imageNamed:@"layout-placeholder"] options:SDWebImageRetryFailed | SDWebImageHandleCookies | SDWebImageAvoidAutoSetImage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {

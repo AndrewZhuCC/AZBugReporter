@@ -1,5 +1,5 @@
 //
-//  AZZJIraIssueTypeFieldsModel.h
+//  AZZJiraIssueTypeFieldsModel.h
 //  BugReporter
 //
 //  Created by 朱安智 on 2016/11/23.
@@ -8,7 +8,7 @@
 
 #import <Mantle/Mantle.h>
 
-@interface AZZJIraIssueTypeFieldsModel : MTLModel<MTLJSONSerializing>
+@interface AZZJiraIssueTypeFieldsModel : MTLModel<MTLJSONSerializing>
 
 @property (nonatomic, assign, readonly) BOOL required;
 @property (nonatomic, copy, readonly) NSString *type;
@@ -20,6 +20,7 @@
 @property (nonatomic, copy, readonly) NSString *autoCompleteUrl;
 
 + (instancetype)getIssueTypeFieldsModelWithDictionary:(NSDictionary *)dic;
-+ (NSArray<AZZJIraIssueTypeFieldsModel *> *)getIssueTypeFieldsModelsWithArray:(NSArray *)array;
++ (NSArray<AZZJiraIssueTypeFieldsModel *> *)getIssueTypeFieldsModelsWithArray:(NSArray *)array;
++ (NSDictionary<NSString *, AZZJiraIssueTypeFieldsModel *> *)getFieldsDictionaryWithDictionary:(NSDictionary *)dic;
 
 @end

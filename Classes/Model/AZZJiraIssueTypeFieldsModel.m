@@ -1,14 +1,14 @@
 //
-//  AZZJIraIssueTypeFieldsModel.m
+//  AZZJiraIssueTypeFieldsModel.m
 //  BugReporter
 //
 //  Created by 朱安智 on 2016/11/23.
 //  Copyright © 2016年 Andrew. All rights reserved.
 //
 
-#import "AZZJIraIssueTypeFieldsModel.h"
+#import "AZZJiraIssueTypeFieldsModel.h"
 
-@implementation AZZJIraIssueTypeFieldsModel
+@implementation AZZJiraIssueTypeFieldsModel
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{
@@ -27,8 +27,20 @@
     return [MTLJSONAdapter modelOfClass:[self class] fromJSONDictionary:dic error:nil];
 }
 
-+ (NSArray<AZZJIraIssueTypeFieldsModel *> *)getIssueTypeFieldsModelsWithArray:(NSArray *)array {
++ (NSArray<AZZJiraIssueTypeFieldsModel *> *)getIssueTypeFieldsModelsWithArray:(NSArray *)array {
     return [MTLJSONAdapter modelsOfClass:[self class] fromJSONArray:array error:nil];
+}
+
++ (NSDictionary<NSString *, AZZJiraIssueTypeFieldsModel *> *)getFieldsDictionaryWithDictionary:(NSDictionary *)dic {
+    NSMutableDictionary *result = [NSMutableDictionary dictionary];
+    for (NSString *key in dic) {
+        NSDictionary *jsonDic = dic[key];
+        AZZJiraIssueTypeFieldsModel *model = [self getIssueTypeFieldsModelWithDictionary:jsonDic];
+        if (model) {
+            result[key] = model;
+        }
+    }
+    return [result copy];
 }
 
 @end

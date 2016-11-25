@@ -18,5 +18,6 @@
 @property (nonatomic, assign, readonly) BOOL active;
 
 + (instancetype)getUserModelWithDictionary:(NSDictionary *)dic;
++ (NSArray<AZZJiraUserModel *> *)getUserModelsFromArray:(NSArray *)array;
 
 @end
