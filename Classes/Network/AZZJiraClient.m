@@ -9,6 +9,8 @@
 #import "AZZJiraClient.h"
 #import "AZZJiraConfiguration.h"
 
+#import "AZZJiraCreateIssueInputModel.h"
+
 @interface AZZJiraClient ()
 
 @property (nonatomic, strong) AFJSONRequestSerializer *postSerializer;
@@ -155,6 +157,103 @@
                                 @"issuetypeIds" : issueTypeId,
                                 @"expand"       : @"projects.issuetypes.fields"};
     return [self requestWithURL:@"issue/createmeta" method:AZZRequestMethodType_Get parameter:parameter body:nil uploadProgress:nil downloadProgress:nil success:success failure:fail];
+}
+
+- (NSURLSessionDataTask *)requestAssignableUsersWithProject:(NSString *)project
+                                                   userName:(NSString *)userName
+                                                    success:(AZZJiraSuccessBlock)success
+                                                       fail:(AZZJiraFailBlock)fail {
+    NSDictionary *parameter = @{@"project"  : project,
+                                @"username" : userName};
+    return [self requestWithURL:@"user/assignable/search" method:AZZRequestMethodType_Get parameter:parameter body:nil uploadProgress:nil downloadProgress:nil success:success failure:fail];
+}
+
+- (NSURLSessionDataTask *)requestJSONOfMyselfSuccess:(AZZJiraSuccessBlock)success
+                                                fail:(AZZJiraFailBlock)fail {
+    return [self requestWithURL:@"myself" method:AZZRequestMethodType_Get parameter:nil body:nil uploadProgress:nil downloadProgress:nil success:success failure:fail];
+}
+
+- (NSURLSessionDataTask *)requestLabelsWithQuery:(NSString *)queryString
+                                        Susscess:(AZZJiraSuccessBlock)success
+                                            fail:(AZZJiraFailBlock)failure {
+    if (!queryString) {
+        queryString = @"";
+    }
+    NSDictionary *parameter = @{@"query" : queryString};
+    NSError *serializerError = nil;
+    NSURLRequest *request = [self.requestSerializer requestWithMethod:@"GET" URLString:AZZJiraClientQueryLabels parameters:parameter error:&serializerError];
+    
+    if (serializerError) {
+        if (failure) {
+            dispatch_async(self.completionQueue ?: dispatch_get_main_queue(), ^{
+                failure(nil, nil, serializerError);
+            });
+        }
+        
+        return nil;
+    }
+    
+    AFXMLParserResponseSerializer *xmlSerializer = [AFXMLParserResponseSerializer serializer];
+    AFHTTPResponseSerializer *origSerializer = self.responseSerializer;
+    self.responseSerializer = xmlSerializer;
+    __weak typeof(self) wself = self;
+    
+    NSURLSessionDataTask *task = [self dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+        if (error) {
+            if (failure) {
+                dispatch_async(self.completionQueue ?: dispatch_get_main_queue(), ^{
+                    failure((NSHTTPURLResponse *)response, responseObject, error);
+                });
+            }
+        } else {
+            if (success) {
+                dispatch_async(self.completionQueue ?: dispatch_get_main_queue(), ^{
+                    success((NSHTTPURLResponse *)response, responseObject);
+                });
+            }
+        }
+        wself.responseSerializer = origSerializer;
+    }];
+    
+    [task resume];
+    return task;
+}
+
+- (NSURLSessionDataTask *)requestCreateIssueWith:(AZZJiraCreateIssueInputModel *)model
+                                         success:(AZZJiraSuccessBlock)success
+                                            fail:(AZZJiraFailBlock)failure {
+    NSDictionary *parameters = [model getJSONModel];
+    NSError *serializerError = nil;
+    NSURLRequest *request = [self.postSerializer requestWithMethod:@"POST" URLString:[[NSURL URLWithString:@"issue" relativeToURL:self.baseURL] absoluteString] parameters:parameters error:&serializerError];
+    
+    if (serializerError) {
+        if (failure) {
+            dispatch_async(self.completionQueue ?: dispatch_get_main_queue(), ^{
+                failure(nil, nil, serializerError);
+            });
+        }
+        
+        return nil;
+    }
+    
+    NSURLSessionDataTask *task = [self dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+        if (error) {
+            if (failure) {
+                dispatch_async(self.completionQueue ?: dispatch_get_main_queue(), ^{
+                    failure((NSHTTPURLResponse *)response, responseObject, error);
+                });
+            }
+        } else {
+            if (success) {
+                dispatch_async(self.completionQueue ?: dispatch_get_main_queue(), ^{
+                    success((NSHTTPURLResponse *)response, responseObject);
+                });
+            }
+        }
+    }];
+    
+    [task resume];
+    return task;
 }
 
 @end

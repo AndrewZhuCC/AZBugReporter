@@ -9,10 +9,32 @@
 #import <UIKit/UIKit.h>
 
 @class AZZJiraIssueTypeFieldsModel;
+@class AZZJiraCreateIssueFieldCell;
+@class AZZJiraProjectsModel;
+
+typedef NS_ENUM(NSUInteger, AZZJiraIssueFieldAllowedType) {
+    AZZJiraFieldType_Default,
+    AZZJiraFieldType_Priority,
+    AZZJiraFieldType_Component,
+    AZZJiraFieldType_Version,
+    AZZJiraFieldType_User,
+};
+
+@protocol AZZJiraCreateIssueFieldCellDelegate <NSObject>
+
+@required
+- (void)fieldOfCell:(AZZJiraCreateIssueFieldCell *)cell filledWithValue:(id)value type:(AZZJiraIssueFieldAllowedType)type system:(NSString *)system;
+
+@end
 
 @interface AZZJiraCreateIssueFieldCell : UITableViewCell
 
-+ (instancetype)cellWithTableView:(UITableView *)tableView model:(AZZJiraIssueTypeFieldsModel *)model;
-- (void)setupWithModel:(AZZJiraIssueTypeFieldsModel *)model;
+@property (nonatomic, weak) id<AZZJiraCreateIssueFieldCellDelegate> delegate;
+
++ (instancetype)cellWithTableView:(UITableView *)tableView model:(AZZJiraIssueTypeFieldsModel *)model delegate:(id<AZZJiraCreateIssueFieldCellDelegate>)delegate value:(id)value;
+- (void)setupWithModel:(AZZJiraIssueTypeFieldsModel *)model value:(id)value;
+
+@property (nonatomic, strong, readonly) NSString *system;
+@property (nonatomic, strong) AZZJiraProjectsModel *projectModel;
 
 @end

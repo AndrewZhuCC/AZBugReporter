@@ -16,6 +16,8 @@ typedef NS_ENUM(NSUInteger, AZZRequestMethodType) {
 typedef void(^AZZJiraSuccessBlock)(NSHTTPURLResponse *response, id responseObject);
 typedef void(^AZZJiraFailBlock)(NSHTTPURLResponse *response, id responseObject, NSError *error);
 
+@class AZZJiraCreateIssueInputModel;
+
 @interface AZZJiraClient : AFHTTPSessionManager
 
 + (instancetype)sharedInstance;
@@ -40,5 +42,21 @@ typedef void(^AZZJiraFailBlock)(NSHTTPURLResponse *response, id responseObject, 
                                                      issueTypeId:(NSString *)issueTypeId
                                                          success:(AZZJiraSuccessBlock)success
                                                             fail:(AZZJiraFailBlock)fail;
+
+- (NSURLSessionDataTask *)requestAssignableUsersWithProject:(NSString *)project
+                                                   userName:(NSString *)userName
+                                                    success:(AZZJiraSuccessBlock)success
+                                                       fail:(AZZJiraFailBlock)fail;
+
+- (NSURLSessionDataTask *)requestJSONOfMyselfSuccess:(AZZJiraSuccessBlock)success
+                                                fail:(AZZJiraFailBlock)fail;
+
+- (NSURLSessionDataTask *)requestLabelsWithQuery:(NSString *)queryString
+                                        Susscess:(AZZJiraSuccessBlock)success
+                                            fail:(AZZJiraFailBlock)failure;
+
+- (NSURLSessionDataTask *)requestCreateIssueWith:(AZZJiraCreateIssueInputModel *)model
+                                         success:(AZZJiraSuccessBlock)success
+                                            fail:(AZZJiraFailBlock)failure;
 
 @end
