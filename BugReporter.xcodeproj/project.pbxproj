@@ -27,6 +27,7 @@
 		4906DE9A1DE7CCD300891D1E /* AZZJiraComponentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906DE991DE7CCD300891D1E /* AZZJiraComponentModel.m */; };
 		4906DE9D1DE7D15B00891D1E /* AZZJiraBasicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906DE9C1DE7D15B00891D1E /* AZZJiraBasicCell.m */; };
 		4906DEA01DE7E4EA00891D1E /* AZZJiraCreateIssueInputModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906DE9F1DE7E4EA00891D1E /* AZZJiraCreateIssueInputModel.m */; };
+		4906DEB61DEE723000891D1E /* MTLJSONAdapterWithoutNil.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906DEB51DEE723000891D1E /* MTLJSONAdapterWithoutNil.m */; };
 		49D93A231DDEE5180074E00D /* AZZJiraProjectsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D93A221DDEE5180074E00D /* AZZJiraProjectsModel.m */; };
 		49D93A271DDEE93B0074E00D /* AZZJiraProjectsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D93A261DDEE93B0074E00D /* AZZJiraProjectsListViewController.m */; };
 		49D93A2A1DDEFCEF0074E00D /* layout-placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 49D93A291DDEFCEF0074E00D /* layout-placeholder.png */; };
@@ -88,6 +89,8 @@
 		4906DE9C1DE7D15B00891D1E /* AZZJiraBasicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraBasicCell.m; path = Classes/View/AZZJiraBasicCell.m; sourceTree = SOURCE_ROOT; };
 		4906DE9E1DE7E4EA00891D1E /* AZZJiraCreateIssueInputModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraCreateIssueInputModel.h; path = Classes/Model/AZZJiraCreateIssueInputModel.h; sourceTree = SOURCE_ROOT; };
 		4906DE9F1DE7E4EA00891D1E /* AZZJiraCreateIssueInputModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraCreateIssueInputModel.m; path = Classes/Model/AZZJiraCreateIssueInputModel.m; sourceTree = SOURCE_ROOT; };
+		4906DEB41DEE723000891D1E /* MTLJSONAdapterWithoutNil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTLJSONAdapterWithoutNil.h; path = Classes/Model/MTLJSONAdapterWithoutNil.h; sourceTree = SOURCE_ROOT; };
+		4906DEB51DEE723000891D1E /* MTLJSONAdapterWithoutNil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MTLJSONAdapterWithoutNil.m; path = Classes/Model/MTLJSONAdapterWithoutNil.m; sourceTree = SOURCE_ROOT; };
 		49D93A211DDEE5180074E00D /* AZZJiraProjectsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraProjectsModel.h; path = Classes/Model/AZZJiraProjectsModel.h; sourceTree = SOURCE_ROOT; };
 		49D93A221DDEE5180074E00D /* AZZJiraProjectsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraProjectsModel.m; path = Classes/Model/AZZJiraProjectsModel.m; sourceTree = SOURCE_ROOT; };
 		49D93A251DDEE93B0074E00D /* AZZJiraProjectsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraProjectsListViewController.h; path = Classes/ViewController/AZZJiraProjectsListViewController.h; sourceTree = SOURCE_ROOT; };
@@ -236,6 +239,8 @@
 				4906DE8A1DE58AED00891D1E /* AZZJiraIssueTypeFieldsModel.m */,
 				4906DE9E1DE7E4EA00891D1E /* AZZJiraCreateIssueInputModel.h */,
 				4906DE9F1DE7E4EA00891D1E /* AZZJiraCreateIssueInputModel.m */,
+				4906DEB41DEE723000891D1E /* MTLJSONAdapterWithoutNil.h */,
+				4906DEB51DEE723000891D1E /* MTLJSONAdapterWithoutNil.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -459,6 +464,7 @@
 				49D93A441DDF04410074E00D /* AZZJiraClient.m in Sources */,
 				49D93A341DDF04220074E00D /* AZZJiraLoginViewController.m in Sources */,
 				4906DE631DE2C75900891D1E /* AZZJiraProjectListCell.m in Sources */,
+				4906DEB61DEE723000891D1E /* MTLJSONAdapterWithoutNil.m in Sources */,
 				49D93A461DDF04410074E00D /* AZZTouchesCollector.m in Sources */,
 				4906DE821DE3ED3400891D1E /* AZZJiraIssueResolutionModel.m in Sources */,
 				4906DE6D1DE3DE8700891D1E /* AZZJiraIssueTypeModel.m in Sources */,

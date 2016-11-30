@@ -79,6 +79,7 @@
         NSLog(@"create issue success:%@", responseObject);
     } fail:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
         NSLog(@"create issue fail:%@", error);
+        NSLog(@"responseObject: %@", responseObject);
     }];
 }
 

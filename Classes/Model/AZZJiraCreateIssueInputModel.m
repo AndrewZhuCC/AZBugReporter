@@ -7,6 +7,7 @@
 //
 
 #import "AZZJiraCreateIssueInputModel.h"
+#import "MTLJSONAdapterWithoutNil.h"
 
 @implementation AZZJiraCreateIssueInputModel
 
@@ -32,7 +33,7 @@
 
 - (NSDictionary *)getJSONModel {
     NSError *error;
-    NSDictionary *result = [MTLJSONAdapter JSONDictionaryFromModel:self error:&error];
+    NSDictionary *result = [MTLJSONAdapterWithoutNil JSONDictionaryFromModel:self error:&error];
     if (error) {
         NSLog(@"input model getJSONModel error:%@", error);
     }
@@ -40,39 +41,39 @@
 }
 
 + (NSValueTransformer *)projectJSONTransformer {
-    return [MTLJSONAdapter dictionaryTransformerWithModelClass:[AZZJiraProjectsModel class]];
+    return [MTLJSONAdapterWithoutNil dictionaryTransformerWithModelClass:[AZZJiraProjectsModel class]];
 }
 
 + (NSValueTransformer *)issuetypeJSONTransformer {
-    return [MTLJSONAdapter dictionaryTransformerWithModelClass:[AZZJiraIssueTypeModel class]];
+    return [MTLJSONAdapterWithoutNil dictionaryTransformerWithModelClass:[AZZJiraIssueTypeModel class]];
 }
 
 + (NSValueTransformer *)assigneeJSONTransformer {
-    return [MTLJSONAdapter dictionaryTransformerWithModelClass:[AZZJiraUserModel class]];
+    return [MTLJSONAdapterWithoutNil dictionaryTransformerWithModelClass:[AZZJiraUserModel class]];
 }
 
 + (NSValueTransformer *)reporterJSONTransformer {
-    return [MTLJSONAdapter dictionaryTransformerWithModelClass:[AZZJiraUserModel class]];
+    return [MTLJSONAdapterWithoutNil dictionaryTransformerWithModelClass:[AZZJiraUserModel class]];
 }
 
 + (NSValueTransformer *)priorityJSONTransformer {
-    return [MTLJSONAdapter dictionaryTransformerWithModelClass:[AZZJiraIssuePriorityModel class]];
+    return [MTLJSONAdapterWithoutNil dictionaryTransformerWithModelClass:[AZZJiraIssuePriorityModel class]];
 }
 
 + (NSValueTransformer *)versionsJSONTransformer {
-    return [MTLJSONAdapter arrayTransformerWithModelClass:[AZZJiraIssueVersionModel class]];
+    return [MTLJSONAdapterWithoutNil arrayTransformerWithModelClass:[AZZJiraIssueVersionModel class]];
 }
 
 + (NSValueTransformer *)fixVersionsJSONTransformer {
-    return [MTLJSONAdapter arrayTransformerWithModelClass:[AZZJiraIssueVersionModel class]];
+    return [MTLJSONAdapterWithoutNil arrayTransformerWithModelClass:[AZZJiraIssueVersionModel class]];
 }
 
 + (NSValueTransformer *)componentsJSONTransformer {
-    return [MTLJSONAdapter arrayTransformerWithModelClass:[AZZJiraComponentModel class]];
+    return [MTLJSONAdapterWithoutNil arrayTransformerWithModelClass:[AZZJiraComponentModel class]];
 }
 
 + (NSValueTransformer *)attachmentJSONTransformer {
-    return [MTLJSONAdapter arrayTransformerWithModelClass:[AZZJiraIssueAttachment class]];
+    return [MTLJSONAdapterWithoutNil arrayTransformerWithModelClass:[AZZJiraIssueAttachment class]];
 }
 
 + (NSValueTransformer *)duedateJSONTransformer {

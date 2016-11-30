@@ -236,6 +236,8 @@
         return nil;
     }
     
+    NSLog(@"create issue json:%@", parameters);
+    
     NSURLSessionDataTask *task = [self dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
         if (error) {
             if (failure) {
