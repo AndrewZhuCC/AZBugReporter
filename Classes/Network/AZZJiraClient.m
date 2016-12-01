@@ -279,7 +279,13 @@
         return nil;
     }
     
-    NSURLSessionDataTask *dataTask = [self uploadTaskWithStreamedRequest:request progress:uploadProgressBlock completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+    NSURLSessionDataTask *dataTask = [self uploadTaskWithStreamedRequest:request progress:^(NSProgress *inProgress) {
+        if (uploadProgressBlock) {
+            dispatch_async(self.completionQueue ?: dispatch_get_main_queue(), ^{
+                uploadProgressBlock(inProgress);
+            });
+        }
+    } completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
         if (error) {
             if (failure) {
                 dispatch_async(self.completionQueue ?: dispatch_get_main_queue(), ^{

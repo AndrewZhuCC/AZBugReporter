@@ -124,11 +124,9 @@
         [tempArray addObject:photo.photoURL];
     }
     [[AZZJiraClient sharedInstance] uploadImagesWithIssueID:issueId images:[tempArray copy] uploadProgress:^(NSProgress *progress) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.hud.mode = MBProgressHUDModeDeterminate;
-            self.hud.progress = progress.completedUnitCount / progress.totalUnitCount;
-            [self.hud showAnimated:YES];
-        });
+        self.hud.mode = MBProgressHUDModeDeterminate;
+        self.hud.progress = progress.completedUnitCount / progress.totalUnitCount;
+        [self.hud showAnimated:YES];
     } success:^(NSHTTPURLResponse *response, id responseObject) {
         [self.navigationController popViewControllerAnimated:YES];
     } fail:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
