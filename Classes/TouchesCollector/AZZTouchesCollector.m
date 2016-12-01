@@ -158,7 +158,6 @@
             NSLog(@"move images to bak folder error:%@", error);
         }
     }
-    
 }
 
 @end

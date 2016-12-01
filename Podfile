@@ -14,5 +14,6 @@ target 'BugReporter' do
   pod 'SAMKeychain'
   pod 'SDWebImage'
   pod 'UITableView+FDTemplateLayoutCell', '~> 1.5.beta'
+  pod "MWPhotoBrowser"
 
 end

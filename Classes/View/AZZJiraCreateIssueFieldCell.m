@@ -101,7 +101,7 @@
         self.tfInput.inputAccessoryView = self.inputToolBar;
     }
     
-    if (self.model.autoCompleteUrl.length > 0) {
+    if (self.model.autoCompleteUrl.length > 0 || [self.system isEqualToString:@"attachment"]) {
         [self.listButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(30, 30));
             make.centerY.equalTo(self.contentView);

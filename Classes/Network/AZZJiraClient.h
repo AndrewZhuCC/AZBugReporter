@@ -15,6 +15,7 @@ typedef NS_ENUM(NSUInteger, AZZRequestMethodType) {
 
 typedef void(^AZZJiraSuccessBlock)(NSHTTPURLResponse *response, id responseObject);
 typedef void(^AZZJiraFailBlock)(NSHTTPURLResponse *response, id responseObject, NSError *error);
+typedef void(^AZZJiraProgressBlock)(NSProgress *progress);
 
 @class AZZJiraCreateIssueInputModel;
 
@@ -58,5 +59,11 @@ typedef void(^AZZJiraFailBlock)(NSHTTPURLResponse *response, id responseObject, 
 - (NSURLSessionDataTask *)requestCreateIssueWith:(AZZJiraCreateIssueInputModel *)model
                                          success:(AZZJiraSuccessBlock)success
                                             fail:(AZZJiraFailBlock)failure;
+
+- (NSURLSessionDataTask *)uploadImagesWithIssueID:(NSString *)issueID
+                                           images:(NSArray<NSURL *> *)images
+                                   uploadProgress:(AZZJiraProgressBlock)uploadProgressBlock
+                                          success:(AZZJiraSuccessBlock)success
+                                             fail:(AZZJiraFailBlock)failure;
 
 @end

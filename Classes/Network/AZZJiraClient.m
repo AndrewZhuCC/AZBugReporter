@@ -256,4 +256,46 @@
     return task;
 }
 
+- (NSURLSessionDataTask *)uploadImagesWithIssueID:(NSString *)issueID
+                                           images:(NSArray<NSURL *> *)images
+                                   uploadProgress:(AZZJiraProgressBlock)uploadProgressBlock
+                                          success:(AZZJiraSuccessBlock)success
+                                             fail:(AZZJiraFailBlock)failure {
+    NSError *serializerError = nil;
+    NSMutableURLRequest *request = [self.requestSerializer multipartFormRequestWithMethod:@"POST" URLString:[[NSURL URLWithString:[NSString stringWithFormat:@"issue/%@/attachments", issueID] relativeToURL:self.baseURL] absoluteString] parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        for (NSURL *fileURL in images) {
+            [formData appendPartWithFileURL:fileURL name:@"file" error:nil];
+        }
+    } error:&serializerError];
+    [request setValue:@"no-check" forHTTPHeaderField:@"X-Atlassian-Token"];
+    
+    if (serializerError) {
+        if (failure) {
+            dispatch_async(self.completionQueue ?: dispatch_get_main_queue(), ^{
+                failure(nil, nil, serializerError);
+            });
+        }
+        
+        return nil;
+    }
+    
+    NSURLSessionDataTask *dataTask = [self uploadTaskWithStreamedRequest:request progress:uploadProgressBlock completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+        if (error) {
+            if (failure) {
+                dispatch_async(self.completionQueue ?: dispatch_get_main_queue(), ^{
+                    failure((NSHTTPURLResponse *)response, responseObject, error);
+                });
+            }
+        } else {
+            if (success) {
+                dispatch_async(self.completionQueue ?: dispatch_get_main_queue(), ^{
+                    success((NSHTTPURLResponse *)response, responseObject);
+                });
+            }
+        }
+    }];
+    [dataTask resume];
+    return dataTask;
+}
+
 @end
