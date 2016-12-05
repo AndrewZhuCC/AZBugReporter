@@ -28,6 +28,7 @@
 		4906DE9D1DE7D15B00891D1E /* AZZJiraBasicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906DE9C1DE7D15B00891D1E /* AZZJiraBasicCell.m */; };
 		4906DEA01DE7E4EA00891D1E /* AZZJiraCreateIssueInputModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906DE9F1DE7E4EA00891D1E /* AZZJiraCreateIssueInputModel.m */; };
 		4906DEB61DEE723000891D1E /* MTLJSONAdapterWithoutNil.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906DEB51DEE723000891D1E /* MTLJSONAdapterWithoutNil.m */; };
+		4906DEB91DF50D4800891D1E /* AZZJiraSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906DEB81DF50D4800891D1E /* AZZJiraSettingsViewController.m */; };
 		49D93A231DDEE5180074E00D /* AZZJiraProjectsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D93A221DDEE5180074E00D /* AZZJiraProjectsModel.m */; };
 		49D93A271DDEE93B0074E00D /* AZZJiraProjectsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D93A261DDEE93B0074E00D /* AZZJiraProjectsListViewController.m */; };
 		49D93A2A1DDEFCEF0074E00D /* layout-placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 49D93A291DDEFCEF0074E00D /* layout-placeholder.png */; };
@@ -91,6 +92,8 @@
 		4906DE9F1DE7E4EA00891D1E /* AZZJiraCreateIssueInputModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraCreateIssueInputModel.m; path = Classes/Model/AZZJiraCreateIssueInputModel.m; sourceTree = SOURCE_ROOT; };
 		4906DEB41DEE723000891D1E /* MTLJSONAdapterWithoutNil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTLJSONAdapterWithoutNil.h; path = Classes/Model/MTLJSONAdapterWithoutNil.h; sourceTree = SOURCE_ROOT; };
 		4906DEB51DEE723000891D1E /* MTLJSONAdapterWithoutNil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MTLJSONAdapterWithoutNil.m; path = Classes/Model/MTLJSONAdapterWithoutNil.m; sourceTree = SOURCE_ROOT; };
+		4906DEB71DF50D4800891D1E /* AZZJiraSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraSettingsViewController.h; path = Classes/ViewController/AZZJiraSettingsViewController.h; sourceTree = SOURCE_ROOT; };
+		4906DEB81DF50D4800891D1E /* AZZJiraSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraSettingsViewController.m; path = Classes/ViewController/AZZJiraSettingsViewController.m; sourceTree = SOURCE_ROOT; };
 		49D93A211DDEE5180074E00D /* AZZJiraProjectsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraProjectsModel.h; path = Classes/Model/AZZJiraProjectsModel.h; sourceTree = SOURCE_ROOT; };
 		49D93A221DDEE5180074E00D /* AZZJiraProjectsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraProjectsModel.m; path = Classes/Model/AZZJiraProjectsModel.m; sourceTree = SOURCE_ROOT; };
 		49D93A251DDEE93B0074E00D /* AZZJiraProjectsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraProjectsListViewController.h; path = Classes/ViewController/AZZJiraProjectsListViewController.h; sourceTree = SOURCE_ROOT; };
@@ -206,6 +209,8 @@
 				4906DE8D1DE5946900891D1E /* AZZJiraSelectIssueTypeViewController.m */,
 				4906DE951DE6DB1900891D1E /* AZZJiraCreateIssueViewController.h */,
 				4906DE961DE6DB1900891D1E /* AZZJiraCreateIssueViewController.m */,
+				4906DEB71DF50D4800891D1E /* AZZJiraSettingsViewController.h */,
+				4906DEB81DF50D4800891D1E /* AZZJiraSettingsViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -449,6 +454,7 @@
 				49ED148A1DD452C90000207A /* AppDelegate.m in Sources */,
 				4906DE791DE3E66B00891D1E /* AZZJiraIssueAttachment.m in Sources */,
 				49ED14871DD452C90000207A /* main.m in Sources */,
+				4906DEB91DF50D4800891D1E /* AZZJiraSettingsViewController.m in Sources */,
 				49D93A451DDF04410074E00D /* AZZTouch.m in Sources */,
 				4906DE7F1DE3EA3A00891D1E /* AZZJiraIssueCommentModel.m in Sources */,
 				4906DEA01DE7E4EA00891D1E /* AZZJiraCreateIssueInputModel.m in Sources */,

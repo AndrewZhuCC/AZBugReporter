@@ -9,6 +9,8 @@
 #import "AZZTouchesCollector.h"
 #import "UIWindow+SendEvent.h"
 
+#import "AZZJiraConfiguration.h"
+
 @interface AZZTouchesCollector ()
 
 @property (nonatomic, strong) dispatch_queue_t ioQueue;
@@ -68,7 +70,10 @@
 #pragma mark - Notification
 
 - (void)touchesNotification:(NSNotification *)notification {
-    if (self.paused) {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    BOOL collectTouches = [userDefaults boolForKey:AZZJiraSettingsTouchCollectSwitch];
+    
+    if (self.paused || !collectTouches) {
         return;
     }
     dispatch_async(self.ioQueue, ^{

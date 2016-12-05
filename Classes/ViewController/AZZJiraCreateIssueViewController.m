@@ -80,6 +80,9 @@
 - (void)setupNavigationItem {
     UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithTitle:@"Create" style:UIBarButtonItemStyleDone target:self action:@selector(createIssueButtonTapped:)];
     UIBarButtonItem *photosButton = [[UIBarButtonItem alloc] initWithTitle:@"attachment" style:UIBarButtonItemStylePlain target:self action:@selector(attachmentButtonTapped:)];
+    if (self.browserPhotos.count == 0) {
+        photosButton.enabled = NO;
+    }
     self.navigationItem.rightBarButtonItems = @[right, photosButton];
 }
 
