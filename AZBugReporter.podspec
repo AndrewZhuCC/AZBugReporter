@@ -11,13 +11,13 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.dependency 'AFNetworking', '~> 3.1.0'
+  s.dependency 'UITableView+FDTemplateLayoutCell', '~> 1.5.beta'
   s.dependency 'Masonry', '~> 1.0.2'
   s.dependency 'IQKeyboardManager', '~> 4.0.7'
   s.dependency 'MBProgressHUD', '~> 1.0.0'
   s.dependency 'Mantle', '~> 2.1.0'
   s.dependency 'SAMKeychain'
   s.dependency 'SDWebImage'
-  s.dependency 'UITableView+FDTemplateLayoutCell', '~> 1.5.beta'
   s.dependency 'AZMWPhotoBrowser', '~> 2.1.3'
 
 end
