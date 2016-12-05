@@ -18,6 +18,6 @@ Pod::Spec.new do |s|
   s.dependency 'SAMKeychain'
   s.dependency 'SDWebImage'
   s.dependency 'UITableView+FDTemplateLayoutCell', '~> 1.5.beta'
-  s.dependency 'MWPhotoBrowser'
+  s.dependency 'AZMWPhotoBrowser', '~> 2.1.3'
 
 end
