@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "AZBugReporter"
-  s.version      = "0.0.2"
+  s.version      = "0.0.3"
   s.summary      = "iOS bug reporter."
   s.homepage     = "https://github.com/AndrewZhuCC/AZBugReporter"
   s.license      = { :type => "MIT", :file => "LICENSE" }
