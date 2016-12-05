@@ -21,7 +21,7 @@
 
 #import <Masonry/Masonry.h>
 #import <MBProgressHUD/MBProgressHUD.h>
-#import <UITableView+FDTemplateLayoutCell/UITableView+FDTemplateLayoutCell.h>
+#import "UITableView+FDTemplateLayoutCell.h"
 
 @interface AZZJiraCreateIssueViewController () <UITableViewDelegate, UITableViewDataSource, AZZJiraCreateIssueFieldCellDelegate, MWPhotoBrowserDelegate>
 

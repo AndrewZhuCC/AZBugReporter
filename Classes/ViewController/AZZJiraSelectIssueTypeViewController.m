@@ -17,7 +17,7 @@
 #import "AZZJiraClient.h"
 
 #import <Masonry/Masonry.h>
-#import <UITableView+FDTemplateLayoutCell/UITableView+FDTemplateLayoutCell.h>
+#import "UITableView+FDTemplateLayoutCell.h"
 
 @interface AZZJiraSelectIssueTypeViewController () <UITableViewDelegate, UITableViewDataSource>
 
