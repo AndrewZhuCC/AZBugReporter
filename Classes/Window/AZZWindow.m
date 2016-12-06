@@ -39,7 +39,7 @@
 }
 
 - (void)commonInit {
-    self.windowLevel = UIWindowLevelStatusBar + 1.f;
+    self.windowLevel = UIWindowLevelStatusBar - 1.f;
     self.backgroundColor = [UIColor clearColor];
     
     AZZJiraLoginViewController *loginVC = [[AZZJiraLoginViewController alloc] init];
@@ -61,8 +61,12 @@
 - (void)buttonTapped:(UIButton *)button {
     self.rootViewController.view.hidden = !self.rootViewController.view.isHidden;
     [[AZZTouchesCollector sharedInstance] pauseCollect:!self.rootViewController.view.hidden];
-    self.hidden = YES;
-    self.hidden = NO;
+    if (self.rootViewController.view.isHidden) {
+        self.hidden = YES;
+        self.hidden = NO;
+    } else {
+        [self makeKeyAndVisible];
+    }
 }
 
 - (void)becomeKeyWindow {

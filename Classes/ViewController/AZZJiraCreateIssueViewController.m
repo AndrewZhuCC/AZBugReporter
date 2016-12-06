@@ -14,6 +14,7 @@
 #import "AZZJiraProjectsModel.h"
 #import "AZZJiraIssueTypeModel.h"
 #import "AZZJiraCreateIssueInputModel.h"
+#import "AZZJiraFileAttachmentViewController.h"
 
 #import "AZZJiraClient.h"
 
@@ -23,7 +24,7 @@
 #import <MBProgressHUD/MBProgressHUD.h>
 #import "UITableView+FDTemplateLayoutCell.h"
 
-@interface AZZJiraCreateIssueViewController () <UITableViewDelegate, UITableViewDataSource, AZZJiraCreateIssueFieldCellDelegate, MWPhotoBrowserDelegate>
+@interface AZZJiraCreateIssueViewController () <UITableViewDelegate, UITableViewDataSource, AZZJiraCreateIssueFieldCellDelegate, MWPhotoBrowserDelegate, AZZJiraFileAttachmentDelegate>
 
 @property (nonatomic, strong) UITableView *tvInputs;
 
@@ -32,6 +33,7 @@
 
 @property (nonatomic, strong) NSArray<MWPhoto *> *browserPhotos;
 @property (nonatomic, strong) NSMutableArray<MWPhoto *> *selectedPhotos;
+@property (nonatomic, strong) NSMutableArray<AZZJiraFileNode *> *selectedFiles;
 
 @property (nonatomic, strong) AZZJiraCreateIssueInputModel *inputModel;
 
@@ -96,7 +98,7 @@
         NSLog(@"create issue success:%@", responseObject);
         if (wself) {
             typeof(wself) sself = wself;
-            if (sself.selectedPhotos.count > 0) {
+            if (sself.selectedPhotos.count > 0 || sself.selectedFiles.count > 0) {
                 [wself uploadAttachmentsWithIssueID:responseObject[@"id"]];
             } else {
                 [wself.navigationController popViewControllerAnimated:YES];
@@ -126,6 +128,10 @@
     for (MWPhoto *photo in self.selectedPhotos) {
         [tempArray addObject:photo.photoURL];
     }
+    for (AZZJiraFileNode *fileNode in self.selectedFiles) {
+        [tempArray addObject:fileNode.filePath];
+    }
+    
     [[AZZJiraClient sharedInstance] uploadImagesWithIssueID:issueId images:[tempArray copy] uploadProgress:^(NSProgress *progress) {
         self.hud.mode = MBProgressHUDModeDeterminate;
         self.hud.progress = progress.completedUnitCount / progress.totalUnitCount;
@@ -142,11 +148,49 @@
 }
 
 - (void)attachmentButtonTapped:(id)sender {
-    MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
-    browser.displayNavArrows = YES;
-    browser.displaySelectionButtons = YES;
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Attachment" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
-    [self.navigationController pushViewController:browser animated:YES];
+    UIAlertAction *photosAction = [UIAlertAction actionWithTitle:@"Touch Snaps" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
+        browser.displayNavArrows = YES;
+        browser.displaySelectionButtons = YES;
+        
+        [self.navigationController pushViewController:browser animated:YES];
+    }];
+    [alertController addAction:photosAction];
+    
+    UIAlertAction *filesAction = [UIAlertAction actionWithTitle:@"File System" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+        AZZJiraFileNode *rootNode = [AZZJiraFileNode fileNodeWithRootFilePath:rootPath];
+        AZZJiraFileAttachmentViewController *vc = [[AZZJiraFileAttachmentViewController alloc] init];
+        vc.delegate = self;
+        vc.fileNode = rootNode;
+        [self.navigationController pushViewController:vc animated:YES];
+    }];
+    [alertController addAction:filesAction];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [alertController addAction:cancelAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
+#pragma mark - AZZJiraFileAttachment
+
+- (void)fileAttachmentDidSelect:(AZZJiraFileNode *)fileNode selected:(BOOL)selected {
+    if (fileNode) {
+        if (selected) {
+            [self.selectedFiles addObject:fileNode];
+        } else {
+            [self.selectedFiles removeObject:fileNode];
+        }
+    }
+}
+
+- (void)fileAttachmentDidTappedDoneButton {
+    [self.navigationController popToViewController:self animated:YES];
 }
 
 #pragma mark - MWPhotoBrowserDelegate
@@ -316,6 +360,13 @@
         _selectedPhotos = [NSMutableArray array];
     }
     return _selectedPhotos;
+}
+
+- (NSMutableArray<AZZJiraFileNode *> *)selectedFiles {
+    if (!_selectedFiles) {
+        _selectedFiles = [NSMutableArray array];
+    }
+    return _selectedFiles;
 }
 
 @end

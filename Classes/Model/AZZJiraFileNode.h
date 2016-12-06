@@ -13,6 +13,7 @@
 @property (nonatomic, copy, readonly) NSURL *filePath;
 @property (nonatomic, assign, readonly) BOOL isDirectory;
 @property (nonatomic, copy, readonly) NSArray<AZZJiraFileNode *> *subpaths;
+@property (nonatomic, copy, readonly) NSString *fileName;
 
 + (instancetype)fileNodeWithRootFilePath:(NSString *)rootPath;
 

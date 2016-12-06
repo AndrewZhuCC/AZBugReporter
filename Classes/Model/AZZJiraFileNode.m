@@ -41,11 +41,11 @@
             NSFileManager *fileManager = [NSFileManager defaultManager];
             NSMutableArray *tempArray = [NSMutableArray array];
             NSError *error = nil;
-            NSString *rootPath = [self.filePath absoluteString];
-            NSArray *subPaths = [fileManager subpathsOfDirectoryAtPath:rootPath error:&error];
+            NSString *rootPath = [self.filePath path];
+            NSArray *subPaths = [fileManager contentsOfDirectoryAtURL:self.filePath includingPropertiesForKeys:[NSArray array] options:NSDirectoryEnumerationSkipsSubdirectoryDescendants | NSDirectoryEnumerationSkipsPackageDescendants | NSDirectoryEnumerationSkipsHiddenFiles error:&error];
             if (!error) {
-                for (NSString *subpath in subPaths) {
-                    AZZJiraFileNode *subNode = [AZZJiraFileNode fileNodeWithRootFilePath:[[NSURL fileURLWithPath:subpath relativeToURL:self.filePath] absoluteString]];
+                for (NSURL *subpath in subPaths) {
+                    AZZJiraFileNode *subNode = [AZZJiraFileNode fileNodeWithRootFilePath:subpath.path];
                     [tempArray addObject:subNode];
                 }
                 _subpaths = [tempArray copy];
@@ -58,6 +58,10 @@
         }
     }
     return _subpaths;
+}
+
+- (NSString *)fileName {
+    return [self.filePath lastPathComponent];
 }
 
 @end
