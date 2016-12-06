@@ -77,7 +77,7 @@
     if (self.rootViewController.view.isHidden) {
         return [self.button pointInside:[self.button convertPoint:point fromView:self] withEvent:event] ? self.button : nil;
     } else {
-        return [self.button pointInside:[self.button convertPoint:point fromView:self] withEvent:event] ? self.button : [self.rootViewController.view hitTest:point withEvent:event];
+        return [self.button pointInside:[self.button convertPoint:point fromView:self] withEvent:event] ? self.button : [super hitTest:point withEvent:event];
     }
 }
 

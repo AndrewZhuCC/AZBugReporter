@@ -145,7 +145,6 @@
     MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
     browser.displayNavArrows = YES;
     browser.displaySelectionButtons = YES;
-    browser.displayActionButton = NO;
     
     [self.navigationController pushViewController:browser animated:YES];
 }

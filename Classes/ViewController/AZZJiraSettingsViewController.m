@@ -8,11 +8,17 @@
 
 #import "AZZJiraSettingsViewController.h"
 #import "AZZJiraConfiguration.h"
+#import "AZZJiraPerformanceSettingViewController.h"
+
+#import "AZPerformanceMonitorManager.h"
 
 #import <Masonry/Masonry.h>
 
 typedef NS_ENUM(NSUInteger, AZZJiraSettingsCell) {
     AZZJiraSettings_TouchCollector = 0,
+    AZZJiraSettings_PerformanceSwitch,
+    AZZJiraSettings_PerformanceCPU,
+    AZZJiraSettings_PerformanceRunLoop,
     AZZJiraSettings_CellCount,
 };
 
@@ -28,6 +34,12 @@ typedef NS_ENUM(NSUInteger, AZZJiraSettingsCell) {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setupConstraints];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.tvSettings reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -52,29 +64,115 @@ typedef NS_ENUM(NSUInteger, AZZJiraSettingsCell) {
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"settingsCell"];
     }
-    if ([cell.accessoryView isKindOfClass:[UISwitch class]]) {
-        cell.accessoryView.tag = indexPath.row;
-        cell.textLabel.text = @"Collect Touches";
-    } else {
-        UISwitch *switchButton = [[UISwitch alloc] initWithFrame:CGRectZero];
-        switchButton.tag = indexPath.row;
-        [switchButton addTarget:self action:@selector(switchActionValueChanged:) forControlEvents:UIControlEventValueChanged];
-        cell.accessoryView = switchButton;
-        cell.textLabel.text = @"Collect Touches";
+    switch (indexPath.row) {
+        case AZZJiraSettings_TouchCollector:
+        {
+            if ([cell.accessoryView isKindOfClass:[UISwitch class]]) {
+                cell.accessoryView.tag = indexPath.row;
+                cell.textLabel.text = @"Collect Touches";
+            } else {
+                UISwitch *switchButton = [[UISwitch alloc] initWithFrame:CGRectZero];
+                switchButton.tag = indexPath.row;
+                [switchButton addTarget:self action:@selector(switchActionValueChanged:) forControlEvents:UIControlEventValueChanged];
+                cell.accessoryView = switchButton;
+                cell.textLabel.text = @"Collect Touches";
+            }
+            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+            [(UISwitch *)cell.accessoryView setOn:[userDefaults boolForKey:AZZJiraSettingsTouchCollectSwitch]];
+            break;
+        }
+        case AZZJiraSettings_PerformanceSwitch:
+        {
+            if ([cell.accessoryView isKindOfClass:[UISwitch class]]) {
+                cell.accessoryView.tag = indexPath.row;
+                cell.textLabel.text = @"PerformanceMonitor Enable";
+            } else {
+                UISwitch *switchButton = [[UISwitch alloc] initWithFrame:CGRectZero];
+                switchButton.tag = indexPath.row;
+                [switchButton addTarget:self action:@selector(switchActionValueChanged:) forControlEvents:UIControlEventValueChanged];
+                cell.accessoryView = switchButton;
+                cell.textLabel.text = @"PerformanceMonitor Enable";
+            }
+            [(UISwitch *)cell.accessoryView setOn:[self performanceEnable]];
+            break;
+        }
+        case AZZJiraSettings_PerformanceCPU:
+        {
+            cell.accessoryView = nil;
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.textLabel.text = @"CPU Monitor";
+            break;
+        }
+        case AZZJiraSettings_PerformanceRunLoop:
+        {
+            cell.accessoryView = nil;
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.textLabel.text = @"RunLoop Monitor";
+            break;
+        }
+            
+        default:
+            break;
     }
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [(UISwitch *)cell.accessoryView setOn:[userDefaults boolForKey:AZZJiraSettingsTouchCollectSwitch]];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    switch (indexPath.row) {
+        case AZZJiraSettings_PerformanceCPU:
+        {
+            AZZJiraPerformanceSettingViewController *vc = [[AZZJiraPerformanceSettingViewController alloc] init];
+            vc.monitorType = MonitorType_CPU;
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
+        }
+            case AZZJiraSettings_PerformanceRunLoop:
+        {
+            AZZJiraPerformanceSettingViewController *vc = [[AZZJiraPerformanceSettingViewController alloc] init];
+            vc.monitorType = MonitorType_RunLoop;
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
+        }
+            
+        default:
+            break;
+    }
 }
 
 #pragma mark - Actions
 
 - (void)switchActionValueChanged:(UISwitch *)switchButton {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setBool:switchButton.isOn forKey:AZZJiraSettingsTouchCollectSwitch];
+    switch (switchButton.tag) {
+        case AZZJiraSettings_TouchCollector:
+        {
+            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+            [userDefaults setBool:switchButton.isOn forKey:AZZJiraSettingsTouchCollectSwitch];
+            break;
+        }
+        case AZZJiraSettings_PerformanceSwitch:
+        {
+            [[AZPerformanceMonitorManager sharedInstance] pauseForIO:!switchButton.isOn];
+            break;
+        }
+            
+        default:
+            break;
+    }
 }
 
 #pragma mark - Propertys
+
+- (BOOL)performanceEnable {
+    NSMutableArray *tempArray = [NSMutableArray arrayWithArray:[[AZPerformanceMonitorManager sharedInstance] monitorsWithType:MonitorType_RunLoop]];
+    [tempArray addObjectsFromArray:[[AZPerformanceMonitorManager sharedInstance] monitorsWithType:MonitorType_CPU]];
+    for (AZPerformanceMonitor *monitor in tempArray) {
+        if (!monitor.isPaused) {
+            return YES;
+        }
+    }
+    return NO;
+}
 
 - (UITableView *)tvSettings {
     if (!_tvSettings) {

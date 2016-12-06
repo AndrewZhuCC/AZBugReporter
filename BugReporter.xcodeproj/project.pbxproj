@@ -29,6 +29,7 @@
 		4906DEA01DE7E4EA00891D1E /* AZZJiraCreateIssueInputModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906DE9F1DE7E4EA00891D1E /* AZZJiraCreateIssueInputModel.m */; };
 		4906DEB61DEE723000891D1E /* MTLJSONAdapterWithoutNil.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906DEB51DEE723000891D1E /* MTLJSONAdapterWithoutNil.m */; };
 		4906DEB91DF50D4800891D1E /* AZZJiraSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906DEB81DF50D4800891D1E /* AZZJiraSettingsViewController.m */; };
+		4906DEBD1DF540C200891D1E /* AZZJiraPerformanceSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906DEBC1DF540C200891D1E /* AZZJiraPerformanceSettingViewController.m */; };
 		49D93A231DDEE5180074E00D /* AZZJiraProjectsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D93A221DDEE5180074E00D /* AZZJiraProjectsModel.m */; };
 		49D93A271DDEE93B0074E00D /* AZZJiraProjectsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D93A261DDEE93B0074E00D /* AZZJiraProjectsListViewController.m */; };
 		49D93A2A1DDEFCEF0074E00D /* layout-placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 49D93A291DDEFCEF0074E00D /* layout-placeholder.png */; };
@@ -44,6 +45,7 @@
 		49ED14901DD452C90000207A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49ED148E1DD452C90000207A /* Main.storyboard */; };
 		49ED14921DD452C90000207A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49ED14911DD452C90000207A /* Assets.xcassets */; };
 		49ED14951DD452C90000207A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49ED14931DD452C90000207A /* LaunchScreen.storyboard */; };
+		49F030FD1DF64E8E001A1FB2 /* AZZJiraFileNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F030FC1DF64E8E001A1FB2 /* AZZJiraFileNode.m */; };
 		D75F465EA99FA827A7F1FFD3 /* libPods-BugReporter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0965C43283F5966068DCED24 /* libPods-BugReporter.a */; };
 /* End PBXBuildFile section */
 
@@ -94,6 +96,8 @@
 		4906DEB51DEE723000891D1E /* MTLJSONAdapterWithoutNil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MTLJSONAdapterWithoutNil.m; path = Classes/Model/MTLJSONAdapterWithoutNil.m; sourceTree = SOURCE_ROOT; };
 		4906DEB71DF50D4800891D1E /* AZZJiraSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraSettingsViewController.h; path = Classes/ViewController/AZZJiraSettingsViewController.h; sourceTree = SOURCE_ROOT; };
 		4906DEB81DF50D4800891D1E /* AZZJiraSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraSettingsViewController.m; path = Classes/ViewController/AZZJiraSettingsViewController.m; sourceTree = SOURCE_ROOT; };
+		4906DEBB1DF540C200891D1E /* AZZJiraPerformanceSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraPerformanceSettingViewController.h; path = Classes/ViewController/AZZJiraPerformanceSettingViewController.h; sourceTree = SOURCE_ROOT; };
+		4906DEBC1DF540C200891D1E /* AZZJiraPerformanceSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraPerformanceSettingViewController.m; path = Classes/ViewController/AZZJiraPerformanceSettingViewController.m; sourceTree = SOURCE_ROOT; };
 		49D93A211DDEE5180074E00D /* AZZJiraProjectsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraProjectsModel.h; path = Classes/Model/AZZJiraProjectsModel.h; sourceTree = SOURCE_ROOT; };
 		49D93A221DDEE5180074E00D /* AZZJiraProjectsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraProjectsModel.m; path = Classes/Model/AZZJiraProjectsModel.m; sourceTree = SOURCE_ROOT; };
 		49D93A251DDEE93B0074E00D /* AZZJiraProjectsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraProjectsListViewController.h; path = Classes/ViewController/AZZJiraProjectsListViewController.h; sourceTree = SOURCE_ROOT; };
@@ -122,6 +126,8 @@
 		49ED14911DD452C90000207A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49ED14941DD452C90000207A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		49ED14961DD452C90000207A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49F030FB1DF64E8E001A1FB2 /* AZZJiraFileNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZZJiraFileNode.h; sourceTree = "<group>"; };
+		49F030FC1DF64E8E001A1FB2 /* AZZJiraFileNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZZJiraFileNode.m; sourceTree = "<group>"; };
 		8957BAEEAE49460388B3B423 /* Pods-BugReporter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BugReporter.release.xcconfig"; path = "Pods/Target Support Files/Pods-BugReporter/Pods-BugReporter.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -211,6 +217,8 @@
 				4906DE961DE6DB1900891D1E /* AZZJiraCreateIssueViewController.m */,
 				4906DEB71DF50D4800891D1E /* AZZJiraSettingsViewController.h */,
 				4906DEB81DF50D4800891D1E /* AZZJiraSettingsViewController.m */,
+				4906DEBB1DF540C200891D1E /* AZZJiraPerformanceSettingViewController.h */,
+				4906DEBC1DF540C200891D1E /* AZZJiraPerformanceSettingViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -246,6 +254,8 @@
 				4906DE9F1DE7E4EA00891D1E /* AZZJiraCreateIssueInputModel.m */,
 				4906DEB41DEE723000891D1E /* MTLJSONAdapterWithoutNil.h */,
 				4906DEB51DEE723000891D1E /* MTLJSONAdapterWithoutNil.m */,
+				49F030FB1DF64E8E001A1FB2 /* AZZJiraFileNode.h */,
+				49F030FC1DF64E8E001A1FB2 /* AZZJiraFileNode.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -455,6 +465,7 @@
 				4906DE791DE3E66B00891D1E /* AZZJiraIssueAttachment.m in Sources */,
 				49ED14871DD452C90000207A /* main.m in Sources */,
 				4906DEB91DF50D4800891D1E /* AZZJiraSettingsViewController.m in Sources */,
+				4906DEBD1DF540C200891D1E /* AZZJiraPerformanceSettingViewController.m in Sources */,
 				49D93A451DDF04410074E00D /* AZZTouch.m in Sources */,
 				4906DE7F1DE3EA3A00891D1E /* AZZJiraIssueCommentModel.m in Sources */,
 				4906DEA01DE7E4EA00891D1E /* AZZJiraCreateIssueInputModel.m in Sources */,
@@ -465,6 +476,7 @@
 				4906DE7C1DE3E8E800891D1E /* AZZJiraIssueVersionModel.m in Sources */,
 				4906DE941DE6D17700891D1E /* AZZJiraCreateIssueFieldCell.m in Sources */,
 				4906DE881DE4394F00891D1E /* AZZJiraIssueListViewController.m in Sources */,
+				49F030FD1DF64E8E001A1FB2 /* AZZJiraFileNode.m in Sources */,
 				49D93A3A1DDF04340074E00D /* UIWindow+SendEvent.m in Sources */,
 				49D93A391DDF04340074E00D /* AZZWindow.m in Sources */,
 				49D93A441DDF04410074E00D /* AZZJiraClient.m in Sources */,
