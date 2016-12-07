@@ -8,10 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-#import "AZPerformanceMonitorManager.h"
-
 @interface AZZJiraPerformanceSettingViewController : UIViewController
 
-@property (nonatomic, assign) MonitorType monitorType;
+@property (nonatomic, assign) NSInteger monitorType;
 
 @end
