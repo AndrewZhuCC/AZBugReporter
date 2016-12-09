@@ -31,6 +31,10 @@
 @property (nonatomic, copy) NSDictionary<NSString *, AZZJiraIssueTypeFieldsModel *> *fieldsModels;
 @property (nonatomic, copy) NSArray *allModelKeys;
 
+@property (nonatomic, strong) MWPhotoBrowser *albumBrowser;
+@property (nonatomic, strong) PHFetchResult<PHAsset *> *albumFetchResult;
+@property (nonatomic, strong) NSMutableArray<NSNumber *> *selectedAlbumPhotos;
+
 @property (nonatomic, strong) NSArray<MWPhoto *> *browserPhotos;
 @property (nonatomic, strong) NSMutableArray<MWPhoto *> *selectedPhotos;
 @property (nonatomic, strong) NSMutableArray<AZZJiraFileNode *> *selectedFiles;
@@ -67,6 +71,8 @@
     } fail:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
         NSLog(@"request create issue fields failed: %@", error);
     }];
+    
+    self.albumBrowser = nil;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -85,6 +91,8 @@
     self.navigationItem.rightBarButtonItems = @[right, photosButton];
 }
 
+#pragma mark - Actions
+
 - (void)createIssueButtonTapped:(id)sender {
     [self.tvInputs endEditing:NO];
     self.hud.mode = MBProgressHUDModeIndeterminate;
@@ -95,7 +103,7 @@
         NSLog(@"create issue success:%@", responseObject);
         if (wself) {
             typeof(wself) sself = wself;
-            if (sself.selectedPhotos.count > 0 || sself.selectedFiles.count > 0) {
+            if (sself.selectedPhotos.count > 0 || sself.selectedFiles.count > 0 || sself.selectedAlbumPhotos.count > 0) {
                 [wself uploadAttachmentsWithIssueID:responseObject[@"id"]];
             } else {
                 [wself.navigationController popViewControllerAnimated:YES];
@@ -129,7 +137,7 @@
         [tempArray addObject:fileNode.filePath];
     }
     
-    [[AZZJiraClient sharedInstance] uploadImagesWithIssueID:issueId images:[tempArray copy] uploadProgress:^(NSProgress *progress) {
+    [[AZZJiraClient sharedInstance] uploadImagesWithIssueID:issueId images:[tempArray copy] assets:[self selectedPhotoAssets] uploadProgress:^(NSProgress *progress) {
         self.hud.mode = MBProgressHUDModeDeterminate;
         self.hud.progress = progress.completedUnitCount / progress.totalUnitCount;
         [self.hud showAnimated:YES];
@@ -157,6 +165,11 @@
         }];
         [alertController addAction:photosAction];
     }
+    
+    UIAlertAction *photoAlbumActon = [UIAlertAction actionWithTitle:@"Photo Album" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self.navigationController pushViewController:self.albumBrowser animated:YES];
+    }];
+    [alertController addAction:photoAlbumActon];
     
     
     UIAlertAction *filesAction = [UIAlertAction actionWithTitle:@"File System" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -196,26 +209,50 @@
 #pragma mark - MWPhotoBrowserDelegate
 
 - (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
-    return self.browserPhotos.count;
+    if (photoBrowser == self.albumBrowser) {
+        return self.albumFetchResult.count;
+    } else {
+        return self.browserPhotos.count;
+    }
 }
 
 - (id<MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
-    return self.browserPhotos[index];
+    if (photoBrowser == self.albumBrowser) {
+        return [MWPhoto photoWithAsset:[self.albumFetchResult objectAtIndex:index] targetSize:[UIScreen mainScreen].bounds.size];
+    } else {
+        return self.browserPhotos[index];
+    }
 }
 
 - (id<MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser thumbPhotoAtIndex:(NSUInteger)index {
-    return self.browserPhotos[index];
+    if (photoBrowser == self.albumBrowser) {
+        return [MWPhoto photoWithAsset:[self.albumFetchResult objectAtIndex:index] targetSize:CGSizeMake(100, 100)];
+    } else {
+        return self.browserPhotos[index];
+    }
 }
 
 - (BOOL)photoBrowser:(MWPhotoBrowser *)photoBrowser isPhotoSelectedAtIndex:(NSUInteger)index {
-    return [self.selectedPhotos containsObject:self.browserPhotos[index]];
+    if (photoBrowser == self.albumBrowser) {
+        return [self.selectedAlbumPhotos containsObject:@(index)];
+    } else {
+        return [self.selectedPhotos containsObject:self.browserPhotos[index]];
+    }
 }
 
 - (void)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index selectedChanged:(BOOL)selected {
-    if (selected) {
-        [self.selectedPhotos addObject:self.browserPhotos[index]];
+    if (photoBrowser == self.albumBrowser) {
+        if (selected) {
+            [self.selectedAlbumPhotos addObject:@(index)];
+        } else {
+            [self.selectedAlbumPhotos removeObject:@(index)];
+        }
     } else {
-        [self.selectedPhotos removeObject:self.browserPhotos[index]];
+        if (selected) {
+            [self.selectedPhotos addObject:self.browserPhotos[index]];
+        } else {
+            [self.selectedPhotos removeObject:self.browserPhotos[index]];
+        }
     }
 }
 
@@ -367,6 +404,39 @@
         _selectedFiles = [NSMutableArray array];
     }
     return _selectedFiles;
+}
+
+- (MWPhotoBrowser *)albumBrowser {
+    if (!_albumBrowser) {
+        _albumBrowser = [[MWPhotoBrowser alloc] initWithDelegate:self];
+        _albumBrowser.delegate = self;
+        _albumBrowser.displayNavArrows = YES;
+        _albumBrowser.displaySelectionButtons = YES;
+    }
+    return _albumBrowser;
+}
+
+- (PHFetchResult<PHAsset *> *)albumFetchResult {
+    if (!_albumFetchResult) {
+        _albumFetchResult = [PHAsset fetchAssetsWithMediaType:PHAssetMediaTypeImage options:nil];
+    }
+    return _albumFetchResult;
+}
+
+- (NSMutableArray<NSNumber *> *)selectedAlbumPhotos {
+    if (!_selectedAlbumPhotos) {
+        _selectedAlbumPhotos = [NSMutableArray array];
+    }
+    return _selectedAlbumPhotos;
+}
+
+- (NSArray<PHAsset *> *)selectedPhotoAssets {
+    NSMutableArray *tempArray = [NSMutableArray array];
+    for (NSNumber *index in self.selectedAlbumPhotos) {
+        PHAsset *asset = [self.albumFetchResult objectAtIndex:[index unsignedIntegerValue]];
+        [tempArray addObject:asset];
+    }
+    return [tempArray copy];
 }
 
 @end

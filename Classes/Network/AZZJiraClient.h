@@ -17,7 +17,7 @@ typedef void(^AZZJiraSuccessBlock)(NSHTTPURLResponse *response, id responseObjec
 typedef void(^AZZJiraFailBlock)(NSHTTPURLResponse *response, id responseObject, NSError *error);
 typedef void(^AZZJiraProgressBlock)(NSProgress *progress);
 
-@class AZZJiraCreateIssueInputModel;
+@class AZZJiraCreateIssueInputModel, PHAsset;
 
 @interface AZZJiraClient : AFHTTPSessionManager
 
@@ -62,6 +62,7 @@ typedef void(^AZZJiraProgressBlock)(NSProgress *progress);
 
 - (NSURLSessionDataTask *)uploadImagesWithIssueID:(NSString *)issueID
                                            images:(NSArray<NSURL *> *)images
+                                           assets:(NSArray<PHAsset *> *)assets
                                    uploadProgress:(AZZJiraProgressBlock)uploadProgressBlock
                                           success:(AZZJiraSuccessBlock)success
                                              fail:(AZZJiraFailBlock)failure;

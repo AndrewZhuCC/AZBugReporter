@@ -10,6 +10,8 @@ Pod::Spec.new do |s|
   s.source_files  = "Classes/**/*"
   s.requires_arc = true
 
+  s.frameworks = 'Photos'
+
   s.dependency 'AFNetworking', '~> 3.1.0'
   s.dependency 'UITableView+FDTemplateLayoutCell', '~> 1.5.beta'
   s.dependency 'Masonry', '~> 1.0.2'

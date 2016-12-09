@@ -30,6 +30,7 @@
 		4906DEB61DEE723000891D1E /* MTLJSONAdapterWithoutNil.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906DEB51DEE723000891D1E /* MTLJSONAdapterWithoutNil.m */; };
 		4906DEB91DF50D4800891D1E /* AZZJiraSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906DEB81DF50D4800891D1E /* AZZJiraSettingsViewController.m */; };
 		4906DEBD1DF540C200891D1E /* AZZJiraPerformanceSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906DEBC1DF540C200891D1E /* AZZJiraPerformanceSettingViewController.m */; };
+		49D8A3161DFA582400972C8F /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49D8A3151DFA582400972C8F /* Photos.framework */; };
 		49D93A231DDEE5180074E00D /* AZZJiraProjectsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D93A221DDEE5180074E00D /* AZZJiraProjectsModel.m */; };
 		49D93A271DDEE93B0074E00D /* AZZJiraProjectsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D93A261DDEE93B0074E00D /* AZZJiraProjectsListViewController.m */; };
 		49D93A2A1DDEFCEF0074E00D /* layout-placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 49D93A291DDEFCEF0074E00D /* layout-placeholder.png */; };
@@ -99,6 +100,7 @@
 		4906DEB81DF50D4800891D1E /* AZZJiraSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraSettingsViewController.m; path = Classes/ViewController/AZZJiraSettingsViewController.m; sourceTree = SOURCE_ROOT; };
 		4906DEBB1DF540C200891D1E /* AZZJiraPerformanceSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraPerformanceSettingViewController.h; path = Classes/ViewController/AZZJiraPerformanceSettingViewController.h; sourceTree = SOURCE_ROOT; };
 		4906DEBC1DF540C200891D1E /* AZZJiraPerformanceSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraPerformanceSettingViewController.m; path = Classes/ViewController/AZZJiraPerformanceSettingViewController.m; sourceTree = SOURCE_ROOT; };
+		49D8A3151DFA582400972C8F /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		49D93A211DDEE5180074E00D /* AZZJiraProjectsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraProjectsModel.h; path = Classes/Model/AZZJiraProjectsModel.h; sourceTree = SOURCE_ROOT; };
 		49D93A221DDEE5180074E00D /* AZZJiraProjectsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraProjectsModel.m; path = Classes/Model/AZZJiraProjectsModel.m; sourceTree = SOURCE_ROOT; };
 		49D93A251DDEE93B0074E00D /* AZZJiraProjectsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraProjectsListViewController.h; path = Classes/ViewController/AZZJiraProjectsListViewController.h; sourceTree = SOURCE_ROOT; };
@@ -139,6 +141,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49D8A3161DFA582400972C8F /* Photos.framework in Frameworks */,
 				D75F465EA99FA827A7F1FFD3 /* libPods-BugReporter.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -158,6 +161,7 @@
 		432280B912E5E321E4AECF7C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				49D8A3151DFA582400972C8F /* Photos.framework */,
 				0965C43283F5966068DCED24 /* libPods-BugReporter.a */,
 			);
 			name = Frameworks;

@@ -10,6 +10,7 @@
 #import "AZZJiraConfiguration.h"
 
 #import "AZZJiraCreateIssueInputModel.h"
+#import <Photos/Photos.h>
 
 @interface AZZJiraClient ()
 
@@ -258,6 +259,7 @@
 
 - (NSURLSessionDataTask *)uploadImagesWithIssueID:(NSString *)issueID
                                            images:(NSArray<NSURL *> *)images
+                                           assets:(NSArray<PHAsset *> *)assets
                                    uploadProgress:(AZZJiraProgressBlock)uploadProgressBlock
                                           success:(AZZJiraSuccessBlock)success
                                              fail:(AZZJiraFailBlock)failure {
@@ -265,6 +267,9 @@
     NSMutableURLRequest *request = [self.requestSerializer multipartFormRequestWithMethod:@"POST" URLString:[[NSURL URLWithString:[NSString stringWithFormat:@"issue/%@/attachments", issueID] relativeToURL:self.baseURL] absoluteString] parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         for (NSURL *fileURL in images) {
             [formData appendPartWithFileURL:fileURL name:@"file" error:nil];
+        }
+        if (assets) {
+            [self appendAssets:assets to:formData];
         }
     } error:&serializerError];
     [request setValue:@"no-check" forHTTPHeaderField:@"X-Atlassian-Token"];
@@ -302,6 +307,36 @@
     }];
     [dataTask resume];
     return dataTask;
+}
+
+- (void)appendAssets:(NSArray<PHAsset *> *)assets to:(id<AFMultipartFormData>)formData {
+    for (PHAsset *asset in assets) {
+        UIImage *image = [self getImageFromAsset:asset];
+        if (image) {
+            [formData appendPartWithFileData:UIImagePNGRepresentation(image) name:@"file" fileName:[self fileNameStringFromDate:asset.creationDate] mimeType:@"image/png"];
+        }
+    }
+}
+
+- (UIImage *)getImageFromAsset:(PHAsset *)asset {
+    PHImageManager *imageManager = [PHImageManager defaultManager];
+    
+    PHImageRequestOptions *options = [PHImageRequestOptions new];
+    options.networkAccessAllowed = YES;
+    options.resizeMode = PHImageRequestOptionsResizeModeFast;
+    options.synchronous = YES;
+    
+    __block UIImage *myResult = nil;
+    [imageManager requestImageForAsset:asset targetSize:[UIScreen mainScreen].bounds.size contentMode:PHImageContentModeAspectFit options:options resultHandler:^(UIImage *result, NSDictionary *info) {
+        myResult = result;
+    }];
+    return myResult;
+}
+
+- (NSString *)fileNameStringFromDate:(NSDate *)date {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd-HH-mm-ss-SSS"];
+    return [[formatter stringFromDate:date] stringByAppendingPathExtension:@"png"];
 }
 
 @end
