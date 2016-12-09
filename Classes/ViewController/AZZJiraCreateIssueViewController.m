@@ -82,9 +82,6 @@
 - (void)setupNavigationItem {
     UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithTitle:@"Create" style:UIBarButtonItemStyleDone target:self action:@selector(createIssueButtonTapped:)];
     UIBarButtonItem *photosButton = [[UIBarButtonItem alloc] initWithTitle:@"attachment" style:UIBarButtonItemStylePlain target:self action:@selector(attachmentButtonTapped:)];
-    if (self.browserPhotos.count == 0) {
-        photosButton.enabled = NO;
-    }
     self.navigationItem.rightBarButtonItems = @[right, photosButton];
 }
 
@@ -150,14 +147,17 @@
 - (void)attachmentButtonTapped:(id)sender {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Attachment" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
-    UIAlertAction *photosAction = [UIAlertAction actionWithTitle:@"Touch Snaps" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
-        browser.displayNavArrows = YES;
-        browser.displaySelectionButtons = YES;
-        
-        [self.navigationController pushViewController:browser animated:YES];
-    }];
-    [alertController addAction:photosAction];
+    if (self.browserPhotos.count != 0) {
+        UIAlertAction *photosAction = [UIAlertAction actionWithTitle:@"Touch Snaps" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
+            browser.displayNavArrows = YES;
+            browser.displaySelectionButtons = YES;
+            
+            [self.navigationController pushViewController:browser animated:YES];
+        }];
+        [alertController addAction:photosAction];
+    }
+    
     
     UIAlertAction *filesAction = [UIAlertAction actionWithTitle:@"File System" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];

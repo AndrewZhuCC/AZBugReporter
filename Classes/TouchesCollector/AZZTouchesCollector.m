@@ -16,8 +16,6 @@
 @property (nonatomic, strong) dispatch_queue_t ioQueue;
 @property (nonatomic, strong) dispatch_source_t timer;
 
-@property (nonatomic, assign) CGContextRef collectorContext;
-
 @property (nonatomic, assign) BOOL paused;
 
 @end
@@ -44,7 +42,7 @@
 
 - (void)createTimer {
     _paused = NO;
-    _ioQueue = dispatch_queue_create("com.andrew.touchesCollectorIO", DISPATCH_QUEUE_SERIAL);
+    _ioQueue = dispatch_queue_create("com.andrew.touchesCollectorIO", DISPATCH_QUEUE_CONCURRENT);
     _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, _ioQueue);
     dispatch_source_set_timer(_timer, DISPATCH_TIME_NOW, 60.0 * NSEC_PER_SEC, 0);
     __weak typeof(self) wself = self;
@@ -86,17 +84,21 @@
 #pragma mark - SnapShot
 
 - (UIImage *)screenShotWithTouches:(NSArray *)touches {
+    if (touches.count == 1) {
+        AZZTouch *touch = touches[0];
+        if (touch.phase == UITouchPhaseMoved) {
+            return nil;
+        }
+    }
     @autoreleasepool {
         UIWindow *window = [[UIApplication sharedApplication] keyWindow];
         UIView *statusBar = [[[UIApplication sharedApplication] valueForKeyPath:@"statusBar"]valueForKeyPath:@"foregroundView"];
         
-        if (!self.collectorContext) {
-            UIGraphicsBeginImageContextWithOptions(window.bounds.size, NO, 0);
-            
-            self.collectorContext = UIGraphicsGetCurrentContext();
-        }
-        [window.layer renderInContext:self.collectorContext];
-        [statusBar.layer renderInContext:self.collectorContext];
+        UIGraphicsBeginImageContextWithOptions(window.bounds.size, NO, 0);
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        
+        [window.layer renderInContext:context];
+        [statusBar.layer renderInContext:context];
         
         for (AZZTouch *touch in touches) {
             CGPoint point = touch.locationInKeyWindow;
@@ -111,14 +113,14 @@
                 default:
                     break;
             }
-            CGContextAddEllipseInRect(self.collectorContext, CGRectMake(point.x - 8, point.y - 8, 16, 16));
-            CGContextSetFillColorWithColor(self.collectorContext, color.CGColor);
-            CGContextFillPath(self.collectorContext);
+            CGContextAddEllipseInRect(context, CGRectMake(point.x - 8, point.y - 8, 16, 16));
+            CGContextSetFillColorWithColor(context, color.CGColor);
+            CGContextFillPath(context);
         }
         
         UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-        CGContextClearRect(self.collectorContext, window.bounds);
-//        UIGraphicsEndImageContext();
+        //CGContextClearRect(self.collectorContext, window.bounds);
+        UIGraphicsEndImageContext();
     
         return image;
     }
