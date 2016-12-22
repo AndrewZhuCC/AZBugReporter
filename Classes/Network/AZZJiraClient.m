@@ -137,9 +137,13 @@
 }
 
 - (NSURLSessionDataTask *)requestIssueListByProjectKey:(NSString *)key
+                                                 start:(NSUInteger)start
+                                             maxResult:(NSUInteger)maxResult
                                                success:(AZZJiraSuccessBlock)success
                                                   fail:(AZZJiraFailBlock)fail {
-    NSDictionary *parameter = @{@"jql" : [NSString stringWithFormat:@"project = %@ AND status in (产品需求阶段, 开发中, Reopened)", key]};
+    NSDictionary *parameter = @{@"jql" : [NSString stringWithFormat:@"project = %@ AND status in (产品需求阶段, 开发中, Reopened)", key],
+                                @"startAt" : [@(start) stringValue],
+                                @"maxResults" : [@(maxResult) stringValue]};
     return [self requestWithURL:@"search" method:AZZRequestMethodType_Get parameter:parameter body:nil uploadProgress:nil downloadProgress:nil success:success failure:fail];
 }
 

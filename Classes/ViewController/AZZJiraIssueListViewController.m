@@ -17,12 +17,14 @@
 
 #import <Masonry/Masonry.h>
 #import "UITableView+FDTemplateLayoutCell.h"
+#import <MJRefresh/MJRefresh.h>
 
 @interface AZZJiraIssueListViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tbIssueList;
 
-@property (nonatomic, strong) NSArray<AZZJiraIssueModel *> *models;
+@property (nonatomic, strong) NSMutableArray<AZZJiraIssueModel *> *models;
+@property (nonatomic, assign) NSUInteger total;
 
 @end
 
@@ -72,11 +74,17 @@
 
 - (void)requestIssuesByProjectKey {
     __weak typeof(self) wself = self;
-    [[AZZJiraClient sharedInstance] requestIssueListByProjectKey:self.projectModel.key success:^(NSHTTPURLResponse *response, id responseObject) {
+    [[AZZJiraClient sharedInstance] requestIssueListByProjectKey:self.projectModel.key start:self.models.count maxResult:50 success:^(NSHTTPURLResponse *response, id responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            wself.total = [[responseObject objectForKey:@"total"] unsignedIntegerValue];
             NSArray *issues = [responseObject objectForKey:@"issues"];
-            wself.models = [AZZJiraIssueModel getIssueModelsWithJSONArray:issues];
-            [wself.tbIssueList reloadData];
+            if (!issues || wself.models.count >= wself.total) {
+                [wself.tbIssueList.mj_footer endRefreshingWithNoMoreData];
+            } else {
+                [wself.models addObjectsFromArray:[AZZJiraIssueModel getIssueModelsWithJSONArray:issues]];
+                [wself.tbIssueList.mj_footer endRefreshing];
+                [wself.tbIssueList reloadData];
+            }
         } else {
             NSLog(@"not dic");
         }
@@ -118,10 +126,18 @@
         _tbIssueList.delegate = self;
         _tbIssueList.dataSource = self;
         _tbIssueList.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+        _tbIssueList.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(requestIssuesByProjectKey)];
         [_tbIssueList registerClass:[AZZJiraIssueListTableViewCell class] forCellReuseIdentifier:NSStringFromClass([AZZJiraIssueListTableViewCell class])];
         [self.view addSubview:_tbIssueList];
     }
     return _tbIssueList;
+}
+
+- (NSMutableArray<AZZJiraIssueModel *> *)models {
+    if (!_models) {
+        _models = [NSMutableArray array];
+    }
+    return _models;
 }
 
 @end

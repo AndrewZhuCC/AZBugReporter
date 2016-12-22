@@ -32,6 +32,8 @@ typedef void(^AZZJiraProgressBlock)(NSProgress *progress);
                                                 fail:(AZZJiraFailBlock)fail;
 
 - (NSURLSessionDataTask *)requestIssueListByProjectKey:(NSString *)key
+                                                 start:(NSUInteger)start
+                                             maxResult:(NSUInteger)maxResult
                                                success:(AZZJiraSuccessBlock)success
                                                   fail:(AZZJiraFailBlock)fail;
 
