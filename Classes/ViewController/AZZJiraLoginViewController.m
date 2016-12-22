@@ -32,6 +32,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.navigationItem.hidesBackButton = YES;
+    self.navigationController.viewControllers = @[self];
     self.title = @"Login";
     [self setupSubviews];
 }
@@ -112,7 +114,7 @@
     
     NSArray *accounts = [SAMKeychain accountsForService:AZZJiraKeyChainService];
     if (accounts.count > 0) {
-        NSString *account = [[accounts firstObject] objectForKey:@"acct"];
+        NSString *account = [[accounts lastObject] objectForKey:@"acct"];
         NSString *password = [SAMKeychain passwordForService:AZZJiraKeyChainService account:account];
         self.tfUserName.text = account;
         self.tfPassword.text = password;

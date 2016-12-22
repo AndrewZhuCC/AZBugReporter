@@ -28,6 +28,9 @@ typedef void(^AZZJiraProgressBlock)(NSProgress *progress);
                                            success:(AZZJiraSuccessBlock)success
                                            failure:(AZZJiraFailBlock)failure;
 
+- (NSURLSessionDataTask *)requestLogoutSuccess:(AZZJiraSuccessBlock)success
+                                       failure:(AZZJiraFailBlock)failure;
+
 - (NSURLSessionDataTask *)requestProjectsListSuccess:(AZZJiraSuccessBlock)success
                                                 fail:(AZZJiraFailBlock)fail;
 

@@ -130,6 +130,42 @@
     return task;
 }
 
+- (NSURLSessionDataTask *)requestLogoutSuccess:(AZZJiraSuccessBlock)success
+                                       failure:(AZZJiraFailBlock)failure {
+    NSError *serializerError = nil;
+    NSURLRequest *request = [self.postSerializer requestWithMethod:@"DELETE" URLString:AZZJiraClientLoginURL parameters:nil error:&serializerError];
+    
+    if (serializerError) {
+        if (failure) {
+            dispatch_async(self.completionQueue ?: dispatch_get_main_queue(), ^{
+                failure(nil, nil, serializerError);
+            });
+        }
+        
+        return nil;
+    }
+    
+    NSURLSessionDataTask *task = [self dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+        if (httpResponse.statusCode == 204) {
+            if (success) {
+                dispatch_async(self.completionQueue ?: dispatch_get_main_queue(), ^{
+                    success((NSHTTPURLResponse *)response, responseObject);
+                });
+            }
+        } else {
+            if (failure) {
+                dispatch_async(self.completionQueue ?: dispatch_get_main_queue(), ^{
+                    failure((NSHTTPURLResponse *)response, responseObject, error);
+                });
+            }
+        }
+    }];
+    
+    [task resume];
+    return task;
+}
+
 - (NSURLSessionDataTask *)requestProjectsListSuccess:(AZZJiraSuccessBlock)success
                                                 fail:(AZZJiraFailBlock)fail {
     return [self requestWithURL:@"project" method:AZZRequestMethodType_Get parameter:nil

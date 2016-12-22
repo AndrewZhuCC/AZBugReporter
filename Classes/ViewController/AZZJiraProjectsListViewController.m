@@ -12,6 +12,7 @@
 #import "AZZJiraProjectListCell.h"
 #import "AZZJiraIssueListViewController.h"
 #import "AZZJiraSettingsViewController.h"
+#import "AZZJiraLoginViewController.h"
 
 #import <AFNetworking/UIKit+AFNetworking.h>
 #import <Masonry/Masonry.h>
@@ -33,6 +34,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.navigationItem.hidesBackButton = YES;
     self.navigationController.viewControllers = @[self];
     self.title = @"Projects";
     [self setupSubviews];
@@ -70,10 +72,28 @@
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"Setting" style:UIBarButtonItemStylePlain target:self action:@selector(settingButtonTapped:)];
     self.navigationItem.rightBarButtonItem = rightItem;
     
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(logoutButtonTapped:)];
+    self.navigationItem.leftBarButtonItem = leftItem;
+    
     self.view.backgroundColor = [UIColor whiteColor];
 }
 
 #pragma mark - Actions
+
+- (void)logoutButtonTapped:(id)sender {
+    self.hud.mode = MBProgressHUDModeIndeterminate;
+    self.hud.label.text = nil;
+    self.hud.detailsLabel.text = nil;
+    __weak typeof(self) wself = self;
+    [[AZZJiraClient sharedInstance] requestLogoutSuccess:^(NSHTTPURLResponse *response, id responseObject) {
+        AZZJiraLoginViewController *vc = [[AZZJiraLoginViewController alloc] init];
+        [wself.navigationController pushViewController:vc animated:YES];
+    } failure:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
+        wself.hud.label.text = error.description;
+        wself.hud.mode = MBProgressHUDModeText;
+        [wself.hud hideAnimated:YES afterDelay:3.0];
+    }];
+}
 
 - (void)settingButtonTapped:(UIButton *)button {
     AZZJiraSettingsViewController *vc = [[AZZJiraSettingsViewController alloc] init];
