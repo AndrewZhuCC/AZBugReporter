@@ -30,6 +30,8 @@
 		4906DEB61DEE723000891D1E /* MTLJSONAdapterWithoutNil.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906DEB51DEE723000891D1E /* MTLJSONAdapterWithoutNil.m */; };
 		4906DEB91DF50D4800891D1E /* AZZJiraSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906DEB81DF50D4800891D1E /* AZZJiraSettingsViewController.m */; };
 		4906DEBD1DF540C200891D1E /* AZZJiraPerformanceSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906DEBC1DF540C200891D1E /* AZZJiraPerformanceSettingViewController.m */; };
+		49A0A7641E0BB15C000589F2 /* AZZJiraLogPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A0A7631E0BB15C000589F2 /* AZZJiraLogPreviewViewController.m */; };
+		49A0A7661E0BB472000589F2 /* azz-preview.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A0A7651E0BB472000589F2 /* azz-preview.png */; };
 		49D8A3161DFA582400972C8F /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49D8A3151DFA582400972C8F /* Photos.framework */; };
 		49D93A231DDEE5180074E00D /* AZZJiraProjectsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D93A221DDEE5180074E00D /* AZZJiraProjectsModel.m */; };
 		49D93A271DDEE93B0074E00D /* AZZJiraProjectsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D93A261DDEE93B0074E00D /* AZZJiraProjectsListViewController.m */; };
@@ -100,6 +102,9 @@
 		4906DEB81DF50D4800891D1E /* AZZJiraSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraSettingsViewController.m; path = Classes/ViewController/AZZJiraSettingsViewController.m; sourceTree = SOURCE_ROOT; };
 		4906DEBB1DF540C200891D1E /* AZZJiraPerformanceSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraPerformanceSettingViewController.h; path = Classes/ViewController/AZZJiraPerformanceSettingViewController.h; sourceTree = SOURCE_ROOT; };
 		4906DEBC1DF540C200891D1E /* AZZJiraPerformanceSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraPerformanceSettingViewController.m; path = Classes/ViewController/AZZJiraPerformanceSettingViewController.m; sourceTree = SOURCE_ROOT; };
+		49A0A7621E0BB15C000589F2 /* AZZJiraLogPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraLogPreviewViewController.h; path = Classes/ViewController/AZZJiraLogPreviewViewController.h; sourceTree = SOURCE_ROOT; };
+		49A0A7631E0BB15C000589F2 /* AZZJiraLogPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraLogPreviewViewController.m; path = Classes/ViewController/AZZJiraLogPreviewViewController.m; sourceTree = SOURCE_ROOT; };
+		49A0A7651E0BB472000589F2 /* azz-preview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "azz-preview.png"; sourceTree = "<group>"; };
 		49D8A3151DFA582400972C8F /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		49D93A211DDEE5180074E00D /* AZZJiraProjectsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraProjectsModel.h; path = Classes/Model/AZZJiraProjectsModel.h; sourceTree = SOURCE_ROOT; };
 		49D93A221DDEE5180074E00D /* AZZJiraProjectsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraProjectsModel.m; path = Classes/Model/AZZJiraProjectsModel.m; sourceTree = SOURCE_ROOT; };
@@ -228,6 +233,8 @@
 				4906DEBC1DF540C200891D1E /* AZZJiraPerformanceSettingViewController.m */,
 				49F031011DF6538E001A1FB2 /* AZZJiraFileAttachmentViewController.h */,
 				49F031021DF6538E001A1FB2 /* AZZJiraFileAttachmentViewController.m */,
+				49A0A7621E0BB15C000589F2 /* AZZJiraLogPreviewViewController.h */,
+				49A0A7631E0BB15C000589F2 /* AZZJiraLogPreviewViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -272,6 +279,7 @@
 		49D93A281DDEFCEF0074E00D /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				49A0A7651E0BB472000589F2 /* azz-preview.png */,
 				49D93A291DDEFCEF0074E00D /* layout-placeholder.png */,
 			);
 			name = resources;
@@ -407,6 +415,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				49ED14951DD452C90000207A /* LaunchScreen.storyboard in Resources */,
+				49A0A7661E0BB472000589F2 /* azz-preview.png in Resources */,
 				49ED14921DD452C90000207A /* Assets.xcassets in Resources */,
 				49ED14901DD452C90000207A /* Main.storyboard in Resources */,
 				49D93A2A1DDEFCEF0074E00D /* layout-placeholder.png in Resources */,
@@ -499,6 +508,7 @@
 				4906DE671DE3D7E100891D1E /* AZZJiraIssueModel.m in Sources */,
 				4906DE731DE3E2D900891D1E /* AZZJiraIssuePriorityModel.m in Sources */,
 				4906DE701DE3E12200891D1E /* AZZJiraUserModel.m in Sources */,
+				49A0A7641E0BB15C000589F2 /* AZZJiraLogPreviewViewController.m in Sources */,
 				4906DE971DE6DB1900891D1E /* AZZJiraCreateIssueViewController.m in Sources */,
 				4906DE9A1DE7CCD300891D1E /* AZZJiraComponentModel.m in Sources */,
 				49D93A231DDEE5180074E00D /* AZZJiraProjectsModel.m in Sources */,

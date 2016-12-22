@@ -13,6 +13,8 @@
 @property (nonatomic, copy) NSURL *filePath;
 @property (nonatomic, assign) BOOL isDirectory;
 @property (nonatomic, copy) NSArray<AZZJiraFileNode *> *subpaths;
+@property (nonatomic, assign) BOOL viewable;
+@property (nonatomic, assign) AZZJiraPreviewFileType previewType;
 
 @end
 
@@ -21,6 +23,18 @@
 + (instancetype)fileNodeWithRootFilePath:(NSString *)rootPath {
     AZZJiraFileNode *fileNode = [[AZZJiraFileNode alloc] init];
     fileNode.filePath = [NSURL fileURLWithPath:rootPath];
+    NSArray *textPathExtensions = @[@"log", @"crash", @"txt"];
+    NSArray *imagePathExtensions = @[@"png", @"jpeg", @"jpg"];
+    if ([textPathExtensions containsObject:fileNode.filePath.pathExtension]) {
+        fileNode.viewable = YES;
+        fileNode.previewType = AZZJiraPreviewType_Text;
+    } else if ([imagePathExtensions containsObject:fileNode.filePath.pathExtension]) {
+        fileNode.viewable = YES;
+        fileNode.previewType = AZZJiraPreviewType_Image;
+    } else {
+        fileNode.viewable = NO;
+        fileNode.previewType = AZZJiraPreviewType_None;
+    }
     
     if (![fileNode.filePath isFileURL]) {
         return nil;

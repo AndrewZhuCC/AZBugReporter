@@ -7,6 +7,7 @@
 //
 
 #import "AZZJiraFileAttachmentViewController.h"
+#import "AZZJiraLogPreviewViewController.h"
 
 #import <Masonry/Masonry.h>
 
@@ -60,9 +61,20 @@
     if (fileNode.isDirectory) {
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     } else {
-        cell.accessoryType = UITableViewCellAccessoryNone;
+        if (fileNode.viewable) {
+            cell.accessoryType = UITableViewCellAccessoryDetailButton;
+        } else {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
     }
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
+    AZZJiraFileNode *fileNode = self.fileNode.subpaths[indexPath.row];
+    AZZJiraLogPreviewViewController *vc = [[AZZJiraLogPreviewViewController alloc] init];
+    vc.fileNode = fileNode;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
