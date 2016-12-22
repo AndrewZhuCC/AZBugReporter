@@ -102,6 +102,27 @@
     }
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    AZPerformanceMonitorConfiguration *config = self.monitors[indexPath.row].config;
+    NSString *mill = [@(config.milliseconds) stringValue];
+    NSString *usage = nil;
+    switch (config.monitorType) {
+            case MonitorType_CPU:
+        {
+            usage = [@(config.cpuUsageToNotify) stringValue];
+            break;
+        }
+            case MonitorType_RunLoop:
+        {
+            usage = [@(config.countToNotify) stringValue];
+            break;
+        }
+    }
+    [[AZPerformanceMonitorManager sharedInstance] removeObserver:self.monitors[indexPath.row]];
+    [self configMonitorWithMill:mill usage:usage];
+}
+
 #pragma mark - TextFieldDelegate
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
@@ -122,18 +143,24 @@
 }
 
 - (void)addButtonTapped:(id)sender {
+    [self configMonitorWithMill:nil usage:nil];
+}
+
+- (void)configMonitorWithMill:(NSString *)mill usage:(NSString *)usage {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Add Monitor" message:nil preferredStyle:UIAlertControllerStyleAlert];
     
     __weak typeof(self) wself = self;
     [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
         textField.delegate = wself;
         textField.placeholder = @"milliseconds";
+        textField.text = mill;
         textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     }];
     
     [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
         textField.delegate = wself;
         textField.placeholder = @"usage for cpu, count for runloop";
+        textField.text = usage;
         textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     }];
     
@@ -168,7 +195,19 @@
     }];
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        
+        switch (wself.monitorType) {
+            case MonitorType_CPU:
+            {
+                ObserveCPU([usage integerValue], [mill integerValue])
+                break;
+            }
+            case MonitorType_RunLoop:
+            {
+                ObserveRunLoop([usage integerValue], [mill integerValue])
+                break;
+            }
+        }
+        [wself reloadMonitors];
     }];
     
     [alertController addAction:doneAction];
@@ -185,7 +224,6 @@
         _tvMonitors.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
         _tvMonitors.delegate = self;
         _tvMonitors.dataSource = self;
-        _tvMonitors.allowsSelection = NO;
         [self.view addSubview:_tvMonitors];
     }
     return _tvMonitors;

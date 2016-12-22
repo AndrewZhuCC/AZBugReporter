@@ -21,6 +21,6 @@ Pod::Spec.new do |s|
   s.dependency 'SAMKeychain'
   s.dependency 'SDWebImage'
   s.dependency 'AZMWPhotoBrowser', '~> 2.1.3'
-  s.dependency 'AZ-THPerformanceMonitor', '~> 0.0.11'
+  s.dependency 'AZ-THPerformanceMonitor', '~> 0.0.12'
 
 end
