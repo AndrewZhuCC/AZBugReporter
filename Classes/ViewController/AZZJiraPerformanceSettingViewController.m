@@ -195,6 +195,11 @@
     if (!_monitors) {
         _monitors = [[AZPerformanceMonitorManager sharedInstance] monitorsWithType:self.monitorType];
     }
+    if (_monitors.count >= 1) {
+        self.navigationItem.rightBarButtonItem.enabled = NO;
+    } else {
+        self.navigationItem.rightBarButtonItem.enabled = YES;
+    }
     return _monitors;
 }
 

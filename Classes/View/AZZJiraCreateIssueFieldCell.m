@@ -297,7 +297,7 @@
 
 - (UITableView *)tbSelector {
     if (!_tbSelector) {
-        _tbSelector = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 120) style:UITableViewStylePlain];
+        _tbSelector = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 220) style:UITableViewStylePlain];
         _tbSelector.delegate = self;
         _tbSelector.dataSource = self;
         _tbSelector.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
