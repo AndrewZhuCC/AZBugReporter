@@ -23,6 +23,9 @@
 @property (nonatomic, strong) UITextField *tfUserName;
 @property (nonatomic, strong) UITextField *tfPassword;
 @property (nonatomic, strong) UIButton *btnCommit;
+@property (nonatomic, strong) UILabel *lbRememberPassword;
+@property (nonatomic, strong) UISwitch *swRememberPassword;
+@property (nonatomic, strong) UIButton *btnSelectUser;
 
 @property (nonatomic, strong) MBProgressHUD *hud;
 
@@ -68,7 +71,9 @@
     __weak typeof(self) wself = self;
     [[AZZJiraClient sharedInstance] requestLoginWithUserName:userName password:password success:^(NSHTTPURLResponse *response, id responseObject) {
 //        NSLog(@"success response:%@", responseObject);
-        [SAMKeychain setPassword:self.tfPassword.text forService:AZZJiraKeyChainService account:self.tfUserName.text];
+        if (wself.swRememberPassword.isOn) {
+            [SAMKeychain setPassword:wself.tfPassword.text forService:AZZJiraKeyChainService account:wself.tfUserName.text];
+        }
         wself.hud.label.text = @"Success";
         AZZJiraProjectsListViewController *listVC = [AZZJiraProjectsListViewController new];
         [wself.navigationController pushViewController:listVC animated:YES];
@@ -82,6 +87,29 @@
     self.hud.label.text = nil;
     self.hud.mode = MBProgressHUDModeIndeterminate;
     [self.hud showAnimated:YES];
+}
+
+- (void)selectUserButtonTapped:(UIButton *)button {
+    NSArray *accounts = [SAMKeychain accountsForService:AZZJiraKeyChainService];
+    if (accounts.count > 0) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Users" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        
+        __weak typeof(self) wself = self;
+        for (NSDictionary *accountDic in accounts) {
+            NSString *account = [accountDic objectForKey:@"acct"];
+            NSString *password = [SAMKeychain passwordForService:AZZJiraKeyChainService account:account];
+            UIAlertAction *action = [UIAlertAction actionWithTitle:account style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                wself.tfUserName.text = account;
+                wself.tfPassword.text = password;
+            }];
+            [alertController addAction:action];
+        }
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        [alertController addAction:cancel];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
 }
 
 #pragma mark - UITextField Delegate
@@ -112,9 +140,22 @@
         make.width.equalTo(self.tfUserName);
         make.height.equalTo(self.tfUserName);
     }];
-    [self.btnCommit mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.lbRememberPassword mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view);
         make.top.equalTo(self.tfPassword.mas_bottom).with.offset(40);
+    }];
+    [self.swRememberPassword mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.lbRememberPassword.mas_right).with.offset(8);
+        make.centerY.equalTo(self.lbRememberPassword);
+    }];
+    [self.btnSelectUser mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.view);
+        make.top.equalTo(self.swRememberPassword.mas_bottom).with.offset(40);
+        make.width.mas_equalTo(200);
+    }];
+    [self.btnCommit mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.view);
+        make.top.equalTo(self.btnSelectUser.mas_bottom).with.offset(20);
         make.width.mas_equalTo(200);
     }];
     
@@ -163,6 +204,39 @@
         [self.view addSubview:_btnCommit];
     }
     return _btnCommit;
+}
+
+- (UILabel *)lbRememberPassword {
+    if (!_lbRememberPassword) {
+        _lbRememberPassword = [[UILabel alloc] init];
+        _lbRememberPassword.font = [UIFont systemFontOfSize:15];
+        _lbRememberPassword.text = @"Remember Me";
+        _lbRememberPassword.textAlignment = NSTextAlignmentCenter;
+        [self.view addSubview:_lbRememberPassword];
+    }
+    return _lbRememberPassword;
+}
+
+- (UISwitch *)swRememberPassword {
+    if (!_swRememberPassword) {
+        _swRememberPassword = [[UISwitch alloc] init];
+        _swRememberPassword.on = YES;
+        [self.view addSubview:_swRememberPassword];
+    }
+    return _swRememberPassword;
+}
+
+- (UIButton *)btnSelectUser {
+    if (!_btnSelectUser) {
+        _btnSelectUser = [[UIButton alloc] init];
+        [_btnSelectUser setTitle:@"Select User" forState:UIControlStateNormal];
+        [_btnSelectUser addTarget:self action:@selector(selectUserButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+        _btnSelectUser.enabled = ([SAMKeychain accountsForService:AZZJiraKeyChainService].count > 0);
+        _btnSelectUser.layer.cornerRadius = 5;
+        _btnSelectUser.layer.backgroundColor = [UIColor colorWithRed:0.012 green:0.663 blue:0.957 alpha:1.000].CGColor;
+        [self.view addSubview:_btnSelectUser];
+    }
+    return _btnSelectUser;
 }
 
 - (MBProgressHUD *)hud {
