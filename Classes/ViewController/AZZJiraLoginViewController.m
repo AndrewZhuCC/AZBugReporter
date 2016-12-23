@@ -12,6 +12,8 @@
 
 #import "AZZJiraConfiguration.h"
 
+#import <Photos/Photos.h>
+
 #import <Masonry/Masonry.h>
 #import <MBProgressHUD/MBProgressHUD.h>
 #import <SAMKeychain/SAMKeychain.h>
@@ -31,6 +33,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), ^{
+       [PHAsset fetchAssetsWithMediaType:PHAssetMediaTypeImage options:nil];
+    });
     
     self.navigationItem.hidesBackButton = YES;
     self.navigationController.viewControllers = @[self];
