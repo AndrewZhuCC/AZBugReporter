@@ -15,6 +15,7 @@
 
 #import <Masonry/Masonry.h>
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <MBProgressHUD/MBProgressHUD.h>
 
 #define IssueDetailViewsPadding 8.f
 
@@ -40,6 +41,8 @@
 
 @property (nonatomic, strong) UILabel *lbDescription;
 @property (nonatomic, strong) UITextView *txvDescription;
+
+@property (nonatomic, strong) MBProgressHUD *hud;
 
 @end
 
@@ -133,7 +136,25 @@
 #pragma mark - Actions
 
 - (void)btnAssignMeClicked:(UIButton *)button {
-    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"分配" message:@"确认分配给你？" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self showHudWithTitle:nil detail:nil];
+        __weak typeof(self) wself = self;
+        [[AZZJiraClient sharedInstance] requestAssignIssue:self.model.key success:^(NSHTTPURLResponse *response, id responseObject) {
+            [wself showHudWithTitle:@"成功" detail:nil];
+            [wself.hud hideAnimated:YES afterDelay:2.f];
+        } fail:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
+            [wself showHudWithTitle:@"Error" detail:[responseObject description]];
+            [wself.hud hideAnimated:YES afterDelay:3.f];
+            NSLog(@"Assign to me error:%@", error);
+            NSLog(@"responseObject:%@", responseObject);
+        }];
+    }];
+    [alertController addAction:confirm];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    [alertController addAction:cancel];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 - (void)btnAttachmentsClicked:(UIButton *)button {
@@ -203,6 +224,7 @@
         _btnAssignMe = [UIButton new];
         [_btnAssignMe setTitle:@"分配给我" forState:UIControlStateNormal];
         [_btnAssignMe setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
+        [_btnAssignMe setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
         _btnAssignMe.titleLabel.font = [UIFont systemFontOfSize:15.f];
         _btnAssignMe.layer.backgroundColor = [UIColor colorWithRed:0.642 green:0.803 blue:0.999 alpha:1.000].CGColor;
         _btnAssignMe.layer.cornerRadius = 5.f;
@@ -277,6 +299,14 @@
     return _txvDescription;
 }
 
+- (MBProgressHUD *)hud {
+    if (!_hud) {
+        _hud = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:_hud];
+    }
+    return _hud;
+}
+
 - (void)setIssueKey:(NSString *)issueKey {
     _issueKey = [issueKey copy];
     if (issueKey) {
@@ -322,7 +352,19 @@
         self.txvDescription.text = model.modelDescription;
         
         self.btnAttachments.enabled = (self.model.attachment.count != 0);
+        self.btnAssignMe.enabled = ![self.model.assignee isEqual:[AZZJiraClient sharedInstance].selfModel];
     }
+}
+
+- (void)showHudWithTitle:(NSString *)title detail:(NSString *)detail {
+    if (title || detail) {
+        self.hud.mode = MBProgressHUDModeText;
+    } else {
+        self.hud.mode = MBProgressHUDModeIndeterminate;
+    }
+    self.hud.label.text = title;
+    self.hud.detailsLabel.text = detail;
+    [self.hud showAnimated:YES];
 }
 
 @end

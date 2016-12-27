@@ -16,6 +16,8 @@
 
 @property (nonatomic, strong) AFJSONRequestSerializer *postSerializer;
 
+@property (nonatomic, strong) AZZJiraUserModel *selfModel;
+
 @end
 
 @implementation AZZJiraClient
@@ -53,6 +55,11 @@
         case AZZRequestMethodType_Post:
         {
             request = [self.postSerializer requestWithMethod:@"POST" URLString:[[NSURL URLWithString:urlString relativeToURL:self.baseURL] absoluteString] parameters:param error:&serializationError];
+            break;
+        }
+        case AZZRequestMethodType_Put:
+        {
+            request = [self.postSerializer requestWithMethod:@"PUT" URLString:[[NSURL URLWithString:urlString relativeToURL:self.baseURL] absoluteString] parameters:param error:&serializationError];
             break;
         }
     }
@@ -123,6 +130,9 @@
                     success((NSHTTPURLResponse *)response, responseObject);
                 });
             }
+            [self requestJSONOfMyselfSuccess:^(NSHTTPURLResponse *response, id responseObject) {
+                self.selfModel = [AZZJiraUserModel getUserModelWithDictionary:responseObject];
+            } fail:nil];
         }
     }];
     
@@ -153,6 +163,7 @@
                     success((NSHTTPURLResponse *)response, responseObject);
                 });
             }
+            self.selfModel = nil;
         } else {
             if (failure) {
                 dispatch_async(self.completionQueue ?: dispatch_get_main_queue(), ^{
@@ -353,6 +364,13 @@
     }];
     [dataTask resume];
     return dataTask;
+}
+
+- (NSURLSessionDataTask *)requestAssignIssue:(NSString *)issueIDOrKey
+                                     success:(AZZJiraSuccessBlock)success
+                                        fail:(AZZJiraFailBlock)failure {
+    NSDictionary *parameters = @{@"name" : self.selfModel.name};
+    return [self requestWithURL:[NSString stringWithFormat:@"issue/%@/assignee", issueIDOrKey] method:AZZRequestMethodType_Put parameter:parameters body:nil uploadProgress:nil downloadProgress:nil success:success failure:failure];
 }
 
 - (void)appendAssets:(NSArray<PHAsset *> *)assets to:(id<AFMultipartFormData>)formData {

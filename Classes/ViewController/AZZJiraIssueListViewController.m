@@ -42,7 +42,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self requestIssuesByProjectKey];
+    [self.tbIssueList.mj_header beginRefreshing];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -81,9 +81,11 @@
             NSArray *issues = [responseObject objectForKey:@"issues"];
             if (!issues || wself.models.count >= wself.total) {
                 [wself.tbIssueList.mj_footer endRefreshingWithNoMoreData];
+                [wself.tbIssueList.mj_header endRefreshing];
             } else {
                 [wself.models addObjectsFromArray:[AZZJiraIssueModel getIssueModelsWithJSONArray:issues]];
                 [wself.tbIssueList.mj_footer endRefreshing];
+                [wself.tbIssueList.mj_header endRefreshing];
                 [wself.tbIssueList reloadData];
             }
         } else {
@@ -93,6 +95,11 @@
         NSLog(@"get issues fail with error: %@", error);
         NSLog(@"responseObject:%@", responseObject);
     }];
+}
+
+- (void)reloadIssuesByProjectKey {
+    [self.models removeAllObjects];
+    [self requestIssuesByProjectKey];
 }
 
 #pragma mark - TableView Delegate
@@ -133,6 +140,7 @@
         _tbIssueList.dataSource = self;
         _tbIssueList.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
         _tbIssueList.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(requestIssuesByProjectKey)];
+        _tbIssueList.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(reloadIssuesByProjectKey)];
         [_tbIssueList registerClass:[AZZJiraIssueListTableViewCell class] forCellReuseIdentifier:NSStringFromClass([AZZJiraIssueListTableViewCell class])];
         [self.view addSubview:_tbIssueList];
     }

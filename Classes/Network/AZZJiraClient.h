@@ -7,10 +7,12 @@
 //
 
 #import <AFNetworking/AFNetworking.h>
+#import "AZZJiraUserModel.h"
 
 typedef NS_ENUM(NSUInteger, AZZRequestMethodType) {
     AZZRequestMethodType_Get = 0,
     AZZRequestMethodType_Post = 1,
+    AZZRequestMethodType_Put = 2,
 };
 
 typedef void(^AZZJiraSuccessBlock)(NSHTTPURLResponse *response, id responseObject);
@@ -20,6 +22,8 @@ typedef void(^AZZJiraProgressBlock)(NSProgress *progress);
 @class AZZJiraCreateIssueInputModel, PHAsset;
 
 @interface AZZJiraClient : AFHTTPSessionManager
+
+@property (nonatomic, readonly) AZZJiraUserModel *selfModel;
 
 + (instancetype)sharedInstance;
 
@@ -75,5 +79,9 @@ typedef void(^AZZJiraProgressBlock)(NSProgress *progress);
                                    uploadProgress:(AZZJiraProgressBlock)uploadProgressBlock
                                           success:(AZZJiraSuccessBlock)success
                                              fail:(AZZJiraFailBlock)failure;
+
+- (NSURLSessionDataTask *)requestAssignIssue:(NSString *)issueIDOrKey
+                                     success:(AZZJiraSuccessBlock)success
+                                        fail:(AZZJiraFailBlock)failure;
 
 @end
