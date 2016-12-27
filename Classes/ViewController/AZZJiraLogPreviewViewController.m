@@ -13,6 +13,8 @@
 #import <Masonry/Masonry.h>
 #import <MBProgressHUD/MBProgressHUD.h>
 
+#import <SDWebImage/UIImageView+WebCache.h>
+
 @interface AZZJiraLogPreviewViewController ()
 
 @property (nonatomic, strong) UITextView *tvPreview;
@@ -79,20 +81,19 @@
                 }
                     case AZZJiraPreviewType_Image:
                 {
-                    UIImage *image = [UIImage imageWithContentsOfFile:[self.fileNode.filePath path]];
-                    dispatch_async(dispatch_get_main_queue(), ^{
+                    __weak typeof(self) wself = self;
+                    [self.ivPreview sd_setImageWithURL:self.fileNode.filePath placeholderImage:[UIImage imageNamed:@"layout-placeholder"] options:SDWebImageRetryFailed | SDWebImageHandleCookies completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                         if (image) {
-                            self.ivPreview.image = image;
-                            self.ivPreview.hidden = NO;
-                            self.tvPreview.hidden = YES;
-                            [self.hud hideAnimated:YES];
+                            wself.ivPreview.hidden = NO;
+                            wself.tvPreview.hidden = YES;
+                            [wself.hud hideAnimated:YES];
                         } else {
-                            self.hud.mode = MBProgressHUDModeText;
-                            self.hud.label.text = @"Error";
-                            self.hud.detailsLabel.text = nil;
-                            [self.hud hideAnimated:YES afterDelay:3.f];
+                            wself.hud.mode = MBProgressHUDModeText;
+                            wself.hud.label.text = @"Error";
+                            wself.hud.detailsLabel.text = nil;
+                            [wself.hud hideAnimated:YES afterDelay:3.f];
                         }
-                    });
+                    }];
                     break;
                 }
                     default:
@@ -138,7 +139,6 @@
 - (MBProgressHUD *)hud {
     if (!_hud) {
         _hud = [[MBProgressHUD alloc] initWithView:self.view];
-        _hud.hidden = YES;
         [self.view addSubview:_hud];
     }
     return _hud;

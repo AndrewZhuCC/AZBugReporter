@@ -32,7 +32,8 @@
              @"project"          : @"fields.project",
              @"versions"         : @"fields.versions",
              @"lastViewed"       : @"fields.lastViewed",
-             @"comments"         : @"fields.comment.comments"
+             @"comments"         : @"fields.comment.comments",
+             @"environment"      : @"fields.environment",
              };
 }
 

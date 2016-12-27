@@ -40,6 +40,10 @@ typedef void(^AZZJiraProgressBlock)(NSProgress *progress);
                                                success:(AZZJiraSuccessBlock)success
                                                   fail:(AZZJiraFailBlock)fail;
 
+- (NSURLSessionDataTask *)requestIssueByIssueKey:(NSString *)key
+                                         success:(AZZJiraSuccessBlock)success
+                                            fail:(AZZJiraFailBlock)fail;
+
 - (NSURLSessionDataTask *)requestCreateIssueMetaByProjectKey:(NSString *)key
                                                      success:(AZZJiraSuccessBlock)success
                                                         fail:(AZZJiraFailBlock)fail;

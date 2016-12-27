@@ -25,5 +25,6 @@ typedef NS_ENUM(NSUInteger, AZZJiraPreviewFileType) {
 @property (nonatomic, assign, readonly) AZZJiraPreviewFileType previewType;
 
 + (instancetype)fileNodeWithRootFilePath:(NSString *)rootPath;
++ (instancetype)fileNodeWithURL:(NSURL *)fileUrl;
 
 @end

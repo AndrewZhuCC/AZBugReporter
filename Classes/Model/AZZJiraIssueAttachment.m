@@ -19,7 +19,7 @@
              @"author"    : @"author",
              @"created"   : @"created",
              @"size"      : @"size",
-             @"mimetype"  : @"mimetype",
+             @"mimetype"  : @"mimeType",
              @"content"   : @"content",
              @"thumbnail" : @"thumbnail"
              };

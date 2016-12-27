@@ -177,10 +177,16 @@
                                              maxResult:(NSUInteger)maxResult
                                                success:(AZZJiraSuccessBlock)success
                                                   fail:(AZZJiraFailBlock)fail {
-    NSDictionary *parameter = @{@"jql" : [NSString stringWithFormat:@"project = %@ AND status in (产品需求阶段, 开发中, Reopened)", key],
+    NSDictionary *parameter = @{@"jql" : [NSString stringWithFormat:@"project = %@ AND resolution = Unresolved", key],
                                 @"startAt" : [@(start) stringValue],
                                 @"maxResults" : [@(maxResult) stringValue]};
     return [self requestWithURL:@"search" method:AZZRequestMethodType_Get parameter:parameter body:nil uploadProgress:nil downloadProgress:nil success:success failure:fail];
+}
+
+- (NSURLSessionDataTask *)requestIssueByIssueKey:(NSString *)key
+                                         success:(AZZJiraSuccessBlock)success
+                                            fail:(AZZJiraFailBlock)fail {
+    return [self requestWithURL:[NSString stringWithFormat:@"issue/%@", key] method:AZZRequestMethodType_Get parameter:nil body:nil uploadProgress:nil downloadProgress:nil success:success failure:fail];
 }
 
 - (NSURLSessionDataTask *)requestCreateIssueMetaByProjectKey:(NSString *)key

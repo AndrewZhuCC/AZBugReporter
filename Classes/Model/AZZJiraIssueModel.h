@@ -42,6 +42,7 @@
 @property (nonatomic, copy, readonly) NSArray<AZZJiraIssueVersionModel *> *versions;
 @property (nonatomic, copy, readonly) NSDate *lastViewed;
 @property (nonatomic, copy, readonly) NSArray<AZZJiraIssueCommentModel *> *comments;
+@property (nonatomic, copy, readonly) NSString *environment;
 
 + (instancetype)getIssueModelWithDictionary:(NSDictionary *)dic;
 + (NSArray<AZZJiraIssueModel *> *)getIssueModelsWithJSONArray:(NSArray *)array;

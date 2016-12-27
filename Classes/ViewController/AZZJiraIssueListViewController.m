@@ -8,6 +8,7 @@
 
 #import "AZZJiraIssueListViewController.h"
 #import "AZZJiraSelectIssueTypeViewController.h"
+#import "AZZJiraIssueDetailViewController.h"
 
 #import "AZZJiraIssueListTableViewCell.h"
 #import "AZZJiraIssueModel.h"
@@ -90,6 +91,7 @@
         }
     } fail:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
         NSLog(@"get issues fail with error: %@", error);
+        NSLog(@"responseObject:%@", responseObject);
     }];
 }
 
@@ -109,6 +111,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    AZZJiraIssueModel *model = self.models[indexPath.row];
+    AZZJiraIssueDetailViewController *vc = [AZZJiraIssueDetailViewController new];
+    vc.issueKey = model.key;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

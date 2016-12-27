@@ -49,6 +49,27 @@
     return fileNode;
 }
 
++ (instancetype)fileNodeWithURL:(NSURL *)fileUrl {
+    AZZJiraFileNode *fileNode = [[AZZJiraFileNode alloc] init];
+    fileNode.filePath = fileUrl;
+    
+    NSArray *textPathExtensions = @[@"log", @"crash", @"txt"];
+    NSArray *imagePathExtensions = @[@"png", @"jpeg", @"jpg"];
+    if ([textPathExtensions containsObject:fileNode.filePath.pathExtension]) {
+        fileNode.viewable = YES;
+        fileNode.previewType = AZZJiraPreviewType_Text;
+    } else if ([imagePathExtensions containsObject:fileNode.filePath.pathExtension]) {
+        fileNode.viewable = YES;
+        fileNode.previewType = AZZJiraPreviewType_Image;
+    } else {
+        fileNode.viewable = NO;
+        fileNode.previewType = AZZJiraPreviewType_None;
+    }
+    
+    fileNode.isDirectory = NO;
+    return fileNode;
+}
+
 - (NSArray<AZZJiraFileNode *> *)subpaths {
     if (!_subpaths) {
         if (self.isDirectory) {
