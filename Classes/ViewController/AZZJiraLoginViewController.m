@@ -15,7 +15,6 @@
 #import <Photos/Photos.h>
 
 #import <Masonry/Masonry.h>
-#import <MBProgressHUD/MBProgressHUD.h>
 #import <SAMKeychain/SAMKeychain.h>
 
 @interface AZZJiraLoginViewController () <UITextFieldDelegate>
@@ -26,8 +25,6 @@
 @property (nonatomic, strong) UILabel *lbRememberPassword;
 @property (nonatomic, strong) UISwitch *swRememberPassword;
 @property (nonatomic, strong) UIButton *btnSelectUser;
-
-@property (nonatomic, strong) MBProgressHUD *hud;
 
 @end
 
@@ -74,19 +71,15 @@
         if (wself.swRememberPassword.isOn) {
             [SAMKeychain setPassword:wself.tfPassword.text forService:AZZJiraKeyChainService account:wself.tfUserName.text];
         }
-        wself.hud.label.text = @"Success";
+        [wself showHudWithTitle:@"Success" detail:nil];
         AZZJiraProjectsListViewController *listVC = [AZZJiraProjectsListViewController new];
         [wself.navigationController pushViewController:listVC animated:YES];
     } failure:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
 //        NSLog(@"fail response:%@ error:%@", responseObject, error);
-        wself.hud.mode = MBProgressHUDModeText;
-        wself.hud.label.text = error.description;
-        [wself.hud hideAnimated:YES afterDelay:3.0];
+        [wself showHudWithTitle:@"Error" detail:error.description hideAfterDelay:3.f];
     }];
     
-    self.hud.label.text = nil;
-    self.hud.mode = MBProgressHUDModeIndeterminate;
-    [self.hud showAnimated:YES];
+    [self showHudWithTitle:nil detail:nil];
 }
 
 - (void)selectUserButtonTapped:(UIButton *)button {
@@ -237,15 +230,6 @@
         [self.view addSubview:_btnSelectUser];
     }
     return _btnSelectUser;
-}
-
-- (MBProgressHUD *)hud {
-    if (!_hud) {
-        _hud = [[MBProgressHUD alloc] initWithView:self.view];
-        _hud.label.numberOfLines = 0;
-        [self.view addSubview:_hud];
-    }
-    return _hud;
 }
 
 @end

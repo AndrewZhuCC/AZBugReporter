@@ -6,11 +6,11 @@
 //  Copyright © 2016年 Andrew. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "AZZJiraBaseViewController.h"
 
 @class AZZJiraFileNode;
 
-@interface AZZJiraLogPreviewViewController : UIViewController
+@interface AZZJiraLogPreviewViewController : AZZJiraBaseViewController
 
 @property (nonatomic, strong) AZZJiraFileNode *fileNode;
 

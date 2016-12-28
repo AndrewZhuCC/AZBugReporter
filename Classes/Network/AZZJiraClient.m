@@ -381,6 +381,34 @@
     return [self requestWithURL:url method:AZZRequestMethodType_Get parameter:parameters body:nil uploadProgress:nil downloadProgress:nil success:success failure:failure];
 }
 
+- (NSURLSessionDataTask *)requestDoTransitionWithIssueIdOrKey:(NSString *)issueId
+                                                 transitionId:(NSString *)transitionId
+                                                  commentBody:(NSString *)commentBody
+                                                      success:(AZZJiraSuccessBlock)success
+                                                         fail:(AZZJiraFailBlock)failure {
+    NSDictionary *parameter = nil;
+    if (commentBody) {
+        parameter = @{
+                      @"update" : @{
+                              @"comment" : @[
+                                      @{
+                                          @"add" : @{
+                                                  @"body" : commentBody,
+                                                  },
+                                          }
+                                      ],
+                              },
+                      @"transition" : transitionId,
+                      };
+    } else {
+        parameter = @{
+                      @"transition" : transitionId,
+                      };
+    }
+    NSString *url = [NSString stringWithFormat:@"issue/%@/transitions", issueId];
+    return [self requestWithURL:url method:AZZRequestMethodType_Post parameter:parameter body:nil uploadProgress:nil downloadProgress:nil success:success failure:failure];
+}
+
 - (void)appendAssets:(NSArray<PHAsset *> *)assets to:(id<AFMultipartFormData>)formData {
     for (PHAsset *asset in assets) {
         UIImage *image = [self getImageFromAsset:asset];

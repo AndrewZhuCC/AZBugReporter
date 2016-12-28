@@ -11,7 +11,6 @@
 #import "AZZJiraFileNode.h"
 
 #import <Masonry/Masonry.h>
-#import <MBProgressHUD/MBProgressHUD.h>
 
 #import <SDWebImage/UIImageView+WebCache.h>
 
@@ -19,7 +18,6 @@
 
 @property (nonatomic, strong) UITextView *tvPreview;
 @property (nonatomic, strong) UIImageView *ivPreview;
-@property (nonatomic, strong) MBProgressHUD *hud;
 
 @end
 
@@ -54,10 +52,7 @@
 
 - (void)loadLogToPreview {
     if (self.fileNode) {
-        self.hud.mode = MBProgressHUDModeIndeterminate;
-        self.hud.label.text = nil;
-        self.hud.detailsLabel.text = nil;
-        [self.hud showAnimated:YES];
+        [self showHudWithTitle:nil detail:nil];
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), ^{
             NSError *error = nil;
             switch (self.fileNode.previewType) {
@@ -69,12 +64,9 @@
                             self.tvPreview.text = log;
                             self.tvPreview.hidden = NO;
                             self.ivPreview.hidden = YES;
-                            [self.hud hideAnimated:YES];
+                            [self hideHudAfterDelay:0];
                         } else {
-                            self.hud.mode = MBProgressHUDModeText;
-                            self.hud.label.text = @"Error";
-                            self.hud.detailsLabel.text = [error localizedFailureReason];
-                            [self.hud hideAnimated:YES afterDelay:3.f];
+                            [self showHudWithTitle:@"Error" detail:error.localizedDescription hideAfterDelay:3.f];
                         }
                     });
                     break;
@@ -86,12 +78,9 @@
                         if (image) {
                             wself.ivPreview.hidden = NO;
                             wself.tvPreview.hidden = YES;
-                            [wself.hud hideAnimated:YES];
+                            [wself hideHudAfterDelay:0];
                         } else {
-                            wself.hud.mode = MBProgressHUDModeText;
-                            wself.hud.label.text = @"Error";
-                            wself.hud.detailsLabel.text = nil;
-                            [wself.hud hideAnimated:YES afterDelay:3.f];
+                            [wself showHudWithTitle:@"Error" detail:nil hideAfterDelay:3.f];
                         }
                     }];
                     break;
@@ -134,14 +123,6 @@
         [self.view addSubview:_ivPreview];
     }
     return _ivPreview;
-}
-
-- (MBProgressHUD *)hud {
-    if (!_hud) {
-        _hud = [[MBProgressHUD alloc] initWithView:self.view];
-        [self.view addSubview:_hud];
-    }
-    return _hud;
 }
 
 @end

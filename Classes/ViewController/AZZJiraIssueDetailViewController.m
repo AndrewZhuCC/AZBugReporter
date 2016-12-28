@@ -13,18 +13,19 @@
 #import "AZZJiraCommentsView.h"
 
 #import "AZZJiraIssueModel.h"
+#import "AZZJiraIssueTransitionModel.h"
 
 #import "AZZJiraClient.h"
 
 #import <Masonry/Masonry.h>
 #import <SDWebImage/UIImageView+WebCache.h>
-#import <MBProgressHUD/MBProgressHUD.h>
 
 #define IssueDetailViewsPadding 8.f
 
 @interface AZZJiraIssueDetailViewController ()
 
 @property (nonatomic, strong) AZZJiraIssueModel *model;
+@property (nonatomic, copy) NSArray<AZZJiraIssueTransitionModel *> *transitions;
 
 @property (nonatomic, strong) UIScrollView *svMainView;
 
@@ -47,8 +48,6 @@
 
 @property (nonatomic, strong) AZZJiraCommentsView *commentsView;
 
-@property (nonatomic, strong) MBProgressHUD *hud;
-
 @end
 
 @implementation AZZJiraIssueDetailViewController
@@ -64,6 +63,14 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if (self.issueKey) {
+        self.issueKey = self.issueKey;
+    }
 }
 
 - (void)setupConstraints {
@@ -134,30 +141,66 @@
         make.left.equalTo(self.lbAssignee);
         make.right.equalTo(self.lbReporter);
     }];
+    
+    UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(rightNavigateItemCliecked:)];
+    self.navigationItem.rightBarButtonItem = right;
 }
 
 #pragma mark - Actions
 
+- (void)rightNavigateItemCliecked:(id)sender {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Actions" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *edit = [UIAlertAction actionWithTitle:@"编辑" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [alertController addAction:edit];
+    for (AZZJiraIssueTransitionModel *model in self.transitions) {
+        UIAlertAction *action = [UIAlertAction actionWithTitle:model.name style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            BOOL needPush = NO;
+            for (NSString *key in model.fields) {
+                AZZJiraIssueTypeFieldsModel *fieldsModel = model.fields[key];
+                if (fieldsModel.required) {
+                    needPush = YES;
+                    break;
+                }
+            }
+            if (needPush) {
+                NSLog(@"needpush");
+            } else {
+                [self showConfirmAlertWithTitle:@"Action" message:[NSString stringWithFormat:@"确认执行[%@]操作吗？", model.name] confirmBlock:^{
+                    [self showHudWithTitle:nil detail:nil];
+                    [[AZZJiraClient sharedInstance] requestDoTransitionWithIssueIdOrKey:self.model.idNumber transitionId:model.idNumber commentBody:nil success:^(NSHTTPURLResponse *response, id responseObject) {
+                        [self showHudWithTitle:@"成功" detail:nil hideAfterDelay:2.f];
+                        self.issueKey = self.issueKey;
+                    } fail:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
+                        [self showHudWithTitle:@"Error" detail:[responseObject description] hideAfterDelay:3.f];
+                        NSLog(@"do transition error:%@", error);
+                        NSLog(@"responseObject:%@", responseObject);
+                    }];
+                }];
+            }
+        }];
+        [alertController addAction:action];
+    }
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [alertController addAction:cancel];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
 - (void)btnAssignMeClicked:(UIButton *)button {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"分配" message:@"确认分配给你？" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    [self showConfirmAlertWithTitle:@"分配" message:@"确认分配给你？" confirmBlock:^{
         [self showHudWithTitle:nil detail:nil];
         __weak typeof(self) wself = self;
         [[AZZJiraClient sharedInstance] requestAssignIssue:self.model.key success:^(NSHTTPURLResponse *response, id responseObject) {
-            [wself showHudWithTitle:@"成功" detail:nil];
-            [wself.hud hideAnimated:YES afterDelay:2.f];
+            [wself showHudWithTitle:@"成功" detail:nil hideAfterDelay:2.f];
         } fail:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
-            [wself showHudWithTitle:@"Error" detail:[responseObject description]];
-            [wself.hud hideAnimated:YES afterDelay:3.f];
+            [wself showHudWithTitle:@"Error" detail:[responseObject description] hideAfterDelay:3.f];
             NSLog(@"Assign to me error:%@", error);
             NSLog(@"responseObject:%@", responseObject);
         }];
     }];
-    [alertController addAction:confirm];
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-    }];
-    [alertController addAction:cancel];
-    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 - (void)btnAttachmentsClicked:(UIButton *)button {
@@ -301,26 +344,28 @@
     return _commentsView;
 }
 
-- (MBProgressHUD *)hud {
-    if (!_hud) {
-        _hud = [[MBProgressHUD alloc] initWithView:self.view];
-        [self.view addSubview:_hud];
-    }
-    return _hud;
-}
-
 - (void)setIssueKey:(NSString *)issueKey {
     _issueKey = [issueKey copy];
     if (issueKey) {
         __weak typeof(self) wself = self;
+        [self showHudWithTitle:nil detail:nil];
         [[AZZJiraClient sharedInstance] requestIssueByIssueKey:issueKey success:^(NSHTTPURLResponse *response, id responseObject) {
             AZZJiraIssueModel *model = [AZZJiraIssueModel getIssueModelWithDictionary:responseObject];
             typeof(wself) sself = wself;
             if (model && sself) {
                 sself.model = model;
+                [sself hideHudAfterDelay:0];
             }
         } fail:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
+            [wself showHudWithTitle:@"Error" detail:[responseObject description] hideAfterDelay:3.f];
             NSLog(@"get issue model error:%@", error);
+            NSLog(@"responseObject:%@", responseObject);
+        }];
+        [[AZZJiraClient sharedInstance] requestGetTransitionsByIssueIdOrKey:issueKey success:^(NSHTTPURLResponse *response, id responseObject) {
+            NSArray *transitionsJson = [responseObject objectForKey:@"transitions"];
+            self.transitions = [AZZJiraIssueTransitionModel getTransitionModelsWithJSONArray:transitionsJson];
+        } fail:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
+            NSLog(@"get issue transitions error:%@", error);
             NSLog(@"responseObject:%@", responseObject);
         }];
     }
@@ -350,15 +395,5 @@
     }
 }
 
-- (void)showHudWithTitle:(NSString *)title detail:(NSString *)detail {
-    if (title || detail) {
-        self.hud.mode = MBProgressHUDModeText;
-    } else {
-        self.hud.mode = MBProgressHUDModeIndeterminate;
-    }
-    self.hud.label.text = title;
-    self.hud.detailsLabel.text = detail;
-    [self.hud showAnimated:YES];
-}
 
 @end

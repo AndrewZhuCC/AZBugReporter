@@ -38,6 +38,7 @@
 		49A0A7751E137F96000589F2 /* AZZJiraUserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A0A7741E137F96000589F2 /* AZZJiraUserView.m */; };
 		49A0A7781E13861D000589F2 /* AZZJiraSingleCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A0A7771E13861D000589F2 /* AZZJiraSingleCommentView.m */; };
 		49A0A77B1E138A2D000589F2 /* AZZJiraCommentsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A0A77A1E138A2D000589F2 /* AZZJiraCommentsView.m */; };
+		49A0A77E1E13B1B5000589F2 /* AZZJiraBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A0A77D1E13B1B5000589F2 /* AZZJiraBaseViewController.m */; };
 		49D8A3161DFA582400972C8F /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49D8A3151DFA582400972C8F /* Photos.framework */; };
 		49D93A231DDEE5180074E00D /* AZZJiraProjectsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D93A221DDEE5180074E00D /* AZZJiraProjectsModel.m */; };
 		49D93A271DDEE93B0074E00D /* AZZJiraProjectsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D93A261DDEE93B0074E00D /* AZZJiraProjectsListViewController.m */; };
@@ -123,6 +124,8 @@
 		49A0A7771E13861D000589F2 /* AZZJiraSingleCommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraSingleCommentView.m; path = Classes/View/AZZJiraSingleCommentView.m; sourceTree = SOURCE_ROOT; };
 		49A0A7791E138A2D000589F2 /* AZZJiraCommentsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraCommentsView.h; path = Classes/View/AZZJiraCommentsView.h; sourceTree = SOURCE_ROOT; };
 		49A0A77A1E138A2D000589F2 /* AZZJiraCommentsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraCommentsView.m; path = Classes/View/AZZJiraCommentsView.m; sourceTree = SOURCE_ROOT; };
+		49A0A77C1E13B1B5000589F2 /* AZZJiraBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraBaseViewController.h; path = Classes/ViewController/AZZJiraBaseViewController.h; sourceTree = SOURCE_ROOT; };
+		49A0A77D1E13B1B5000589F2 /* AZZJiraBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraBaseViewController.m; path = Classes/ViewController/AZZJiraBaseViewController.m; sourceTree = SOURCE_ROOT; };
 		49D8A3151DFA582400972C8F /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		49D93A211DDEE5180074E00D /* AZZJiraProjectsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraProjectsModel.h; path = Classes/Model/AZZJiraProjectsModel.h; sourceTree = SOURCE_ROOT; };
 		49D93A221DDEE5180074E00D /* AZZJiraProjectsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraProjectsModel.m; path = Classes/Model/AZZJiraProjectsModel.m; sourceTree = SOURCE_ROOT; };
@@ -241,6 +244,8 @@
 		49D93A1D1DDEE2BD0074E00D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				49A0A77C1E13B1B5000589F2 /* AZZJiraBaseViewController.h */,
+				49A0A77D1E13B1B5000589F2 /* AZZJiraBaseViewController.m */,
 				49D93A321DDF04220074E00D /* AZZJiraLoginViewController.h */,
 				49D93A331DDF04220074E00D /* AZZJiraLoginViewController.m */,
 				49D93A251DDEE93B0074E00D /* AZZJiraProjectsListViewController.h */,
@@ -546,6 +551,7 @@
 				4906DE701DE3E12200891D1E /* AZZJiraUserModel.m in Sources */,
 				49A0A7641E0BB15C000589F2 /* AZZJiraLogPreviewViewController.m in Sources */,
 				4906DE971DE6DB1900891D1E /* AZZJiraCreateIssueViewController.m in Sources */,
+				49A0A77E1E13B1B5000589F2 /* AZZJiraBaseViewController.m in Sources */,
 				4906DE9A1DE7CCD300891D1E /* AZZJiraComponentModel.m in Sources */,
 				49D93A231DDEE5180074E00D /* AZZJiraProjectsModel.m in Sources */,
 				4906DE8B1DE58AED00891D1E /* AZZJiraIssueTypeFieldsModel.m in Sources */,

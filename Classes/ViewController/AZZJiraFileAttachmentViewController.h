@@ -6,7 +6,7 @@
 //  Copyright © 2016年 Andrew. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "AZZJiraBaseViewController.h"
 #import "AZZJiraFileNode.h"
 
 @protocol AZZJiraFileAttachmentDelegate <NSObject>
@@ -17,7 +17,7 @@
 
 @end
 
-@interface AZZJiraFileAttachmentViewController : UIViewController
+@interface AZZJiraFileAttachmentViewController : AZZJiraBaseViewController
 
 @property (nonatomic, strong) AZZJiraFileNode *fileNode;
 @property (nonatomic, weak) id<AZZJiraFileAttachmentDelegate> delegate;

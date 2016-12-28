@@ -6,9 +6,9 @@
 //  Copyright © 2016年 Andrew. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "AZZJiraBaseViewController.h"
 
-@interface AZZJiraPerformanceSettingViewController : UIViewController
+@interface AZZJiraPerformanceSettingViewController : AZZJiraBaseViewController
 
 @property (nonatomic, assign) NSInteger monitorType;
 

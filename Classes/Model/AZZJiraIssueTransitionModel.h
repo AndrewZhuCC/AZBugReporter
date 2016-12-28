@@ -18,7 +18,7 @@
 @property (nonatomic, copy, readonly) AZZJiraIssueStatusModel *to;
 @property (nonatomic, copy, readonly) NSDictionary<NSString *, AZZJiraIssueTypeFieldsModel *> *fields;
 
-+ (instancetype)getIssueModelWithDictionary:(NSDictionary *)dic;
-+ (NSArray<AZZJiraIssueTransitionModel *> *)getIssueModelsWithJSONArray:(NSArray *)array;
++ (instancetype)getTransitionModelWithDictionary:(NSDictionary *)dic;
++ (NSArray<AZZJiraIssueTransitionModel *> *)getTransitionModelsWithJSONArray:(NSArray *)array;
 
 @end

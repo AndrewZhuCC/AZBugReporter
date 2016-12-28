@@ -19,11 +19,11 @@
              };
 }
 
-+ (instancetype)getIssueModelWithDictionary:(NSDictionary *)dic {
++ (instancetype)getTransitionModelWithDictionary:(NSDictionary *)dic {
     return [MTLJSONAdapter modelOfClass:[self class] fromJSONDictionary:dic error:nil];
 }
 
-+ (NSArray<AZZJiraIssueTransitionModel *> *)getIssueModelsWithJSONArray:(NSArray *)array {
++ (NSArray<AZZJiraIssueTransitionModel *> *)getTransitionModelsWithJSONArray:(NSArray *)array {
     NSError *error;
     NSArray *result = [MTLJSONAdapter modelsOfClass:[self class] fromJSONArray:array error:&error];
     if (error) {
@@ -40,17 +40,11 @@
 
 + (NSValueTransformer *)fieldsJSONTransformer {
     return [MTLValueTransformer transformerUsingForwardBlock:^id(NSDictionary *value, BOOL *success, NSError *__autoreleasing *error) {
-        NSMutableDictionary *tempResult = [value mutableCopy];
-        for (NSString *key in value) {
-            NSDictionary *dic = value[key];
-            AZZJiraIssueTransitionModel *model = [AZZJiraIssueTransitionModel getIssueModelWithDictionary:dic];
-            [tempResult setObject:model forKey:key];
-        }
-        return [tempResult copy];
+        return [AZZJiraIssueTypeFieldsModel getFieldsDictionaryWithDictionary:value];
     } reverseBlock:^id(NSDictionary *value, BOOL *success, NSError *__autoreleasing *error) {
         NSMutableDictionary *tempResult = [value mutableCopy];
         for (NSString *key in value) {
-            AZZJiraIssueTransitionModel *model = value[key];
+            AZZJiraIssueTypeFieldsModel *model = value[key];
             NSDictionary *dic = [MTLJSONAdapter JSONDictionaryFromModel:model error:nil];
             [tempResult setObject:dic forKey:key];
         }

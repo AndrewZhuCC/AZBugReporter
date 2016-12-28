@@ -21,7 +21,6 @@
 #import "MWPhotoBrowser.h"
 
 #import <Masonry/Masonry.h>
-#import <MBProgressHUD/MBProgressHUD.h>
 #import "UITableView+FDTemplateLayoutCell.h"
 
 @interface AZZJiraCreateIssueViewController () <UITableViewDelegate, UITableViewDataSource, AZZJiraCreateIssueFieldCellDelegate, MWPhotoBrowserDelegate, AZZJiraFileAttachmentDelegate>
@@ -40,8 +39,6 @@
 @property (nonatomic, strong) NSMutableArray<AZZJiraFileNode *> *selectedFiles;
 
 @property (nonatomic, strong) AZZJiraCreateIssueInputModel *inputModel;
-
-@property (nonatomic, strong) MBProgressHUD *hud;
 
 @end
 
@@ -95,9 +92,7 @@
 
 - (void)createIssueButtonTapped:(id)sender {
     [self.tvInputs endEditing:NO];
-    self.hud.mode = MBProgressHUDModeIndeterminate;
-    self.hud.label.text = nil;
-    [self.hud showAnimated:YES];
+    [self showHudWithTitle:nil detail:nil];
     __weak typeof(self) wself = self;
     [[AZZJiraClient sharedInstance] requestCreateIssueWith:self.inputModel success:^(NSHTTPURLResponse *response, id responseObject) {
         NSLog(@"create issue success:%@", responseObject);
@@ -113,7 +108,6 @@
         NSLog(@"create issue fail:%@", error);
         NSLog(@"responseObject: %@", responseObject);
         if (wself) {
-            wself.hud.mode = MBProgressHUDModeText;
             NSMutableString *tempString = [NSMutableString string];
             for (NSString *key in responseObject[@"errors"]) {
                 if (tempString.length > 0) {
@@ -121,9 +115,7 @@
                 }
                 [tempString appendFormat:@"%@: %@", key, responseObject[@"errors"][key]];
             }
-            wself.hud.label.text = [tempString copy];
-            [wself.hud showAnimated:YES];
-            [wself.hud hideAnimated:YES afterDelay:3.f];
+            [wself showHudWithTitle:@"Error" detail:[tempString copy] hideAfterDelay:3.f];
         }
     }];
 }
@@ -138,7 +130,7 @@
     }
     
     [[AZZJiraClient sharedInstance] uploadImagesWithIssueID:issueId images:[tempArray copy] assets:[self selectedPhotoAssets] uploadProgress:^(NSProgress *progress) {
-        self.hud.mode = MBProgressHUDModeDeterminate;
+        self.hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
         self.hud.progress = progress.completedUnitCount / progress.totalUnitCount;
         [self.hud showAnimated:YES];
     } success:^(NSHTTPURLResponse *response, id responseObject) {
@@ -146,9 +138,7 @@
     } fail:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
         NSLog(@"upload fail: %@", error);
         NSLog(@"responseObject: %@", responseObject);
-        self.hud.mode = MBProgressHUDModeText;
-        self.hud.label.text = [error localizedDescription];
-        [self.hud hideAnimated:YES afterDelay:3.f];
+        [self showHudWithTitle:@"Error" detail:error.localizedDescription hideAfterDelay:3.f];
     }];
 }
 
@@ -347,15 +337,6 @@
         [self.view addSubview:_tvInputs];
     }
     return _tvInputs;
-}
-
-- (MBProgressHUD *)hud {
-    if (!_hud) {
-        _hud = [[MBProgressHUD alloc] initWithView:self.view];
-        _hud.label.numberOfLines = 0;
-        [self.view addSubview:_hud];
-    }
-    return _hud;
 }
 
 - (AZZJiraCreateIssueInputModel *)inputModel {

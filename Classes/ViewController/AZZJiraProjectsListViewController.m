@@ -16,7 +16,6 @@
 
 #import <AFNetworking/UIKit+AFNetworking.h>
 #import <Masonry/Masonry.h>
-#import <MBProgressHUD/MBProgressHUD.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @interface AZZJiraProjectsListViewController () <UITableViewDelegate, UITableViewDataSource>
@@ -24,7 +23,6 @@
 @property (nonatomic, copy) NSArray<AZZJiraProjectsModel *> *projects;
 
 @property (nonatomic, strong) UITableView *tbProjects;
-@property (nonatomic, strong) MBProgressHUD *hud;
 
 @end
 
@@ -46,17 +44,13 @@
     __weak typeof(self) wself = self;
     [[AZZJiraClient sharedInstance] requestProjectsListSuccess:^(NSHTTPURLResponse *response, id responseObject) {
         wself.projects = [AZZJiraProjectsModel getProjectsModelsWithJSONArray:responseObject];
-        [wself.hud hideAnimated:YES];
+        [wself hideHudAfterDelay:0];
         [wself.tbProjects reloadData];
     } fail:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
-        wself.hud.label.text = error.description;
-        wself.hud.mode = MBProgressHUDModeText;
-        [wself.hud hideAnimated:YES afterDelay:3.0];
+        [wself showHudWithTitle:@"Error" detail:error.description hideAfterDelay:3.f];
     }];
     
-    self.hud.mode = MBProgressHUDModeIndeterminate;
-    self.hud.label.text = nil;
-    [self.hud showAnimated:YES];
+    [self showHudWithTitle:nil detail:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -81,17 +75,13 @@
 #pragma mark - Actions
 
 - (void)logoutButtonTapped:(id)sender {
-    self.hud.mode = MBProgressHUDModeIndeterminate;
-    self.hud.label.text = nil;
-    self.hud.detailsLabel.text = nil;
+    [self showHudWithTitle:nil detail:nil];
     __weak typeof(self) wself = self;
     [[AZZJiraClient sharedInstance] requestLogoutSuccess:^(NSHTTPURLResponse *response, id responseObject) {
         AZZJiraLoginViewController *vc = [[AZZJiraLoginViewController alloc] init];
         [wself.navigationController pushViewController:vc animated:YES];
     } failure:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
-        wself.hud.label.text = error.description;
-        wself.hud.mode = MBProgressHUDModeText;
-        [wself.hud hideAnimated:YES afterDelay:3.0];
+        [wself showHudWithTitle:@"Error" detail:error.description hideAfterDelay:3.f];
     }];
 }
 
@@ -134,15 +124,6 @@
         [self.view addSubview:_tbProjects];
     }
     return _tbProjects;
-}
-
-- (MBProgressHUD *)hud {
-    if (!_hud) {
-        _hud = [[MBProgressHUD alloc] initWithView:self.view];
-        _hud.label.numberOfLines = 0;
-        [self.view addSubview:_hud];
-    }
-    return _hud;
 }
 
 @end

@@ -6,11 +6,11 @@
 //  Copyright © 2016年 Andrew. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "AZZJiraBaseViewController.h"
 
 @class AZZJiraIssueTypeModel, AZZJiraProjectsModel;
 
-@interface AZZJiraCreateIssueViewController : UIViewController
+@interface AZZJiraCreateIssueViewController : AZZJiraBaseViewController
 
 @property (nonatomic, strong) AZZJiraProjectsModel *projectModel;
 @property (nonatomic, strong) AZZJiraIssueTypeModel *issueTypeModel;

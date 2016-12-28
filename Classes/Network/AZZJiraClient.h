@@ -88,4 +88,10 @@ typedef void(^AZZJiraProgressBlock)(NSProgress *progress);
                                                       success:(AZZJiraSuccessBlock)success
                                                          fail:(AZZJiraFailBlock)failure;
 
+- (NSURLSessionDataTask *)requestDoTransitionWithIssueIdOrKey:(NSString *)issueId
+                                                 transitionId:(NSString *)transitionId
+                                                  commentBody:(NSString *)commentBody
+                                                      success:(AZZJiraSuccessBlock)success
+                                                         fail:(AZZJiraFailBlock)failure;
+
 @end

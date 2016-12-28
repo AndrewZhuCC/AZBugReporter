@@ -6,9 +6,9 @@
 //  Copyright © 2016年 Andrew. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "AZZJiraBaseViewController.h"
 
-@interface AZZJiraIssueDetailViewController : UIViewController
+@interface AZZJiraIssueDetailViewController : AZZJiraBaseViewController
 
 @property (nonatomic, copy) NSString *issueKey;
 

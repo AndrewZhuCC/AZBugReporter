@@ -6,8 +6,8 @@
 //  Copyright © 2016年 Andrew. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "AZZJiraBaseViewController.h"
 
-@interface AZZJiraProjectsListViewController : UIViewController
+@interface AZZJiraProjectsListViewController : AZZJiraBaseViewController
 
 @end
