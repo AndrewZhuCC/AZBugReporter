@@ -373,6 +373,14 @@
     return [self requestWithURL:[NSString stringWithFormat:@"issue/%@/assignee", issueIDOrKey] method:AZZRequestMethodType_Put parameter:parameters body:nil uploadProgress:nil downloadProgress:nil success:success failure:failure];
 }
 
+- (NSURLSessionDataTask *)requestGetTransitionsByIssueIdOrKey:(NSString *)idOrKey
+                                                      success:(AZZJiraSuccessBlock)success
+                                                         fail:(AZZJiraFailBlock)failure {
+    NSString *url = [NSString stringWithFormat:@"issue/%@/transitions", idOrKey];
+    NSDictionary *parameters = @{@"expand" : @"transitions.fields"};
+    return [self requestWithURL:url method:AZZRequestMethodType_Get parameter:parameters body:nil uploadProgress:nil downloadProgress:nil success:success failure:failure];
+}
+
 - (void)appendAssets:(NSArray<PHAsset *> *)assets to:(id<AFMultipartFormData>)formData {
     for (PHAsset *asset in assets) {
         UIImage *image = [self getImageFromAsset:asset];

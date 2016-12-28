@@ -34,6 +34,10 @@
 		49A0A7661E0BB472000589F2 /* azz-preview.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A0A7651E0BB472000589F2 /* azz-preview.png */; };
 		49A0A7691E122981000589F2 /* AZZJiraIssueDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A0A7681E122981000589F2 /* AZZJiraIssueDetailViewController.m */; };
 		49A0A76C1E125B90000589F2 /* AZZJiraAttachmentListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A0A76B1E125B90000589F2 /* AZZJiraAttachmentListViewController.m */; };
+		49A0A76F1E1366FE000589F2 /* AZZJiraIssueTransitionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A0A76E1E1366FE000589F2 /* AZZJiraIssueTransitionModel.m */; };
+		49A0A7751E137F96000589F2 /* AZZJiraUserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A0A7741E137F96000589F2 /* AZZJiraUserView.m */; };
+		49A0A7781E13861D000589F2 /* AZZJiraSingleCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A0A7771E13861D000589F2 /* AZZJiraSingleCommentView.m */; };
+		49A0A77B1E138A2D000589F2 /* AZZJiraCommentsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A0A77A1E138A2D000589F2 /* AZZJiraCommentsView.m */; };
 		49D8A3161DFA582400972C8F /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49D8A3151DFA582400972C8F /* Photos.framework */; };
 		49D93A231DDEE5180074E00D /* AZZJiraProjectsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D93A221DDEE5180074E00D /* AZZJiraProjectsModel.m */; };
 		49D93A271DDEE93B0074E00D /* AZZJiraProjectsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D93A261DDEE93B0074E00D /* AZZJiraProjectsListViewController.m */; };
@@ -111,6 +115,14 @@
 		49A0A7681E122981000589F2 /* AZZJiraIssueDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraIssueDetailViewController.m; path = Classes/ViewController/AZZJiraIssueDetailViewController.m; sourceTree = SOURCE_ROOT; };
 		49A0A76A1E125B90000589F2 /* AZZJiraAttachmentListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraAttachmentListViewController.h; path = Classes/ViewController/AZZJiraAttachmentListViewController.h; sourceTree = SOURCE_ROOT; };
 		49A0A76B1E125B90000589F2 /* AZZJiraAttachmentListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraAttachmentListViewController.m; path = Classes/ViewController/AZZJiraAttachmentListViewController.m; sourceTree = SOURCE_ROOT; };
+		49A0A76D1E1366FE000589F2 /* AZZJiraIssueTransitionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraIssueTransitionModel.h; path = Classes/Model/AZZJiraIssueTransitionModel.h; sourceTree = SOURCE_ROOT; };
+		49A0A76E1E1366FE000589F2 /* AZZJiraIssueTransitionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraIssueTransitionModel.m; path = Classes/Model/AZZJiraIssueTransitionModel.m; sourceTree = SOURCE_ROOT; };
+		49A0A7731E137F96000589F2 /* AZZJiraUserView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraUserView.h; path = Classes/View/AZZJiraUserView.h; sourceTree = SOURCE_ROOT; };
+		49A0A7741E137F96000589F2 /* AZZJiraUserView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraUserView.m; path = Classes/View/AZZJiraUserView.m; sourceTree = SOURCE_ROOT; };
+		49A0A7761E13861D000589F2 /* AZZJiraSingleCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraSingleCommentView.h; path = Classes/View/AZZJiraSingleCommentView.h; sourceTree = SOURCE_ROOT; };
+		49A0A7771E13861D000589F2 /* AZZJiraSingleCommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraSingleCommentView.m; path = Classes/View/AZZJiraSingleCommentView.m; sourceTree = SOURCE_ROOT; };
+		49A0A7791E138A2D000589F2 /* AZZJiraCommentsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraCommentsView.h; path = Classes/View/AZZJiraCommentsView.h; sourceTree = SOURCE_ROOT; };
+		49A0A77A1E138A2D000589F2 /* AZZJiraCommentsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraCommentsView.m; path = Classes/View/AZZJiraCommentsView.m; sourceTree = SOURCE_ROOT; };
 		49D8A3151DFA582400972C8F /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		49D93A211DDEE5180074E00D /* AZZJiraProjectsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraProjectsModel.h; path = Classes/Model/AZZJiraProjectsModel.h; sourceTree = SOURCE_ROOT; };
 		49D93A221DDEE5180074E00D /* AZZJiraProjectsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraProjectsModel.m; path = Classes/Model/AZZJiraProjectsModel.m; sourceTree = SOURCE_ROOT; };
@@ -191,6 +203,12 @@
 				4906DE931DE6D17700891D1E /* AZZJiraCreateIssueFieldCell.m */,
 				4906DE9B1DE7D15B00891D1E /* AZZJiraBasicCell.h */,
 				4906DE9C1DE7D15B00891D1E /* AZZJiraBasicCell.m */,
+				49A0A7731E137F96000589F2 /* AZZJiraUserView.h */,
+				49A0A7741E137F96000589F2 /* AZZJiraUserView.m */,
+				49A0A7761E13861D000589F2 /* AZZJiraSingleCommentView.h */,
+				49A0A7771E13861D000589F2 /* AZZJiraSingleCommentView.m */,
+				49A0A7791E138A2D000589F2 /* AZZJiraCommentsView.h */,
+				49A0A77A1E138A2D000589F2 /* AZZJiraCommentsView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -282,6 +300,8 @@
 				4906DEB51DEE723000891D1E /* MTLJSONAdapterWithoutNil.m */,
 				49F030FE1DF6534F001A1FB2 /* AZZJiraFileNode.h */,
 				49F030FF1DF6534F001A1FB2 /* AZZJiraFileNode.m */,
+				49A0A76D1E1366FE000589F2 /* AZZJiraIssueTransitionModel.h */,
+				49A0A76E1E1366FE000589F2 /* AZZJiraIssueTransitionModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -488,6 +508,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				49ED148D1DD452C90000207A /* ViewController.m in Sources */,
+				49A0A7751E137F96000589F2 /* AZZJiraUserView.m in Sources */,
 				49A0A7691E122981000589F2 /* AZZJiraIssueDetailViewController.m in Sources */,
 				4906DE911DE594B100891D1E /* AZZJiraIssueTypeCell.m in Sources */,
 				49ED148A1DD452C90000207A /* AppDelegate.m in Sources */,
@@ -496,6 +517,7 @@
 				49ED14871DD452C90000207A /* main.m in Sources */,
 				4906DEB91DF50D4800891D1E /* AZZJiraSettingsViewController.m in Sources */,
 				4906DEBD1DF540C200891D1E /* AZZJiraPerformanceSettingViewController.m in Sources */,
+				49A0A7781E13861D000589F2 /* AZZJiraSingleCommentView.m in Sources */,
 				49D93A451DDF04410074E00D /* AZZTouch.m in Sources */,
 				4906DE7F1DE3EA3A00891D1E /* AZZJiraIssueCommentModel.m in Sources */,
 				4906DEA01DE7E4EA00891D1E /* AZZJiraCreateIssueInputModel.m in Sources */,
@@ -503,10 +525,12 @@
 				4906DE851DE41AC900891D1E /* AZZJiraIssueListTableViewCell.m in Sources */,
 				4906DE8E1DE5946900891D1E /* AZZJiraSelectIssueTypeViewController.m in Sources */,
 				4906DE9D1DE7D15B00891D1E /* AZZJiraBasicCell.m in Sources */,
+				49A0A76F1E1366FE000589F2 /* AZZJiraIssueTransitionModel.m in Sources */,
 				4906DE7C1DE3E8E800891D1E /* AZZJiraIssueVersionModel.m in Sources */,
 				4906DE941DE6D17700891D1E /* AZZJiraCreateIssueFieldCell.m in Sources */,
 				4906DE881DE4394F00891D1E /* AZZJiraIssueListViewController.m in Sources */,
 				49F031001DF6534F001A1FB2 /* AZZJiraFileNode.m in Sources */,
+				49A0A77B1E138A2D000589F2 /* AZZJiraCommentsView.m in Sources */,
 				49D93A3A1DDF04340074E00D /* UIWindow+SendEvent.m in Sources */,
 				49A0A76C1E125B90000589F2 /* AZZJiraAttachmentListViewController.m in Sources */,
 				49D93A391DDF04340074E00D /* AZZWindow.m in Sources */,

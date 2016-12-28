@@ -42,7 +42,9 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self.tbIssueList.mj_header beginRefreshing];
+    if (self.models.count == 0) {
+        [self.tbIssueList.mj_header beginRefreshing];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

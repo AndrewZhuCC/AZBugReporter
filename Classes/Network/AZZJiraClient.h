@@ -84,4 +84,8 @@ typedef void(^AZZJiraProgressBlock)(NSProgress *progress);
                                      success:(AZZJiraSuccessBlock)success
                                         fail:(AZZJiraFailBlock)failure;
 
+- (NSURLSessionDataTask *)requestGetTransitionsByIssueIdOrKey:(NSString *)idOrKey
+                                                      success:(AZZJiraSuccessBlock)success
+                                                         fail:(AZZJiraFailBlock)failure;
+
 @end
