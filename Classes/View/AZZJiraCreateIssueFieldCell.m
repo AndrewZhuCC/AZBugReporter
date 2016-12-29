@@ -263,7 +263,6 @@
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
     if ([self.system isEqualToString:@"labels"]) {
         self.items = [self.xmlElementsValue allObjects];
-        NSLog(@"items :%@", self.items);
         if (self.tfInput.inputView == self.tbSelector) {
             [self.tbSelector reloadData];
         }
