@@ -9,6 +9,8 @@
 #import "AZZJiraIssueDetailViewController.h"
 #import "AZZJiraAttachmentListViewController.h"
 #import "AZZJiraIssueEditTransitionViewController.h"
+#import "AZZJiraFileAttachmentViewController.h"
+#import "MWPhotoBrowser.h"
 
 #import "AZZJiraUserView.h"
 #import "AZZJiraCommentsView.h"
@@ -24,7 +26,7 @@
 
 #define IssueDetailViewsPadding 8.f
 
-@interface AZZJiraIssueDetailViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface AZZJiraIssueDetailViewController () <UITableViewDelegate, UITableViewDataSource, MWPhotoBrowserDelegate, AZZJiraFileAttachmentDelegate>
 
 @property (nonatomic, strong) AZZJiraIssueModel *model;
 @property (nonatomic, copy) NSArray<AZZJiraIssueTransitionModel *> *transitions;
@@ -39,6 +41,8 @@
 
 @property (nonatomic, strong) UIButton *btnAssignMe;
 @property (nonatomic, strong) UIButton *btnAttachments;
+@property (nonatomic, strong) UIButton *btnAddComment;
+@property (nonatomic, strong) UIButton *btnAddAttachments;
 
 @property (nonatomic, strong) UILabel *lbSolution;
 
@@ -55,6 +59,14 @@
 
 @property (nonatomic, strong) AZZJiraCommentsView *commentsView;
 
+@property (nonatomic, strong) MWPhotoBrowser *albumBrowser;
+@property (nonatomic, strong) PHFetchResult<PHAsset *> *albumFetchResult;
+@property (nonatomic, strong) NSMutableArray<NSNumber *> *selectedAlbumPhotos;
+
+@property (nonatomic, strong) NSArray<MWPhoto *> *browserPhotos;
+@property (nonatomic, strong) NSMutableArray<MWPhoto *> *selectedPhotos;
+@property (nonatomic, strong) NSMutableArray<AZZJiraFileNode *> *selectedFiles;
+
 @end
 
 @implementation AZZJiraIssueDetailViewController
@@ -70,6 +82,12 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    self.albumBrowser = nil;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -115,8 +133,16 @@
         make.centerX.equalTo(self.lbReporter);
         make.size.equalTo(self.btnAssignMe);
     }];
-    [self.lbSolution mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.btnAddComment mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.and.left.and.right.equalTo(self.btnAssignMe);
         make.top.equalTo(self.btnAssignMe.mas_bottom).with.offset(IssueDetailViewsPadding);
+    }];
+    [self.btnAddAttachments mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.and.left.and.right.equalTo(self.btnAttachments);
+        make.top.equalTo(self.btnAttachments.mas_bottom).with.offset(IssueDetailViewsPadding);
+    }];
+    [self.lbSolution mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.btnAddComment.mas_bottom).with.offset(IssueDetailViewsPadding);
         make.left.equalTo(self.lbAssignee);
         make.right.equalTo(self.lbReporter);
         make.height.mas_equalTo(40);
@@ -176,12 +202,6 @@
     }];
     [alertController addAction:edit];
     */
-    UIAlertAction *addComment = [UIAlertAction actionWithTitle:@"添加备注" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        AZZJiraIssueEditTransitionViewController *vc = [AZZJiraIssueEditTransitionViewController new];
-        vc.issueId = self.issueKey;
-        [self.navigationController pushViewController:vc animated:YES];
-    }];
-    [alertController addAction:addComment];
     for (AZZJiraIssueTransitionModel *model in self.transitions) {
         UIAlertAction *action = [UIAlertAction actionWithTitle:model.name style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             BOOL needPush = NO;
@@ -238,6 +258,80 @@
     AZZJiraAttachmentListViewController *vc = [AZZJiraAttachmentListViewController new];
     vc.issueModel = self.model;
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)btnAddCommentClicked:(UIButton *)button {
+    AZZJiraIssueEditTransitionViewController *vc = [AZZJiraIssueEditTransitionViewController new];
+    vc.issueId = self.issueKey;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)btnAddAttachmentsClicked:(UIButton *)button {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Attachment" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    if (self.browserPhotos.count != 0) {
+        UIAlertAction *photosAction = [UIAlertAction actionWithTitle:@"Touch Snaps" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
+            browser.displayNavArrows = YES;
+            browser.displaySelectionButtons = YES;
+            
+            [self.navigationController pushViewController:browser animated:YES];
+        }];
+        [alertController addAction:photosAction];
+    }
+    
+    UIAlertAction *photoAlbumActon = [UIAlertAction actionWithTitle:@"Photo Album" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self.navigationController pushViewController:self.albumBrowser animated:YES];
+    }];
+    [alertController addAction:photoAlbumActon];
+    
+    
+    UIAlertAction *filesAction = [UIAlertAction actionWithTitle:@"File System" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+        AZZJiraFileNode *rootNode = [AZZJiraFileNode fileNodeWithRootFilePath:rootPath];
+        AZZJiraFileAttachmentViewController *vc = [[AZZJiraFileAttachmentViewController alloc] init];
+        vc.delegate = self;
+        vc.fileNode = rootNode;
+        [self.navigationController pushViewController:vc animated:YES];
+    }];
+    [alertController addAction:filesAction];
+    
+    if (self.selectedFiles.count > 0 || self.selectedPhotos.count > 0 || self.selectedAlbumPhotos.count > 0) {
+        UIAlertAction *uploadAction = [UIAlertAction actionWithTitle:@"上传" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            [self showHudWithTitle:nil detail:nil];
+            NSMutableArray *tempArray = [NSMutableArray array];
+            for (MWPhoto *photo in self.selectedPhotos) {
+                [tempArray addObject:photo.photoURL];
+            }
+            for (AZZJiraFileNode *fileNode in self.selectedFiles) {
+                [tempArray addObject:fileNode.filePath];
+            }
+            
+            [[AZZJiraClient sharedInstance] uploadImagesWithIssueID:self.issueKey images:[tempArray copy] assets:[self selectedPhotoAssets] uploadProgress:^(NSProgress *progress) {
+                self.hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
+                self.hud.progress = progress.completedUnitCount / progress.totalUnitCount;
+                [self.hud showAnimated:YES];
+            } success:^(NSHTTPURLResponse *response, id responseObject) {
+                [self showHudWithTitle:@"上传附件成功" detail:nil hideAfterDelay:2.f];
+                self.issueKey = self.issueKey;
+                [self.selectedAlbumPhotos removeAllObjects];
+                [self.selectedPhotos removeAllObjects];
+                [self.selectedFiles removeAllObjects];
+            } fail:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
+                NSLog(@"upload fail: %@", error);
+                NSLog(@"responseObject: %@", responseObject);
+                [self showHudWithTitle:@"Error" detail:error.localizedDescription hideAfterDelay:3.f];
+            }];
+        }];
+        [alertController addAction:uploadAction];
+    }
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [alertController addAction:cancelAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 - (void)btnSelectAssignableUserClicked:(UIButton *)button {
@@ -308,6 +402,72 @@
             NSLog(@"responseObject:%@", responseObject);
         }];
     }];
+}
+
+#pragma mark - AZZJiraFileAttachment
+
+- (void)fileAttachmentDidSelect:(AZZJiraFileNode *)fileNode selected:(BOOL)selected {
+    if (fileNode) {
+        if (selected) {
+            [self.selectedFiles addObject:fileNode];
+        } else {
+            [self.selectedFiles removeObject:fileNode];
+        }
+    }
+}
+
+- (void)fileAttachmentDidTappedDoneButton {
+    [self.navigationController popToViewController:self animated:YES];
+}
+
+#pragma mark - MWPhotoBrowserDelegate
+
+- (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
+    if (photoBrowser == self.albumBrowser) {
+        return self.albumFetchResult.count;
+    } else {
+        return self.browserPhotos.count;
+    }
+}
+
+- (id<MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
+    if (photoBrowser == self.albumBrowser) {
+        return [MWPhoto photoWithAsset:[self.albumFetchResult objectAtIndex:index] targetSize:[UIScreen mainScreen].bounds.size];
+    } else {
+        return self.browserPhotos[index];
+    }
+}
+
+- (id<MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser thumbPhotoAtIndex:(NSUInteger)index {
+    if (photoBrowser == self.albumBrowser) {
+        return [MWPhoto photoWithAsset:[self.albumFetchResult objectAtIndex:index] targetSize:CGSizeMake(100, 100)];
+    } else {
+        return self.browserPhotos[index];
+    }
+}
+
+- (BOOL)photoBrowser:(MWPhotoBrowser *)photoBrowser isPhotoSelectedAtIndex:(NSUInteger)index {
+    if (photoBrowser == self.albumBrowser) {
+        return [self.selectedAlbumPhotos containsObject:@(index)];
+    } else {
+        return [self.selectedPhotos containsObject:self.browserPhotos[index]];
+    }
+}
+
+- (void)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index selectedChanged:(BOOL)selected {
+    if (photoBrowser == self.albumBrowser) {
+        if (selected) {
+            [self.selectedAlbumPhotos addObject:@(index)];
+        } else {
+            [self.selectedAlbumPhotos removeObject:@(index)];
+        }
+    } else {
+        if (selected) {
+            [self.selectedPhotos addObject:self.browserPhotos[index]];
+        } else {
+            [self.selectedPhotos removeObject:self.browserPhotos[index]];
+        }
+    }
 }
 
 #pragma mark - Properties
@@ -384,6 +544,36 @@
         [self.svMainView addSubview:_btnAttachments];
     }
     return _btnAttachments;
+}
+
+- (UIButton *)btnAddComment {
+    if (!_btnAddComment) {
+        _btnAddComment = [UIButton new];
+        [_btnAddComment setTitle:@"添加备注" forState:UIControlStateNormal];
+        [_btnAddComment setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
+        [_btnAddComment setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
+        _btnAddComment.titleLabel.font = [UIFont systemFontOfSize:15.f];
+        _btnAddComment.layer.backgroundColor = [UIColor colorWithRed:0.642 green:0.803 blue:0.999 alpha:1.000].CGColor;
+        _btnAddComment.layer.cornerRadius = 5.f;
+        [_btnAddComment addTarget:self action:@selector(btnAddCommentClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [self.svMainView addSubview:_btnAddComment];
+    }
+    return _btnAddComment;
+}
+
+- (UIButton *)btnAddAttachments {
+    if (!_btnAddAttachments) {
+        _btnAddAttachments = [UIButton new];
+        [_btnAddAttachments setTitle:@"添加附件" forState:UIControlStateNormal];
+        [_btnAddAttachments setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
+        [_btnAddAttachments setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
+        _btnAddAttachments.titleLabel.font = [UIFont systemFontOfSize:15.f];
+        _btnAddAttachments.layer.backgroundColor = [UIColor colorWithRed:0.642 green:0.803 blue:0.999 alpha:1.000].CGColor;
+        _btnAddAttachments.layer.cornerRadius = 5.f;
+        [_btnAddAttachments addTarget:self action:@selector(btnAddAttachmentsClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [self.svMainView addSubview:_btnAddAttachments];
+    }
+    return _btnAddAttachments;
 }
 
 - (UILabel *)lbSolution {
@@ -536,6 +726,78 @@
         
         self.commentsView.commentModels = model.comments;
     }
+}
+
+- (NSArray *)browserPhotos {
+    if (!_browserPhotos) {
+        _browserPhotos = [NSArray array];
+        NSMutableArray *tempArray = [NSMutableArray array];
+        NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+        NSString *filesPath = [documentPath stringByAppendingPathComponent:@"TouchesSnapShots"];
+        NSString *bakFilesPath = [documentPath stringByAppendingPathComponent:@"TouchesSnapShots_bak"];
+        
+        NSFileManager *fm = [NSFileManager defaultManager];
+        BOOL isDirectory;
+        for (NSString *dirPath in @[filesPath, bakFilesPath]) {
+            if ([fm fileExistsAtPath:dirPath isDirectory:&isDirectory] && isDirectory) {
+                NSArray *subPaths = [fm subpathsAtPath:dirPath];
+                for (NSString *filePath in subPaths) {
+                    NSURL *fileURL = [NSURL fileURLWithPath:filePath relativeToURL:[NSURL fileURLWithPath:dirPath]];
+                    MWPhoto *photo = [[MWPhoto alloc] initWithURL:fileURL];
+                    [tempArray addObject:photo];
+                }
+            }
+        }
+        _browserPhotos = [tempArray copy];
+    }
+    return _browserPhotos;
+}
+
+- (NSMutableArray<MWPhoto *> *)selectedPhotos {
+    if (!_selectedPhotos) {
+        _selectedPhotos = [NSMutableArray array];
+    }
+    return _selectedPhotos;
+}
+
+- (NSMutableArray<AZZJiraFileNode *> *)selectedFiles {
+    if (!_selectedFiles) {
+        _selectedFiles = [NSMutableArray array];
+    }
+    return _selectedFiles;
+}
+
+- (MWPhotoBrowser *)albumBrowser {
+    if (!_albumBrowser) {
+        _albumBrowser = [[MWPhotoBrowser alloc] initWithDelegate:self];
+        _albumBrowser.delegate = self;
+        _albumBrowser.displayNavArrows = YES;
+        _albumBrowser.displaySelectionButtons = YES;
+    }
+    return _albumBrowser;
+}
+
+- (PHFetchResult<PHAsset *> *)albumFetchResult {
+    if (!_albumFetchResult) {
+        _albumFetchResult = [PHAsset fetchAssetsWithMediaType:PHAssetMediaTypeImage options:nil];
+    }
+    return _albumFetchResult;
+}
+
+- (NSMutableArray<NSNumber *> *)selectedAlbumPhotos {
+    if (!_selectedAlbumPhotos) {
+        _selectedAlbumPhotos = [NSMutableArray array];
+    }
+    return _selectedAlbumPhotos;
+}
+
+- (NSArray<PHAsset *> *)selectedPhotoAssets {
+    NSMutableArray *tempArray = [NSMutableArray array];
+    for (NSNumber *index in self.selectedAlbumPhotos) {
+        PHAsset *asset = [self.albumFetchResult objectAtIndex:[index unsignedIntegerValue]];
+        [tempArray addObject:asset];
+    }
+    return [tempArray copy];
 }
 
 

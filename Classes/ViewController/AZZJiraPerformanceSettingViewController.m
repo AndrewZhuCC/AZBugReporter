@@ -96,8 +96,10 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [[AZPerformanceMonitorManager sharedInstance] removeObserver:self.monitors[indexPath.row]];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * self.monitors[indexPath.row].config.milliseconds * NSEC_PER_MSEC)), dispatch_get_main_queue(), ^{
+        [self showHudWithTitle:nil detail:nil];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * self.monitors[indexPath.row].config.milliseconds * NSEC_PER_MSEC)), dispatch_get_main_queue(), ^{
             [self reloadMonitors];
+            [self hideHudAfterDelay:0];
         });
     }
 }
