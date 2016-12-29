@@ -310,7 +310,7 @@
             [[AZZJiraClient sharedInstance] uploadImagesWithIssueID:self.issueKey images:[tempArray copy] assets:[self selectedPhotoAssets] uploadProgress:^(NSProgress *progress) {
                 self.hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
                 self.hud.progress = progress.completedUnitCount / progress.totalUnitCount;
-                [self.hud showAnimated:YES];
+                [self.hud show:YES];
             } success:^(NSHTTPURLResponse *response, id responseObject) {
                 [self showHudWithTitle:@"上传附件成功" detail:nil hideAfterDelay:2.f];
                 self.issueKey = self.issueKey;

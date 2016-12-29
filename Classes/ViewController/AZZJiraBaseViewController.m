@@ -42,16 +42,16 @@
     } else {
         self.hud.mode = MBProgressHUDModeIndeterminate;
     }
-    self.hud.label.text = title;
-    self.hud.detailsLabel.text = detail;
-    [self.hud showAnimated:YES];
+    self.hud.labelText = title;
+    self.hud.detailsLabelText = detail;
+    [self.hud show:YES];
 }
 
 - (void)hideHudAfterDelay:(NSTimeInterval)delay {
     if (delay == 0) {
-        [self.hud hideAnimated:YES];
+        [self.hud hide:YES];
     } else {
-        [self.hud hideAnimated:YES afterDelay:delay];
+        [self.hud hide:YES afterDelay:delay];
     }
 }
 

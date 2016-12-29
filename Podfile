@@ -9,7 +9,7 @@ target 'BugReporter' do
   pod 'AFNetworking', '~> 3.1.0'
   pod 'Masonry', '~> 1.0.2'
   pod 'IQKeyboardManager', '~> 4.0.7'
-  pod 'MBProgressHUD', '~> 1.0.0'
+  pod 'MBProgressHUD', '~> 0.9.2'
   pod 'Mantle', '~> 2.1.0'
   pod 'SAMKeychain'
   pod 'SDWebImage'

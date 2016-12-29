@@ -132,7 +132,7 @@
     [[AZZJiraClient sharedInstance] uploadImagesWithIssueID:issueId images:[tempArray copy] assets:[self selectedPhotoAssets] uploadProgress:^(NSProgress *progress) {
         self.hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
         self.hud.progress = progress.completedUnitCount / progress.totalUnitCount;
-        [self.hud showAnimated:YES];
+        [self.hud show:YES];
     } success:^(NSHTTPURLResponse *response, id responseObject) {
         [self.navigationController popViewControllerAnimated:YES];
     } fail:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {

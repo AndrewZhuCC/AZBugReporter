@@ -25,7 +25,7 @@ PODS:
     - Mantle/extobjc (= 2.1.0)
   - Mantle/extobjc (2.1.0)
   - Masonry (1.0.2)
-  - MBProgressHUD (1.0.0)
+  - MBProgressHUD (0.9.2)
   - MJRefresh (3.1.12)
   - SAMKeychain (1.5.2)
   - SDWebImage (3.8.2):
@@ -40,7 +40,7 @@ DEPENDENCIES:
   - IQKeyboardManager (~> 4.0.7)
   - Mantle (~> 2.1.0)
   - Masonry (~> 1.0.2)
-  - MBProgressHUD (~> 1.0.0)
+  - MBProgressHUD (~> 0.9.2)
   - MJRefresh
   - SAMKeychain
   - SDWebImage
@@ -54,12 +54,12 @@ SPEC CHECKSUMS:
   IQKeyboardManager: 69002bb4fea60596b710e57d426abc00e5063630
   Mantle: 2fa750afa478cd625a94230fbf1c13462f29395b
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
-  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
+  MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   SAMKeychain: 1865333198217411f35327e8da61b43de79b635b
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   UITableView+FDTemplateLayoutCell: 02b508ab1cb4cea16a8c17ac83d2cd1fd72124f9
 
-PODFILE CHECKSUM: c5886e1535f3a25eafa612c107404bc6fec1f0c3
+PODFILE CHECKSUM: 743e92b967fd568d19fd67a8f09e405f813afdee
 
 COCOAPODS: 1.2.0.beta.1
