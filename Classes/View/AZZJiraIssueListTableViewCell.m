@@ -76,7 +76,7 @@
     }];
     [self.typeIcon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.lbType);
-        make.size.mas_equalTo(CGSizeMake(30, 30));
+        make.size.mas_equalTo(CGSizeMake(20, 20));
         make.right.equalTo(self.lbType.mas_left).with.offset(-5);
     }];
     [self.lbSummary mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -158,6 +158,7 @@
 - (UILabel *)lbType {
     if (!_lbType) {
         _lbType = [[UILabel alloc] initWithFrame:CGRectZero];
+        _lbType.font = [UIFont systemFontOfSize:15];
         _lbType.backgroundColor = [UIColor clearColor];
         _lbType.textColor = [UIColor blackColor];
         [self.contentView addSubview:_lbType];
@@ -168,6 +169,7 @@
 - (UILabel *)lbKey {
     if (!_lbKey) {
         _lbKey = [[UILabel alloc] initWithFrame:CGRectZero];
+        _lbKey.font = [UIFont systemFontOfSize:15];
         _lbKey.backgroundColor = [UIColor clearColor];
         _lbKey.textColor = [UIColor blackColor];
         [self.contentView addSubview:_lbKey];
@@ -179,10 +181,10 @@
     if (!_lbSummary) {
         _lbSummary = [[UILabel alloc] initWithFrame:CGRectZero];
         _lbSummary.backgroundColor = [UIColor clearColor];
+        _lbSummary.layer.backgroundColor = [UIColor cyanColor].CGColor;
+        _lbSummary.layer.cornerRadius = 5.f;
         _lbSummary.textColor = [UIColor blackColor];
         _lbSummary.numberOfLines = 0;
-        _lbSummary.layer.borderColor = [UIColor blackColor].CGColor;
-        _lbSummary.layer.borderWidth = 1.f;
         [self.contentView addSubview:_lbSummary];
     }
     return _lbSummary;
@@ -199,6 +201,7 @@
 - (UILabel *)lbStatus {
     if (!_lbStatus) {
         _lbStatus = [[UILabel alloc] initWithFrame:CGRectZero];
+        _lbStatus.font = [UIFont systemFontOfSize:15];
         _lbStatus.backgroundColor = [UIColor clearColor];
         _lbStatus.textColor = [UIColor blackColor];
         [self.contentView addSubview:_lbStatus];
@@ -217,6 +220,7 @@
 - (UILabel *)lbPriority {
     if (!_lbPriority) {
         _lbPriority = [[UILabel alloc] initWithFrame:CGRectZero];
+        _lbPriority.font = [UIFont systemFontOfSize:15];
         _lbPriority.backgroundColor = [UIColor clearColor];
         _lbPriority.textColor = [UIColor blackColor];
         [self.contentView addSubview:_lbPriority];

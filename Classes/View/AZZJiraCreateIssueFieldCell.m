@@ -341,7 +341,7 @@
     
     __weak typeof(self) wself = self;
     if ([self.system isEqualToString:@"assignee"]) {
-        [[AZZJiraClient sharedInstance] requestAssignableUsersWithProject:self.projectModel.key userName:self.tfInput.text success:^(NSHTTPURLResponse *response, id responseObject) {
+        [[AZZJiraClient sharedInstance] requestAssignableUsersWithProject:self.projectModel.key userName:self.tfInput.text issueKey:nil success:^(NSHTTPURLResponse *response, id responseObject) {
             if ([wself.system isEqualToString:@"assignee"]) {
                 if ([responseObject isKindOfClass:[NSArray class]]) {
                     NSArray *users = responseObject;

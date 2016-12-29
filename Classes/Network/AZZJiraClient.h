@@ -59,6 +59,7 @@ typedef void(^AZZJiraProgressBlock)(NSProgress *progress);
 
 - (NSURLSessionDataTask *)requestAssignableUsersWithProject:(NSString *)project
                                                    userName:(NSString *)userName
+                                                   issueKey:(NSString *)issueKey
                                                     success:(AZZJiraSuccessBlock)success
                                                        fail:(AZZJiraFailBlock)fail;
 
@@ -81,6 +82,7 @@ typedef void(^AZZJiraProgressBlock)(NSProgress *progress);
                                              fail:(AZZJiraFailBlock)failure;
 
 - (NSURLSessionDataTask *)requestAssignIssue:(NSString *)issueIDOrKey
+                                    userName:(NSString *)userName
                                      success:(AZZJiraSuccessBlock)success
                                         fail:(AZZJiraFailBlock)failure;
 
@@ -90,8 +92,14 @@ typedef void(^AZZJiraProgressBlock)(NSProgress *progress);
 
 - (NSURLSessionDataTask *)requestDoTransitionWithIssueIdOrKey:(NSString *)issueId
                                                  transitionId:(NSString *)transitionId
+                                                 resolutionId:(NSString *)resolutionId
                                                   commentBody:(NSString *)commentBody
                                                       success:(AZZJiraSuccessBlock)success
                                                          fail:(AZZJiraFailBlock)failure;
+
+- (NSURLSessionDataTask *)requestAddCommentWithIssueIdOrKey:(NSString *)issueId
+                                                commentBody:(NSString *)commentBody
+                                                    success:(AZZJiraSuccessBlock)success
+                                                       fail:(AZZJiraFailBlock)failure;
 
 @end

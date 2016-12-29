@@ -8,9 +8,11 @@
 
 #import "AZZJiraIssueDetailViewController.h"
 #import "AZZJiraAttachmentListViewController.h"
+#import "AZZJiraIssueEditTransitionViewController.h"
 
 #import "AZZJiraUserView.h"
 #import "AZZJiraCommentsView.h"
+#import "AZZJiraBasicCell.h"
 
 #import "AZZJiraIssueModel.h"
 #import "AZZJiraIssueTransitionModel.h"
@@ -22,7 +24,7 @@
 
 #define IssueDetailViewsPadding 8.f
 
-@interface AZZJiraIssueDetailViewController ()
+@interface AZZJiraIssueDetailViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) AZZJiraIssueModel *model;
 @property (nonatomic, copy) NSArray<AZZJiraIssueTransitionModel *> *transitions;
@@ -46,6 +48,11 @@
 @property (nonatomic, strong) UILabel *lbDescription;
 @property (nonatomic, strong) UITextView *txvDescription;
 
+@property (nonatomic, strong) UIButton *btnSelectAssignableUser;
+@property (nonatomic, strong) UITableView *tbAssignableUsers;
+@property (nonatomic, strong) UIButton *btnBackground;
+@property (nonatomic, copy) NSArray<AZZJiraUserModel *> *assignableUsers;
+
 @property (nonatomic, strong) AZZJiraCommentsView *commentsView;
 
 @end
@@ -65,8 +72,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     
     if (self.issueKey) {
         self.issueKey = self.issueKey;
@@ -141,6 +148,18 @@
         make.left.equalTo(self.lbAssignee);
         make.right.equalTo(self.lbReporter);
     }];
+    [self.btnSelectAssignableUser mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.equalTo(self.uvAssignee);
+        make.center.equalTo(self.uvAssignee);
+    }];
+    [self.btnBackground mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
+    [self.tbAssignableUsers mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.and.right.equalTo(self.uvAssignee);
+        make.top.equalTo(self.uvAssignee.mas_bottom);
+        make.height.mas_equalTo(200.f);
+    }];
     
     UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(rightNavigateItemCliecked:)];
     self.navigationItem.rightBarButtonItem = right;
@@ -150,10 +169,19 @@
 
 - (void)rightNavigateItemCliecked:(id)sender {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Actions" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    /*
+    // 暂时不启用编辑 Issue 功能
     UIAlertAction *edit = [UIAlertAction actionWithTitle:@"编辑" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
     }];
     [alertController addAction:edit];
+    */
+    UIAlertAction *addComment = [UIAlertAction actionWithTitle:@"添加备注" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        AZZJiraIssueEditTransitionViewController *vc = [AZZJiraIssueEditTransitionViewController new];
+        vc.issueId = self.issueKey;
+        [self.navigationController pushViewController:vc animated:YES];
+    }];
+    [alertController addAction:addComment];
     for (AZZJiraIssueTransitionModel *model in self.transitions) {
         UIAlertAction *action = [UIAlertAction actionWithTitle:model.name style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             BOOL needPush = NO;
@@ -165,11 +193,14 @@
                 }
             }
             if (needPush) {
-                NSLog(@"needpush");
+                AZZJiraIssueEditTransitionViewController *vc = [AZZJiraIssueEditTransitionViewController new];
+                vc.issueId = self.issueKey;
+                vc.transition = model;
+                [self.navigationController pushViewController:vc animated:YES];
             } else {
                 [self showConfirmAlertWithTitle:@"Action" message:[NSString stringWithFormat:@"确认执行[%@]操作吗？", model.name] confirmBlock:^{
                     [self showHudWithTitle:nil detail:nil];
-                    [[AZZJiraClient sharedInstance] requestDoTransitionWithIssueIdOrKey:self.model.idNumber transitionId:model.idNumber commentBody:nil success:^(NSHTTPURLResponse *response, id responseObject) {
+                    [[AZZJiraClient sharedInstance] requestDoTransitionWithIssueIdOrKey:self.model.idNumber transitionId:model.idNumber resolutionId:nil commentBody:nil success:^(NSHTTPURLResponse *response, id responseObject) {
                         [self showHudWithTitle:@"成功" detail:nil hideAfterDelay:2.f];
                         self.issueKey = self.issueKey;
                     } fail:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
@@ -193,7 +224,7 @@
     [self showConfirmAlertWithTitle:@"分配" message:@"确认分配给你？" confirmBlock:^{
         [self showHudWithTitle:nil detail:nil];
         __weak typeof(self) wself = self;
-        [[AZZJiraClient sharedInstance] requestAssignIssue:self.model.key success:^(NSHTTPURLResponse *response, id responseObject) {
+        [[AZZJiraClient sharedInstance] requestAssignIssue:self.model.key userName:nil success:^(NSHTTPURLResponse *response, id responseObject) {
             [wself showHudWithTitle:@"成功" detail:nil hideAfterDelay:2.f];
         } fail:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
             [wself showHudWithTitle:@"Error" detail:[responseObject description] hideAfterDelay:3.f];
@@ -209,12 +240,81 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (void)btnSelectAssignableUserClicked:(UIButton *)button {
+    CGRect originFrame = self.tbAssignableUsers.frame;
+    CGRect toFrame = originFrame;
+    toFrame.size.height = 0;
+    self.tbAssignableUsers.frame = toFrame;
+    self.tbAssignableUsers.hidden = NO;
+    self.btnBackground.hidden = NO;
+    [UIView animateWithDuration:0.3f animations:^{
+        self.tbAssignableUsers.frame = originFrame;
+        self.btnBackground.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
+    } completion:^(BOOL finished) {
+        self.navigationItem.rightBarButtonItem.enabled = NO;
+    }];
+}
+
+- (void)btnBackgroundClicked:(UIButton *)button {
+    CGRect originFrame = self.tbAssignableUsers.frame;
+    CGRect toFrame = originFrame;
+    toFrame.size.height = 0;
+    [UIView animateWithDuration:0.3f animations:^{
+        self.tbAssignableUsers.frame = toFrame;
+        self.btnBackground.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
+    } completion:^(BOOL finished) {
+        self.tbAssignableUsers.hidden = YES;
+        self.btnBackground.hidden = YES;
+        self.navigationItem.rightBarButtonItem.enabled = YES;
+        self.tbAssignableUsers.frame = originFrame;
+    }];
+}
+
+#pragma mark - UITableView Delegate
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.assignableUsers.count;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    AZZJiraUserModel *model = self.assignableUsers[indexPath.row];
+    if ([model isEqual:self.model.assignee]) {
+        [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+    }
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    AZZJiraUserModel *model = self.assignableUsers[indexPath.row];
+    AZZJiraBasicCell *cell = [AZZJiraBasicCell cellWithTableView:tableView labelText:model.displayName imageURL:model.avatarUrls[@"48x48"]];
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    AZZJiraUserModel *model = self.assignableUsers[indexPath.row];
+    if ([model isEqual:self.model.assignee]) {
+        return;
+    }
+    
+    [self btnBackgroundClicked:nil];
+    [self showConfirmAlertWithTitle:@"分配" message:[NSString stringWithFormat:@"确定分配给 %@ ?", model.displayName] confirmBlock:^{
+        [self showHudWithTitle:nil detail:nil];
+        [[AZZJiraClient sharedInstance] requestAssignIssue:self.issueKey userName:model.name success:^(NSHTTPURLResponse *response, id responseObject) {
+            [self showHudWithTitle:@"成功" detail:nil hideAfterDelay:2.f];
+            self.issueKey = self.issueKey;
+        } fail:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
+            [self showHudWithTitle:@"Error" detail:[responseObject description] hideAfterDelay:3.f];
+            NSLog(@"assign user error:%@", error);
+            NSLog(@"responseObject:%@", responseObject);
+        }];
+    }];
+}
+
 #pragma mark - Properties
 
 - (UIScrollView *)svMainView {
     if (!_svMainView) {
         _svMainView = [UIScrollView new];
-        _svMainView.bounces = NO;
         [self.view addSubview:_svMainView];
     }
     return _svMainView;
@@ -336,6 +436,42 @@
     return _txvDescription;
 }
 
+- (UIButton *)btnSelectAssignableUser {
+    if (!_btnSelectAssignableUser) {
+        _btnSelectAssignableUser = [UIButton new];
+        _btnSelectAssignableUser.backgroundColor = [UIColor clearColor];
+        [_btnSelectAssignableUser addTarget:self action:@selector(btnSelectAssignableUserClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_btnSelectAssignableUser];
+    }
+    return _btnSelectAssignableUser;
+}
+
+- (UITableView *)tbAssignableUsers {
+    if (!_tbAssignableUsers) {
+        _tbAssignableUsers = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        _tbAssignableUsers.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+        _tbAssignableUsers.delegate = self;
+        _tbAssignableUsers.dataSource = self;
+        _tbAssignableUsers.hidden = YES;
+        _tbAssignableUsers.layer.cornerRadius = 5.f;
+        [_tbAssignableUsers registerClass:[AZZJiraBasicCell class] forCellReuseIdentifier:NSStringFromClass([AZZJiraBasicCell class])];
+        [self.btnBackground class];
+        [self.view addSubview:_tbAssignableUsers];
+    }
+    return _tbAssignableUsers;
+}
+
+- (UIButton *)btnBackground {
+    if (!_btnBackground) {
+        _btnBackground = [UIButton new];
+        _btnBackground.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
+        _btnBackground.hidden = YES;
+        [_btnBackground addTarget:self action:@selector(btnBackgroundClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_btnBackground];
+    }
+    return _btnBackground;
+}
+
 - (AZZJiraCommentsView *)commentsView {
     if (!_commentsView) {
         _commentsView = [AZZJiraCommentsView commentsViewWithModels:self.model.comments];
@@ -366,6 +502,13 @@
             self.transitions = [AZZJiraIssueTransitionModel getTransitionModelsWithJSONArray:transitionsJson];
         } fail:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
             NSLog(@"get issue transitions error:%@", error);
+            NSLog(@"responseObject:%@", responseObject);
+        }];
+        [[AZZJiraClient sharedInstance] requestAssignableUsersWithProject:nil userName:nil issueKey:issueKey success:^(NSHTTPURLResponse *response, id responseObject) {
+            self.assignableUsers = [AZZJiraUserModel getUserModelsFromArray:responseObject];
+            [self.tbAssignableUsers reloadData];
+        } fail:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
+            NSLog(@"get assignable users error:%@", error);
             NSLog(@"responseObject:%@", responseObject);
         }];
     }

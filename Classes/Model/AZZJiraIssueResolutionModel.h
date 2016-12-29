@@ -16,5 +16,6 @@
 @property (nonatomic, copy, readonly) NSString *name;
 
 + (instancetype)getIssueResolutionModelWithDictionary:(NSDictionary *)dic;
++ (NSArray<AZZJiraIssueResolutionModel *> *)getIssueResolutionModelsWithArray:(NSArray *)array;
 
 @end

@@ -39,8 +39,8 @@
     [self setupCreateIssueButton];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     
     if (self.models.count == 0) {
         [self.tbIssueList.mj_header beginRefreshing];

@@ -39,6 +39,7 @@
 		49A0A7781E13861D000589F2 /* AZZJiraSingleCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A0A7771E13861D000589F2 /* AZZJiraSingleCommentView.m */; };
 		49A0A77B1E138A2D000589F2 /* AZZJiraCommentsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A0A77A1E138A2D000589F2 /* AZZJiraCommentsView.m */; };
 		49A0A77E1E13B1B5000589F2 /* AZZJiraBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A0A77D1E13B1B5000589F2 /* AZZJiraBaseViewController.m */; };
+		49A0A7811E13B6AA000589F2 /* AZZJiraIssueEditTransitionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A0A7801E13B6AA000589F2 /* AZZJiraIssueEditTransitionViewController.m */; };
 		49D8A3161DFA582400972C8F /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49D8A3151DFA582400972C8F /* Photos.framework */; };
 		49D93A231DDEE5180074E00D /* AZZJiraProjectsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D93A221DDEE5180074E00D /* AZZJiraProjectsModel.m */; };
 		49D93A271DDEE93B0074E00D /* AZZJiraProjectsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D93A261DDEE93B0074E00D /* AZZJiraProjectsListViewController.m */; };
@@ -126,6 +127,8 @@
 		49A0A77A1E138A2D000589F2 /* AZZJiraCommentsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraCommentsView.m; path = Classes/View/AZZJiraCommentsView.m; sourceTree = SOURCE_ROOT; };
 		49A0A77C1E13B1B5000589F2 /* AZZJiraBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraBaseViewController.h; path = Classes/ViewController/AZZJiraBaseViewController.h; sourceTree = SOURCE_ROOT; };
 		49A0A77D1E13B1B5000589F2 /* AZZJiraBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraBaseViewController.m; path = Classes/ViewController/AZZJiraBaseViewController.m; sourceTree = SOURCE_ROOT; };
+		49A0A77F1E13B6AA000589F2 /* AZZJiraIssueEditTransitionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraIssueEditTransitionViewController.h; path = Classes/ViewController/AZZJiraIssueEditTransitionViewController.h; sourceTree = SOURCE_ROOT; };
+		49A0A7801E13B6AA000589F2 /* AZZJiraIssueEditTransitionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraIssueEditTransitionViewController.m; path = Classes/ViewController/AZZJiraIssueEditTransitionViewController.m; sourceTree = SOURCE_ROOT; };
 		49D8A3151DFA582400972C8F /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		49D93A211DDEE5180074E00D /* AZZJiraProjectsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraProjectsModel.h; path = Classes/Model/AZZJiraProjectsModel.h; sourceTree = SOURCE_ROOT; };
 		49D93A221DDEE5180074E00D /* AZZJiraProjectsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraProjectsModel.m; path = Classes/Model/AZZJiraProjectsModel.m; sourceTree = SOURCE_ROOT; };
@@ -254,6 +257,8 @@
 				4906DE871DE4394F00891D1E /* AZZJiraIssueListViewController.m */,
 				49A0A7671E122981000589F2 /* AZZJiraIssueDetailViewController.h */,
 				49A0A7681E122981000589F2 /* AZZJiraIssueDetailViewController.m */,
+				49A0A77F1E13B6AA000589F2 /* AZZJiraIssueEditTransitionViewController.h */,
+				49A0A7801E13B6AA000589F2 /* AZZJiraIssueEditTransitionViewController.m */,
 				49A0A76A1E125B90000589F2 /* AZZJiraAttachmentListViewController.h */,
 				49A0A76B1E125B90000589F2 /* AZZJiraAttachmentListViewController.m */,
 				4906DE8C1DE5946900891D1E /* AZZJiraSelectIssueTypeViewController.h */,
@@ -521,6 +526,7 @@
 				4906DE791DE3E66B00891D1E /* AZZJiraIssueAttachment.m in Sources */,
 				49ED14871DD452C90000207A /* main.m in Sources */,
 				4906DEB91DF50D4800891D1E /* AZZJiraSettingsViewController.m in Sources */,
+				49A0A7811E13B6AA000589F2 /* AZZJiraIssueEditTransitionViewController.m in Sources */,
 				4906DEBD1DF540C200891D1E /* AZZJiraPerformanceSettingViewController.m in Sources */,
 				49A0A7781E13861D000589F2 /* AZZJiraSingleCommentView.m in Sources */,
 				49D93A451DDF04410074E00D /* AZZTouch.m in Sources */,

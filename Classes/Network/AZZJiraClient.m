@@ -27,7 +27,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         instance = [[self alloc] initWithBaseURL:[NSURL URLWithString:AZZJiraClientAPIBaseURL]];
-        instance.requestSerializer.timeoutInterval = 60;
+        instance.requestSerializer.timeoutInterval = 15;
         [(AFJSONResponseSerializer *)instance.responseSerializer setRemovesKeysWithNullValues:YES];
         instance.postSerializer = [AFJSONRequestSerializer serializer];
     });
@@ -219,10 +219,20 @@
 
 - (NSURLSessionDataTask *)requestAssignableUsersWithProject:(NSString *)project
                                                    userName:(NSString *)userName
+                                                   issueKey:(NSString *)issueKey
                                                     success:(AZZJiraSuccessBlock)success
                                                        fail:(AZZJiraFailBlock)fail {
-    NSDictionary *parameter = @{@"project"  : project,
-                                @"username" : userName};
+    NSMutableDictionary *tempParameter = [NSMutableDictionary dictionary];
+    if (project) {
+        [tempParameter setObject:project forKey:@"project"];
+    }
+    if (userName) {
+        [tempParameter setObject:userName forKey:@"username"];
+    }
+    if (issueKey) {
+        [tempParameter setObject:issueKey forKey:@"issueKey"];
+    }
+    NSDictionary *parameter = [tempParameter copy];
     return [self requestWithURL:@"user/assignable/search" method:AZZRequestMethodType_Get parameter:parameter body:nil uploadProgress:nil downloadProgress:nil success:success failure:fail];
 }
 
@@ -367,9 +377,15 @@
 }
 
 - (NSURLSessionDataTask *)requestAssignIssue:(NSString *)issueIDOrKey
+                                    userName:(NSString *)userName
                                      success:(AZZJiraSuccessBlock)success
                                         fail:(AZZJiraFailBlock)failure {
-    NSDictionary *parameters = @{@"name" : self.selfModel.name};
+    NSDictionary *parameters = nil;
+    if (userName) {
+        parameters = @{@"name" : userName};
+    } else {
+        parameters = @{@"name" : self.selfModel.name};
+    }
     return [self requestWithURL:[NSString stringWithFormat:@"issue/%@/assignee", issueIDOrKey] method:AZZRequestMethodType_Put parameter:parameters body:nil uploadProgress:nil downloadProgress:nil success:success failure:failure];
 }
 
@@ -383,29 +399,61 @@
 
 - (NSURLSessionDataTask *)requestDoTransitionWithIssueIdOrKey:(NSString *)issueId
                                                  transitionId:(NSString *)transitionId
+                                                 resolutionId:(NSString *)resolutionId
                                                   commentBody:(NSString *)commentBody
                                                       success:(AZZJiraSuccessBlock)success
                                                          fail:(AZZJiraFailBlock)failure {
     NSDictionary *parameter = nil;
-    if (commentBody) {
-        parameter = @{
-                      @"update" : @{
-                              @"comment" : @[
-                                      @{
-                                          @"add" : @{
-                                                  @"body" : commentBody,
-                                                  },
-                                          }
-                                      ],
-                              },
-                      @"transition" : transitionId,
-                      };
+    if (resolutionId) {
+        if (commentBody.length > 0) {
+            parameter = @{
+                          @"update" : @{
+                                  @"comment" : @[
+                                          @{
+                                              @"add" : @{
+                                                      @"body" : commentBody,
+                                                      },
+                                              }
+                                          ],
+                                  @"resolution" : @[
+                                          @{
+                                              @"set" : @{
+                                                      @"id" : resolutionId,
+                                                      },
+                                              },
+                                          ],
+                                  },
+                          @"transition" : transitionId,
+                          };
+        } else {
+            parameter = @{
+                          @"update" : @{
+                                  @"resolution" : @[
+                                          @{
+                                              @"set" : @{
+                                                      @"id" : resolutionId,
+                                                      },
+                                              },
+                                          ],
+                                  },
+                          @"transition" : transitionId,
+                          };
+        }
     } else {
         parameter = @{
                       @"transition" : transitionId,
                       };
     }
     NSString *url = [NSString stringWithFormat:@"issue/%@/transitions", issueId];
+    return [self requestWithURL:url method:AZZRequestMethodType_Post parameter:parameter body:nil uploadProgress:nil downloadProgress:nil success:success failure:failure];
+}
+
+- (NSURLSessionDataTask *)requestAddCommentWithIssueIdOrKey:(NSString *)issueId
+                                                commentBody:(NSString *)commentBody
+                                                    success:(AZZJiraSuccessBlock)success
+                                                       fail:(AZZJiraFailBlock)failure {
+    NSDictionary *parameter = @{@"body" : commentBody};
+    NSString *url = [NSString stringWithFormat:@"issue/%@/comment", issueId];
     return [self requestWithURL:url method:AZZRequestMethodType_Post parameter:parameter body:nil uploadProgress:nil downloadProgress:nil success:success failure:failure];
 }
 

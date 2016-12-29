@@ -36,10 +36,6 @@
     self.navigationController.viewControllers = @[self];
     self.title = @"Projects";
     [self setupSubviews];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
     
     __weak typeof(self) wself = self;
     [[AZZJiraClient sharedInstance] requestProjectsListSuccess:^(NSHTTPURLResponse *response, id responseObject) {
