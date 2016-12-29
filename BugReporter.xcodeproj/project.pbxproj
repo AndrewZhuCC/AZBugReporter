@@ -40,6 +40,7 @@
 		49A0A77B1E138A2D000589F2 /* AZZJiraCommentsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A0A77A1E138A2D000589F2 /* AZZJiraCommentsView.m */; };
 		49A0A77E1E13B1B5000589F2 /* AZZJiraBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A0A77D1E13B1B5000589F2 /* AZZJiraBaseViewController.m */; };
 		49A0A7811E13B6AA000589F2 /* AZZJiraIssueEditTransitionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A0A7801E13B6AA000589F2 /* AZZJiraIssueEditTransitionViewController.m */; };
+		49A0A7871E14E372000589F2 /* AZZJiraUserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A0A7861E14E372000589F2 /* AZZJiraUserManager.m */; };
 		49D8A3161DFA582400972C8F /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49D8A3151DFA582400972C8F /* Photos.framework */; };
 		49D93A231DDEE5180074E00D /* AZZJiraProjectsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D93A221DDEE5180074E00D /* AZZJiraProjectsModel.m */; };
 		49D93A271DDEE93B0074E00D /* AZZJiraProjectsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D93A261DDEE93B0074E00D /* AZZJiraProjectsListViewController.m */; };
@@ -129,6 +130,8 @@
 		49A0A77D1E13B1B5000589F2 /* AZZJiraBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraBaseViewController.m; path = Classes/ViewController/AZZJiraBaseViewController.m; sourceTree = SOURCE_ROOT; };
 		49A0A77F1E13B6AA000589F2 /* AZZJiraIssueEditTransitionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraIssueEditTransitionViewController.h; path = Classes/ViewController/AZZJiraIssueEditTransitionViewController.h; sourceTree = SOURCE_ROOT; };
 		49A0A7801E13B6AA000589F2 /* AZZJiraIssueEditTransitionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraIssueEditTransitionViewController.m; path = Classes/ViewController/AZZJiraIssueEditTransitionViewController.m; sourceTree = SOURCE_ROOT; };
+		49A0A7851E14E372000589F2 /* AZZJiraUserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZZJiraUserManager.h; sourceTree = "<group>"; };
+		49A0A7861E14E372000589F2 /* AZZJiraUserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZZJiraUserManager.m; sourceTree = "<group>"; };
 		49D8A3151DFA582400972C8F /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		49D93A211DDEE5180074E00D /* AZZJiraProjectsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraProjectsModel.h; path = Classes/Model/AZZJiraProjectsModel.h; sourceTree = SOURCE_ROOT; };
 		49D93A221DDEE5180074E00D /* AZZJiraProjectsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraProjectsModel.m; path = Classes/Model/AZZJiraProjectsModel.m; sourceTree = SOURCE_ROOT; };
@@ -332,6 +335,8 @@
 				49D93A3C1DDF04410074E00D /* AZZJiraClient.h */,
 				49D93A3D1DDF04410074E00D /* AZZJiraClient.m */,
 				49D93A3E1DDF04410074E00D /* AZZJiraConfiguration.h */,
+				49A0A7851E14E372000589F2 /* AZZJiraUserManager.h */,
+				49A0A7861E14E372000589F2 /* AZZJiraUserManager.m */,
 			);
 			name = Network;
 			path = Classes/Network;
@@ -533,6 +538,7 @@
 				4906DE7F1DE3EA3A00891D1E /* AZZJiraIssueCommentModel.m in Sources */,
 				4906DEA01DE7E4EA00891D1E /* AZZJiraCreateIssueInputModel.m in Sources */,
 				49D93A271DDEE93B0074E00D /* AZZJiraProjectsListViewController.m in Sources */,
+				49A0A7871E14E372000589F2 /* AZZJiraUserManager.m in Sources */,
 				4906DE851DE41AC900891D1E /* AZZJiraIssueListTableViewCell.m in Sources */,
 				4906DE8E1DE5946900891D1E /* AZZJiraSelectIssueTypeViewController.m in Sources */,
 				4906DE9D1DE7D15B00891D1E /* AZZJiraBasicCell.m in Sources */,

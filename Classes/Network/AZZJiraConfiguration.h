@@ -16,5 +16,6 @@
 #define AZZJiraKeyChainService  @"com.andrewzhu.azzjira"
 
 #define AZZJiraSettingsTouchCollectSwitch @"AZZJiraSettingsTouchCollectSwitch"
+#define AZZJiraSettingsLastLoginUser      @"AZZJiraSettingsLastLoginUser"
 
 #endif /* AZZJiraConfiguration_h */

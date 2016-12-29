@@ -11,11 +11,11 @@
 #import "AZZJiraProjectsListViewController.h"
 
 #import "AZZJiraConfiguration.h"
+#import "AZZJiraUserManager.h"
 
 #import <Photos/Photos.h>
 
 #import <Masonry/Masonry.h>
-#import <SAMKeychain/SAMKeychain.h>
 
 @interface AZZJiraLoginViewController () <UITextFieldDelegate>
 
@@ -69,7 +69,8 @@
     [[AZZJiraClient sharedInstance] requestLoginWithUserName:userName password:password success:^(NSHTTPURLResponse *response, id responseObject) {
 //        NSLog(@"success response:%@", responseObject);
         if (wself.swRememberPassword.isOn) {
-            [SAMKeychain setPassword:wself.tfPassword.text forService:AZZJiraKeyChainService account:wself.tfUserName.text];
+            [AZZJiraUserManager setPassword:wself.tfPassword.text forUserName:wself.tfUserName.text];
+            [AZZJiraUserManager setLastLoginUserName:wself.tfUserName.text];
         }
         [wself showHudWithTitle:@"Success" detail:nil];
         AZZJiraProjectsListViewController *listVC = [AZZJiraProjectsListViewController new];
@@ -83,14 +84,13 @@
 }
 
 - (void)selectUserButtonTapped:(UIButton *)button {
-    NSArray *accounts = [SAMKeychain accountsForService:AZZJiraKeyChainService];
+    NSArray *accounts = [AZZJiraUserManager allUserNames];
     if (accounts.count > 0) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Users" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
         
         __weak typeof(self) wself = self;
-        for (NSDictionary *accountDic in accounts) {
-            NSString *account = [accountDic objectForKey:@"acct"];
-            NSString *password = [SAMKeychain passwordForService:AZZJiraKeyChainService account:account];
+        for (NSString *account in accounts) {
+            NSString *password = [AZZJiraUserManager passwordForUserName:account];
             UIAlertAction *action = [UIAlertAction actionWithTitle:account style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 wself.tfUserName.text = account;
                 wself.tfPassword.text = password;
@@ -152,13 +152,10 @@
         make.width.mas_equalTo(200);
     }];
     
-    NSArray *accounts = [SAMKeychain accountsForService:AZZJiraKeyChainService];
-    if (accounts.count > 0) {
-        NSString *account = [[accounts lastObject] objectForKey:@"acct"];
-        NSString *password = [SAMKeychain passwordForService:AZZJiraKeyChainService account:account];
-        self.tfUserName.text = account;
-        self.tfPassword.text = password;
-    }
+    NSString *account = [AZZJiraUserManager lastLoginUserName];
+    NSString *password = [AZZJiraUserManager passwordForUserName:account];
+    self.tfUserName.text = account;
+    self.tfPassword.text = password;
 }
 
 - (UITextField *)tfUserName {
@@ -224,7 +221,7 @@
         _btnSelectUser = [[UIButton alloc] init];
         [_btnSelectUser setTitle:@"Select User" forState:UIControlStateNormal];
         [_btnSelectUser addTarget:self action:@selector(selectUserButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-        _btnSelectUser.enabled = ([SAMKeychain accountsForService:AZZJiraKeyChainService].count > 0);
+        _btnSelectUser.enabled = ([AZZJiraUserManager allUserNames].count > 0);
         _btnSelectUser.layer.cornerRadius = 5;
         _btnSelectUser.layer.backgroundColor = [UIColor colorWithRed:0.012 green:0.663 blue:0.957 alpha:1.000].CGColor;
         [self.view addSubview:_btnSelectUser];
