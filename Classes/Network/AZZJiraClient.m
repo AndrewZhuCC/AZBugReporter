@@ -30,6 +30,7 @@
         instance.requestSerializer.timeoutInterval = 15;
         [(AFJSONResponseSerializer *)instance.responseSerializer setRemovesKeysWithNullValues:YES];
         instance.postSerializer = [AFJSONRequestSerializer serializer];
+        instance.postSerializer.timeoutInterval = 15;
     });
     return instance;
 }
@@ -184,13 +185,18 @@
 }
 
 - (NSURLSessionDataTask *)requestIssueListByProjectKey:(NSString *)key
+                                            searchText:(NSString *)searchText
                                                  start:(NSUInteger)start
                                              maxResult:(NSUInteger)maxResult
                                                success:(AZZJiraSuccessBlock)success
                                                   fail:(AZZJiraFailBlock)fail {
-    NSDictionary *parameter = @{@"jql" : [NSString stringWithFormat:@"project = %@ AND resolution = Unresolved", key],
-                                @"startAt" : [@(start) stringValue],
-                                @"maxResults" : [@(maxResult) stringValue]};
+    NSMutableDictionary *tempParameter = [NSMutableDictionary dictionary];
+    if (searchText.length > 0) {
+        [tempParameter setObject:[NSString stringWithFormat:@"project = %@ AND text ~ %@", key, searchText] forKey:@"jql"];
+    } else {
+        [tempParameter setObject:[NSString stringWithFormat:@"project = %@ AND resolution = Unresolved", key] forKey:@"jql"];
+    }
+    NSDictionary *parameter = [tempParameter copy];
     return [self requestWithURL:@"search" method:AZZRequestMethodType_Get parameter:parameter body:nil uploadProgress:nil downloadProgress:nil success:success failure:fail];
 }
 
