@@ -246,6 +246,7 @@
         __weak typeof(self) wself = self;
         [[AZZJiraClient sharedInstance] requestAssignIssue:self.model.key userName:nil success:^(NSHTTPURLResponse *response, id responseObject) {
             [wself showHudWithTitle:@"成功" detail:nil hideAfterDelay:2.f];
+            wself.issueKey = wself.issueKey;
         } fail:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
             [wself showHudWithTitle:@"Error" detail:[responseObject description] hideAfterDelay:3.f];
             NSLog(@"Assign to me error:%@", error);
