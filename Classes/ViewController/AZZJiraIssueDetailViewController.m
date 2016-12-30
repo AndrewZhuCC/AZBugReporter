@@ -288,7 +288,7 @@
     
     
     UIAlertAction *filesAction = [UIAlertAction actionWithTitle:@"File System" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+        NSString *rootPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] stringByDeletingLastPathComponent];
         AZZJiraFileNode *rootNode = [AZZJiraFileNode fileNodeWithRootFilePath:rootPath];
         AZZJiraFileAttachmentViewController *vc = [[AZZJiraFileAttachmentViewController alloc] init];
         vc.delegate = self;

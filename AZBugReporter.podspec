@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "AZBugReporter"
-  s.version      = "0.1.2"
+  s.version      = "0.1.3"
   s.summary      = "iOS bug reporter."
   s.homepage     = "https://github.com/AndrewZhuCC/AZBugReporter"
   s.license      = { :type => "MIT", :file => "LICENSE" }
@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
   s.dependency 'SAMKeychain'
   s.dependency 'SDWebImage'
   s.dependency 'AZMWPhotoBrowser', '~> 2.1.3'
-  s.dependency 'AZ-THPerformanceMonitor', '~> 0.0.12'
+  s.dependency 'AZ-THPerformanceMonitor', '~> 0.0.15'
   s.dependency 'MJRefresh'
 
 end

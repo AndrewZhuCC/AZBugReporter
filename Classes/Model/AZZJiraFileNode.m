@@ -15,6 +15,7 @@
 @property (nonatomic, copy) NSArray<AZZJiraFileNode *> *subpaths;
 @property (nonatomic, assign) BOOL viewable;
 @property (nonatomic, assign) AZZJiraPreviewFileType previewType;
+@property (nonatomic, strong) NSError *subpathsError;
 
 @end
 
@@ -31,6 +32,9 @@
     } else if ([imagePathExtensions containsObject:fileNode.filePath.pathExtension]) {
         fileNode.viewable = YES;
         fileNode.previewType = AZZJiraPreviewType_Image;
+    } else if ([fileNode.filePath.pathExtension isEqualToString:@"plist"]) {
+        fileNode.viewable = YES;
+        fileNode.previewType = AZZJiraPreviewType_Plist;
     } else {
         fileNode.viewable = NO;
         fileNode.previewType = AZZJiraPreviewType_None;
@@ -85,6 +89,7 @@
                 }
                 _subpaths = [tempArray copy];
             } else {
+                self.subpathsError = error;
                 NSLog(@"create node at path: %@ error:%@", rootPath, error);
                 return nil;
             }

@@ -66,7 +66,7 @@
                             self.ivPreview.hidden = YES;
                             [self hideHudAfterDelay:0];
                         } else {
-                            [self showHudWithTitle:@"Error" detail:error.localizedDescription hideAfterDelay:3.f];
+                            [self showHudWithTitle:@"Error" detail:error.localizedDescription];
                         }
                     });
                     break;
@@ -80,9 +80,20 @@
                             wself.tvPreview.hidden = YES;
                             [wself hideHudAfterDelay:0];
                         } else {
-                            [wself showHudWithTitle:@"Error" detail:nil hideAfterDelay:3.f];
+                            [wself showHudWithTitle:@"Error" detail:error.localizedDescription];
                         }
                     }];
+                    break;
+                }
+                    case AZZJiraPreviewType_Plist:
+                {
+                    NSDictionary *plist = [NSDictionary dictionaryWithContentsOfURL:self.fileNode.filePath];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        self.tvPreview.text = [plist description];
+                        self.tvPreview.hidden = NO;
+                        self.ivPreview.hidden = YES;
+                        [self hideHudAfterDelay:0];
+                    });
                     break;
                 }
                     default:

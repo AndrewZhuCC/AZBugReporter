@@ -26,6 +26,14 @@
     [self setupConstraints];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if (!self.fileNode.subpaths && self.fileNode.subpathsError) {
+        [self showHudWithTitle:@"Error" detail:self.fileNode.subpathsError.localizedDescription];
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

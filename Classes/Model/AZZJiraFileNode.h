@@ -12,17 +12,20 @@ typedef NS_ENUM(NSUInteger, AZZJiraPreviewFileType) {
     AZZJiraPreviewType_None,
     AZZJiraPreviewType_Text,
     AZZJiraPreviewType_Image,
+    AZZJiraPreviewType_Plist,
 };
 
 @interface AZZJiraFileNode : NSObject
 
 @property (nonatomic, copy, readonly) NSURL *filePath;
 @property (nonatomic, assign, readonly) BOOL isDirectory;
-@property (nonatomic, copy, readonly) NSArray<AZZJiraFileNode *> *subpaths;
 @property (nonatomic, copy, readonly) NSString *fileName;
 
 @property (nonatomic, assign, readonly) BOOL viewable;
 @property (nonatomic, assign, readonly) AZZJiraPreviewFileType previewType;
+
+@property (nonatomic, copy, readonly) NSArray<AZZJiraFileNode *> *subpaths;
+@property (nonatomic, strong, readonly) NSError *subpathsError;
 
 + (instancetype)fileNodeWithRootFilePath:(NSString *)rootPath;
 + (instancetype)fileNodeWithURL:(NSURL *)fileUrl;
