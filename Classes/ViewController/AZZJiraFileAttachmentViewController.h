@@ -13,6 +13,7 @@
 
 @required
 - (void)fileAttachmentDidSelect:(AZZJiraFileNode *)fileNode selected:(BOOL)selected;
+- (BOOL)fileAttachmentIsSelected:(AZZJiraFileNode *)fileNode;
 - (void)fileAttachmentDidTappedDoneButton;
 
 @end

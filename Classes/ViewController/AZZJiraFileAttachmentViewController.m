@@ -65,6 +65,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"fileNodeCell"];
     AZZJiraFileNode *fileNode = self.fileNode.subpaths[indexPath.row];
+    if ([self.delegate conformsToProtocol:@protocol(AZZJiraFileAttachmentDelegate)]) {
+        if ([self.delegate fileAttachmentIsSelected:fileNode]) {
+            [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+        }
+    }
     cell.textLabel.text = fileNode.fileName;
     if (fileNode.isDirectory) {
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;

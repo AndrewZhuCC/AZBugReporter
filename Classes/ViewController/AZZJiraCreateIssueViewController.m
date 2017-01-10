@@ -38,6 +38,8 @@
 @property (nonatomic, strong) NSMutableArray<MWPhoto *> *selectedPhotos;
 @property (nonatomic, strong) NSMutableArray<AZZJiraFileNode *> *selectedFiles;
 
+@property (nonatomic, strong) AZZJiraFileNode *rootNode;
+
 @property (nonatomic, strong) AZZJiraCreateIssueInputModel *inputModel;
 
 @end
@@ -163,8 +165,7 @@
     
     
     UIAlertAction *filesAction = [UIAlertAction actionWithTitle:@"File System" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        NSString *rootPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] stringByDeletingLastPathComponent];
-        AZZJiraFileNode *rootNode = [AZZJiraFileNode fileNodeWithRootFilePath:rootPath];
+        AZZJiraFileNode *rootNode = self.rootNode;
         AZZJiraFileAttachmentViewController *vc = [[AZZJiraFileAttachmentViewController alloc] init];
         vc.delegate = self;
         vc.fileNode = rootNode;
@@ -190,6 +191,10 @@
             [self.selectedFiles removeObject:fileNode];
         }
     }
+}
+
+- (BOOL)fileAttachmentIsSelected:(AZZJiraFileNode *)fileNode {
+    return [self.selectedFiles containsObject:fileNode];
 }
 
 - (void)fileAttachmentDidTappedDoneButton {
@@ -418,6 +423,14 @@
         [tempArray addObject:asset];
     }
     return [tempArray copy];
+}
+
+- (AZZJiraFileNode *)rootNode {
+    if (!_rootNode) {
+        NSString *rootPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] stringByDeletingLastPathComponent];
+        _rootNode = [AZZJiraFileNode fileNodeWithRootFilePath:rootPath];
+    }
+    return _rootNode;
 }
 
 @end
