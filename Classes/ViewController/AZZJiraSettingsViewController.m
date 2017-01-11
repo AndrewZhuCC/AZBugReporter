@@ -14,7 +14,7 @@
 #import "AZPerformanceMonitorManager.h"
 
 #import <Masonry/Masonry.h>
-#import <NEShakeGestureManager.h>
+#import "NEShakeGestureManager.h"
 
 typedef NS_ENUM(NSUInteger, AZZJiraSettingsCell) {
     AZZJiraSettings_NetworkEye = 0,
