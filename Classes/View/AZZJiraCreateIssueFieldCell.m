@@ -318,7 +318,7 @@
 - (UIButton *)listButton {
     if (!_listButton) {
         _listButton = [[UIButton alloc] initWithFrame:CGRectZero];
-        _listButton.backgroundColor = [UIColor blackColor];
+        [_listButton setImage:[UIImage imageNamed:@"azzglass"] forState:UIControlStateNormal];
         [_listButton addTarget:self action:@selector(listButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:_listButton];
     }

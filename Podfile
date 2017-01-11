@@ -15,7 +15,8 @@ target 'BugReporter' do
   pod 'SDWebImage'
   pod 'UITableView+FDTemplateLayoutCell', '~> 1.5.beta'
   pod "AZMWPhotoBrowser", "~> 2.1.3"
-  pod 'AZ-THPerformanceMonitor', '~> 0.0.15'
+  pod 'AZ-THPerformanceMonitor', '~> 0.0.16'
   pod 'MJRefresh'
+  pod 'AZNetworkEye', "~> 1.0.8"
 
 end

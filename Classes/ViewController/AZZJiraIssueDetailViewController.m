@@ -189,7 +189,7 @@
         make.height.mas_equalTo(200.f);
     }];
     
-    UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(rightNavigateItemCliecked:)];
+    UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithTitle:@"状态修改" style:UIBarButtonItemStylePlain target:self action:@selector(rightNavigateItemCliecked:)];
     self.navigationItem.rightBarButtonItem = right;
 }
 
@@ -290,7 +290,6 @@
     
     
     UIAlertAction *filesAction = [UIAlertAction actionWithTitle:@"File System" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        NSString *rootPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] stringByDeletingLastPathComponent];
         AZZJiraFileNode *rootNode = self.rootNode;
         AZZJiraFileAttachmentViewController *vc = [[AZZJiraFileAttachmentViewController alloc] init];
         vc.delegate = self;

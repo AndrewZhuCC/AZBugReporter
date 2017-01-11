@@ -23,5 +23,6 @@ Pod::Spec.new do |s|
   s.dependency 'AZMWPhotoBrowser', '~> 2.1.3'
   s.dependency 'AZ-THPerformanceMonitor', '~> 0.0.15'
   s.dependency 'MJRefresh'
+  s.dependency 'NetworkEye'
 
 end

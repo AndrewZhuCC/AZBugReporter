@@ -11,5 +11,10 @@
 @interface AZZWindow : UIWindow
 
 + (instancetype)sharedInstance;
+- (void)collectionStart:(NSString *)title;
+- (void)viewControllerDidAppear:(Class)vcClass;
+- (void)viewControllerDidDisappear:(Class)vcClass;
+
+@property (nonatomic, strong) NSMutableDictionary<NSString *, NSNumber *> *batterValues;
 
 @end

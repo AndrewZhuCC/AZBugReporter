@@ -1,23 +1,21 @@
 //
-//  AZZJiraBaseViewController.m
+//  AZZJiraSearchResultViewController.m
 //  BugReporter
 //
-//  Created by 朱安智 on 2016/12/28.
-//  Copyright © 2016年 Andrew. All rights reserved.
+//  Created by 朱安智 on 2017/1/10.
+//  Copyright © 2017年 Andrew. All rights reserved.
 //
 
-#import "AZZJiraBaseViewController.h"
+#import "AZZJiraSearchResultViewController.h"
 
-@interface AZZJiraBaseViewController ()
+@interface AZZJiraSearchResultViewController ()
 
 @end
 
-@implementation AZZJiraBaseViewController
+@implementation AZZJiraSearchResultViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)didReceiveMemoryWarning {

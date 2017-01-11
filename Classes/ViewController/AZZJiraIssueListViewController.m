@@ -9,6 +9,7 @@
 #import "AZZJiraIssueListViewController.h"
 #import "AZZJiraSelectIssueTypeViewController.h"
 #import "AZZJiraIssueDetailViewController.h"
+#import "AZZJiraSearchResultViewController.h"
 
 #import "AZZJiraIssueListTableViewCell.h"
 #import "AZZJiraIssueModel.h"
@@ -25,7 +26,7 @@
 @property (nonatomic, strong) UITableView *tbIssueList;
 
 @property (nonatomic, strong) UISearchController *searchController;
-@property (nonatomic, strong) UITableViewController *searchResultVC;
+@property (nonatomic, strong) AZZJiraSearchResultViewController *searchResultVC;
 @property (nonatomic, copy) NSArray<AZZJiraIssueModel *> *searchResults;
 
 @property (nonatomic, strong) NSMutableArray<AZZJiraIssueModel *> *models;
@@ -158,6 +159,13 @@
     [[AZZJiraClient sharedInstance] requestIssueListByProjectKey:self.projectModel.key searchText:searchController.searchBar.text start:0 maxResult:100 success:^(NSHTTPURLResponse *response, id responseObject) {
         self.searchResults = [AZZJiraIssueModel getIssueModelsWithJSONArray:responseObject[@"issues"]];
         [self.searchResultVC.tableView reloadData];
+        if (self.searchResults.count == 0) {
+            [self.searchResultVC showHudWithTitle:@"No Results" detail:nil];
+        } else {
+            if (self.searchResultVC.hud.alpha != 0.f) {
+                [self.searchResultVC hideHudAfterDelay:0];
+            }
+        }
     } fail:^(NSHTTPURLResponse *response, id responseObject, NSError *error) {
         NSLog(@"search result error:%@", error);
         NSLog(@"responseObject:%@", responseObject);
@@ -200,9 +208,9 @@
     return _searchController;
 }
 
-- (UITableViewController *)searchResultVC {
+- (AZZJiraSearchResultViewController *)searchResultVC {
     if (!_searchResultVC) {
-        _searchResultVC = [[UITableViewController alloc] initWithStyle:UITableViewStylePlain];
+        _searchResultVC = [[AZZJiraSearchResultViewController alloc] initWithStyle:UITableViewStylePlain];
         _searchResultVC.tableView.delegate = self;
         _searchResultVC.tableView.dataSource = self;
         _searchResultVC.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];

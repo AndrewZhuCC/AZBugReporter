@@ -9,13 +9,17 @@
 #import "AZZJiraSettingsViewController.h"
 #import "AZZJiraConfiguration.h"
 #import "AZZJiraPerformanceSettingViewController.h"
+#import "AZZJiraBatteryCollectionViewController.h"
 
 #import "AZPerformanceMonitorManager.h"
 
 #import <Masonry/Masonry.h>
+#import <NEShakeGestureManager.h>
 
 typedef NS_ENUM(NSUInteger, AZZJiraSettingsCell) {
-    AZZJiraSettings_TouchCollector = 0,
+    AZZJiraSettings_NetworkEye = 0,
+    AZZJiraSettings_Battery,
+    AZZJiraSettings_TouchCollector,
     AZZJiraSettings_PerformanceSwitch,
     AZZJiraSettings_PerformanceCPU,
     AZZJiraSettings_PerformanceRunLoop,
@@ -81,6 +85,20 @@ typedef NS_ENUM(NSUInteger, AZZJiraSettingsCell) {
             [(UISwitch *)cell.accessoryView setOn:[userDefaults boolForKey:AZZJiraSettingsTouchCollectSwitch]];
             break;
         }
+        case  AZZJiraSettings_NetworkEye:
+        {
+            cell.accessoryView = nil;
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.textLabel.text = @"Network Eye";
+            break;
+        }
+        case AZZJiraSettings_Battery:
+        {
+            cell.accessoryView = nil;
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.textLabel.text = @"Battery Usage";
+            break;
+        }
         case AZZJiraSettings_PerformanceSwitch:
         {
             if ([cell.accessoryView isKindOfClass:[UISwitch class]]) {
@@ -120,6 +138,17 @@ typedef NS_ENUM(NSUInteger, AZZJiraSettingsCell) {
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     switch (indexPath.row) {
+        case AZZJiraSettings_NetworkEye:
+        {
+            [[NEShakeGestureManager defaultManager] presentInformationViewController];
+            break;
+        }
+        case AZZJiraSettings_Battery:
+        {
+            AZZJiraBatteryCollectionViewController *vc = [AZZJiraBatteryCollectionViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
+        }
         case AZZJiraSettings_PerformanceCPU:
         {
             AZZJiraPerformanceSettingViewController *vc = [[AZZJiraPerformanceSettingViewController alloc] init];

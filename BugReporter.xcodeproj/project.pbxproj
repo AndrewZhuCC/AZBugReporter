@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4045515515E9052076C9CA93 /* libPods-BugReporter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DE006DD8E0FB8C8C3061940F /* libPods-BugReporter.a */; };
 		4906DE631DE2C75900891D1E /* AZZJiraProjectListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906DE621DE2C75900891D1E /* AZZJiraProjectListCell.m */; };
 		4906DE671DE3D7E100891D1E /* AZZJiraIssueModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906DE661DE3D7E100891D1E /* AZZJiraIssueModel.m */; };
 		4906DE6D1DE3DE8700891D1E /* AZZJiraIssueTypeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4906DE6C1DE3DE8700891D1E /* AZZJiraIssueTypeModel.m */; };
@@ -41,6 +42,10 @@
 		49A0A77E1E13B1B5000589F2 /* AZZJiraBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A0A77D1E13B1B5000589F2 /* AZZJiraBaseViewController.m */; };
 		49A0A7811E13B6AA000589F2 /* AZZJiraIssueEditTransitionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A0A7801E13B6AA000589F2 /* AZZJiraIssueEditTransitionViewController.m */; };
 		49A0A7871E14E372000589F2 /* AZZJiraUserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A0A7861E14E372000589F2 /* AZZJiraUserManager.m */; };
+		49A28CDD1E24E1AA00123F58 /* azzglass.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A28CDC1E24E1AA00123F58 /* azzglass.png */; };
+		49A28CE01E252AFD00123F58 /* AZZJiraSearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A28CDF1E252AFD00123F58 /* AZZJiraSearchResultViewController.m */; };
+		49A28CE31E2535DE00123F58 /* UIViewController+AZZJiraViewLife.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A28CE21E2535DE00123F58 /* UIViewController+AZZJiraViewLife.m */; };
+		49A28CE61E25F28E00123F58 /* AZZJiraBatteryCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A28CE51E25F28E00123F58 /* AZZJiraBatteryCollectionViewController.m */; };
 		49D8A3161DFA582400972C8F /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49D8A3151DFA582400972C8F /* Photos.framework */; };
 		49D93A231DDEE5180074E00D /* AZZJiraProjectsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D93A221DDEE5180074E00D /* AZZJiraProjectsModel.m */; };
 		49D93A271DDEE93B0074E00D /* AZZJiraProjectsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D93A261DDEE93B0074E00D /* AZZJiraProjectsListViewController.m */; };
@@ -59,11 +64,9 @@
 		49ED14951DD452C90000207A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49ED14931DD452C90000207A /* LaunchScreen.storyboard */; };
 		49F031001DF6534F001A1FB2 /* AZZJiraFileNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F030FF1DF6534F001A1FB2 /* AZZJiraFileNode.m */; };
 		49F031031DF6538E001A1FB2 /* AZZJiraFileAttachmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F031021DF6538E001A1FB2 /* AZZJiraFileAttachmentViewController.m */; };
-		D75F465EA99FA827A7F1FFD3 /* libPods-BugReporter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0965C43283F5966068DCED24 /* libPods-BugReporter.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0965C43283F5966068DCED24 /* libPods-BugReporter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BugReporter.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		33FB23EE2FA9F0F9266DE158 /* Pods-BugReporter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BugReporter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BugReporter/Pods-BugReporter.debug.xcconfig"; sourceTree = "<group>"; };
 		4906DE611DE2C75900891D1E /* AZZJiraProjectListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraProjectListCell.h; path = Classes/View/AZZJiraProjectListCell.h; sourceTree = SOURCE_ROOT; };
 		4906DE621DE2C75900891D1E /* AZZJiraProjectListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraProjectListCell.m; path = Classes/View/AZZJiraProjectListCell.m; sourceTree = SOURCE_ROOT; };
@@ -132,6 +135,13 @@
 		49A0A7801E13B6AA000589F2 /* AZZJiraIssueEditTransitionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraIssueEditTransitionViewController.m; path = Classes/ViewController/AZZJiraIssueEditTransitionViewController.m; sourceTree = SOURCE_ROOT; };
 		49A0A7851E14E372000589F2 /* AZZJiraUserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZZJiraUserManager.h; sourceTree = "<group>"; };
 		49A0A7861E14E372000589F2 /* AZZJiraUserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZZJiraUserManager.m; sourceTree = "<group>"; };
+		49A28CDC1E24E1AA00123F58 /* azzglass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = azzglass.png; sourceTree = "<group>"; };
+		49A28CDE1E252AFD00123F58 /* AZZJiraSearchResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraSearchResultViewController.h; path = Classes/ViewController/AZZJiraSearchResultViewController.h; sourceTree = SOURCE_ROOT; };
+		49A28CDF1E252AFD00123F58 /* AZZJiraSearchResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraSearchResultViewController.m; path = Classes/ViewController/AZZJiraSearchResultViewController.m; sourceTree = SOURCE_ROOT; };
+		49A28CE11E2535DE00123F58 /* UIViewController+AZZJiraViewLife.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+AZZJiraViewLife.h"; path = "Classes/Window/UIViewController+AZZJiraViewLife.h"; sourceTree = SOURCE_ROOT; };
+		49A28CE21E2535DE00123F58 /* UIViewController+AZZJiraViewLife.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+AZZJiraViewLife.m"; path = "Classes/Window/UIViewController+AZZJiraViewLife.m"; sourceTree = SOURCE_ROOT; };
+		49A28CE41E25F28E00123F58 /* AZZJiraBatteryCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraBatteryCollectionViewController.h; path = Classes/ViewController/AZZJiraBatteryCollectionViewController.h; sourceTree = SOURCE_ROOT; };
+		49A28CE51E25F28E00123F58 /* AZZJiraBatteryCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraBatteryCollectionViewController.m; path = Classes/ViewController/AZZJiraBatteryCollectionViewController.m; sourceTree = SOURCE_ROOT; };
 		49D8A3151DFA582400972C8F /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		49D93A211DDEE5180074E00D /* AZZJiraProjectsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraProjectsModel.h; path = Classes/Model/AZZJiraProjectsModel.h; sourceTree = SOURCE_ROOT; };
 		49D93A221DDEE5180074E00D /* AZZJiraProjectsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraProjectsModel.m; path = Classes/Model/AZZJiraProjectsModel.m; sourceTree = SOURCE_ROOT; };
@@ -166,6 +176,7 @@
 		49F031011DF6538E001A1FB2 /* AZZJiraFileAttachmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZZJiraFileAttachmentViewController.h; path = Classes/ViewController/AZZJiraFileAttachmentViewController.h; sourceTree = SOURCE_ROOT; };
 		49F031021DF6538E001A1FB2 /* AZZJiraFileAttachmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZZJiraFileAttachmentViewController.m; path = Classes/ViewController/AZZJiraFileAttachmentViewController.m; sourceTree = SOURCE_ROOT; };
 		8957BAEEAE49460388B3B423 /* Pods-BugReporter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BugReporter.release.xcconfig"; path = "Pods/Target Support Files/Pods-BugReporter/Pods-BugReporter.release.xcconfig"; sourceTree = "<group>"; };
+		DE006DD8E0FB8C8C3061940F /* libPods-BugReporter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BugReporter.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,7 +185,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				49D8A3161DFA582400972C8F /* Photos.framework in Frameworks */,
-				D75F465EA99FA827A7F1FFD3 /* libPods-BugReporter.a in Frameworks */,
+				4045515515E9052076C9CA93 /* libPods-BugReporter.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,7 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				49D8A3151DFA582400972C8F /* Photos.framework */,
-				0965C43283F5966068DCED24 /* libPods-BugReporter.a */,
+				DE006DD8E0FB8C8C3061940F /* libPods-BugReporter.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -243,6 +254,8 @@
 				49D93A361DDF04340074E00D /* AZZWindow.m */,
 				49D93A371DDF04340074E00D /* UIWindow+SendEvent.h */,
 				49D93A381DDF04340074E00D /* UIWindow+SendEvent.m */,
+				49A28CE11E2535DE00123F58 /* UIViewController+AZZJiraViewLife.h */,
+				49A28CE21E2535DE00123F58 /* UIViewController+AZZJiraViewLife.m */,
 			);
 			name = Window;
 			sourceTree = "<group>";
@@ -276,6 +289,10 @@
 				49F031021DF6538E001A1FB2 /* AZZJiraFileAttachmentViewController.m */,
 				49A0A7621E0BB15C000589F2 /* AZZJiraLogPreviewViewController.h */,
 				49A0A7631E0BB15C000589F2 /* AZZJiraLogPreviewViewController.m */,
+				49A28CDE1E252AFD00123F58 /* AZZJiraSearchResultViewController.h */,
+				49A28CDF1E252AFD00123F58 /* AZZJiraSearchResultViewController.m */,
+				49A28CE41E25F28E00123F58 /* AZZJiraBatteryCollectionViewController.h */,
+				49A28CE51E25F28E00123F58 /* AZZJiraBatteryCollectionViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -324,6 +341,7 @@
 			children = (
 				49A0A7651E0BB472000589F2 /* azz-preview.png */,
 				49D93A291DDEFCEF0074E00D /* layout-placeholder.png */,
+				49A28CDC1E24E1AA00123F58 /* azzglass.png */,
 			);
 			name = resources;
 			path = Classes/resources;
@@ -459,6 +477,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49A28CDD1E24E1AA00123F58 /* azzglass.png in Resources */,
 				49ED14951DD452C90000207A /* LaunchScreen.storyboard in Resources */,
 				49A0A7661E0BB472000589F2 /* azz-preview.png in Resources */,
 				49ED14921DD452C90000207A /* Assets.xcassets in Resources */,
@@ -545,6 +564,7 @@
 				49A0A76F1E1366FE000589F2 /* AZZJiraIssueTransitionModel.m in Sources */,
 				4906DE7C1DE3E8E800891D1E /* AZZJiraIssueVersionModel.m in Sources */,
 				4906DE941DE6D17700891D1E /* AZZJiraCreateIssueFieldCell.m in Sources */,
+				49A28CE31E2535DE00123F58 /* UIViewController+AZZJiraViewLife.m in Sources */,
 				4906DE881DE4394F00891D1E /* AZZJiraIssueListViewController.m in Sources */,
 				49F031001DF6534F001A1FB2 /* AZZJiraFileNode.m in Sources */,
 				49A0A77B1E138A2D000589F2 /* AZZJiraCommentsView.m in Sources */,
@@ -558,7 +578,9 @@
 				49D93A461DDF04410074E00D /* AZZTouchesCollector.m in Sources */,
 				4906DE821DE3ED3400891D1E /* AZZJiraIssueResolutionModel.m in Sources */,
 				4906DE6D1DE3DE8700891D1E /* AZZJiraIssueTypeModel.m in Sources */,
+				49A28CE01E252AFD00123F58 /* AZZJiraSearchResultViewController.m in Sources */,
 				4906DE671DE3D7E100891D1E /* AZZJiraIssueModel.m in Sources */,
+				49A28CE61E25F28E00123F58 /* AZZJiraBatteryCollectionViewController.m in Sources */,
 				4906DE731DE3E2D900891D1E /* AZZJiraIssuePriorityModel.m in Sources */,
 				4906DE701DE3E12200891D1E /* AZZJiraUserModel.m in Sources */,
 				49A0A7641E0BB15C000589F2 /* AZZJiraLogPreviewViewController.m in Sources */,
