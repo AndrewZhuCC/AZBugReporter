@@ -12,7 +12,7 @@
 
 #import "AZZJiraLoginViewController.h"
 
-#import <AZ-THPerformanceMonitor/AZPerformanceMonitor.h>
+#import "AZPerformanceMonitor.h"
 
 #define CurrentDeviceBatteryLevel [UIDevice currentDevice].batteryLevel
 
