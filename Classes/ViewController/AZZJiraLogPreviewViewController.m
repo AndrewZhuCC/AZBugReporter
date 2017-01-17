@@ -74,7 +74,8 @@
                     case AZZJiraPreviewType_Image:
                 {
                     __weak typeof(self) wself = self;
-                    [self.ivPreview sd_setImageWithURL:self.fileNode.filePath placeholderImage:[UIImage imageNamed:@"layout-placeholder"] options:SDWebImageRetryFailed | SDWebImageHandleCookies completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                    NSString *imagePath = [[NSBundle bundleForClass:[self class]] pathForResource:@"layout-placeholder" ofType:@"png"];
+                    [self.ivPreview sd_setImageWithURL:self.fileNode.filePath placeholderImage:[UIImage imageWithContentsOfFile:imagePath] options:SDWebImageRetryFailed | SDWebImageHandleCookies completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                         if (image) {
                             wself.ivPreview.hidden = NO;
                             wself.tvPreview.hidden = YES;

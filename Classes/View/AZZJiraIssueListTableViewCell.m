@@ -113,7 +113,8 @@
     self.model = model;
     
     __weak typeof(self) wself = self;
-    [self.typeIcon sd_setImageWithURL:self.model.issueType.iconUrl placeholderImage:[UIImage imageNamed:@"layout-placeholder"] options:SDWebImageAvoidAutoSetImage | SDWebImageRetryFailed | SDWebImageHandleCookies completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    NSString *imagePath = [[NSBundle bundleForClass:[self class]] pathForResource:@"layout-placeholder" ofType:@"png"];
+    [self.typeIcon sd_setImageWithURL:self.model.issueType.iconUrl placeholderImage:[UIImage imageWithContentsOfFile:imagePath] options:SDWebImageAvoidAutoSetImage | SDWebImageRetryFailed | SDWebImageHandleCookies completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         if ([wself.model isEqual:model] && image) {
             wself.typeIcon.image = image;
         } else if (error) {
@@ -126,7 +127,7 @@
     
     self.lbSummary.text = self.model.summary;
     
-    [self.statusIcon sd_setImageWithURL:self.model.status.iconUrl placeholderImage:[UIImage imageNamed:@"layout-placeholder"] options:SDWebImageAvoidAutoSetImage | SDWebImageRetryFailed | SDWebImageHandleCookies completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [self.statusIcon sd_setImageWithURL:self.model.status.iconUrl placeholderImage:[UIImage imageWithContentsOfFile:imagePath] options:SDWebImageAvoidAutoSetImage | SDWebImageRetryFailed | SDWebImageHandleCookies completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         if ([wself.model isEqual:model] && image) {
             wself.statusIcon.image = image;
         } else if (error) {
@@ -135,7 +136,7 @@
     }];
     self.lbStatus.text = self.model.status.name;
     
-    [self.priorityIcon sd_setImageWithURL:self.model.priority.iconUrl placeholderImage:[UIImage imageNamed:@"layout-placeholder"] options:SDWebImageAvoidAutoSetImage | SDWebImageRetryFailed | SDWebImageHandleCookies completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [self.priorityIcon sd_setImageWithURL:self.model.priority.iconUrl placeholderImage:[UIImage imageWithContentsOfFile:imagePath] options:SDWebImageAvoidAutoSetImage | SDWebImageRetryFailed | SDWebImageHandleCookies completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         if ([wself.model isEqual:model] && image) {
             wself.priorityIcon.image = image;
         } else if (error) {

@@ -57,12 +57,13 @@
 
 - (void)setModel:(AZZJiraUserModel *)model {
     _model = model;
+    NSString *imagePath = [[NSBundle bundleForClass:[self class]] pathForResource:@"layout-placeholder" ofType:@"png"];
     if (model) {
         self.lbName.text = model.displayName;
         NSURL *assigneeUrl = [NSURL URLWithString:model.avatarUrls[@"48x48"]];
-        [self.ivIcon sd_setImageWithURL:assigneeUrl placeholderImage:[UIImage imageNamed:@"layout-placeholder"] options:SDWebImageRetryFailed | SDWebImageHandleCookies];
+        [self.ivIcon sd_setImageWithURL:assigneeUrl placeholderImage:[UIImage imageWithContentsOfFile:imagePath] options:SDWebImageRetryFailed | SDWebImageHandleCookies];
     } else {
-        self.ivIcon.image = [UIImage imageNamed:@"layout-placeholder"];
+        self.ivIcon.image = [UIImage imageWithContentsOfFile:imagePath];
         self.lbName.text = @"未分配";
     }
 }

@@ -64,7 +64,8 @@
     NSURL *imageUrl = [NSURL URLWithString:imageURL];
     if (imageUrl) {
         __weak typeof(self) wself = self;
-        [self.icon sd_setImageWithURL:imageUrl placeholderImage:[UIImage imageNamed:@"layout-placeholder"] options:SDWebImageAvoidAutoSetImage | SDWebImageRetryFailed | SDWebImageHandleCookies completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        NSString *imagePath = [[NSBundle bundleForClass:[self class]] pathForResource:@"layout-placeholder" ofType:@"png"];
+        [self.icon sd_setImageWithURL:imageUrl placeholderImage:[UIImage imageWithContentsOfFile:imagePath] options:SDWebImageAvoidAutoSetImage | SDWebImageRetryFailed | SDWebImageHandleCookies completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             if ([imageUrl isEqual:imageURL]) {
                 wself.icon.image = image;
                 [wself.icon setNeedsLayout];

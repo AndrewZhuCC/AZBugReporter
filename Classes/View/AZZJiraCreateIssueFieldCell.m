@@ -318,7 +318,8 @@
 - (UIButton *)listButton {
     if (!_listButton) {
         _listButton = [[UIButton alloc] initWithFrame:CGRectZero];
-        [_listButton setImage:[UIImage imageNamed:@"azzglass"] forState:UIControlStateNormal];
+        NSString *imagePath = [[NSBundle bundleForClass:[self class]] pathForResource:@"azzglass" ofType:@"png"];
+        [_listButton setImage:[UIImage imageWithContentsOfFile:imagePath] forState:UIControlStateNormal];
         [_listButton addTarget:self action:@selector(listButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:_listButton];
     }

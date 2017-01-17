@@ -76,7 +76,8 @@
     self.lbDescription.text = model.modelDescription;
     
     __weak typeof(self) wself = self;
-    [self.icon sd_setImageWithURL:model.iconUrl placeholderImage:[UIImage imageNamed:@"layout-placeholder"] options:SDWebImageRetryFailed | SDWebImageHandleCookies | SDWebImageAvoidAutoSetImage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    NSString *imagePath = [[NSBundle bundleForClass:[self class]] pathForResource:@"layout-placeholder" ofType:@"png"];
+    [self.icon sd_setImageWithURL:model.iconUrl placeholderImage:[UIImage imageWithContentsOfFile:imagePath] options:SDWebImageRetryFailed | SDWebImageHandleCookies | SDWebImageAvoidAutoSetImage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         if (image && [model isEqual:wself.model]) {
             wself.icon.image = image;
         } else if (error) {
