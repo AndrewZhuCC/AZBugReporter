@@ -295,6 +295,12 @@
     NSArray *sortedKeys = @[@"summary", @"priority", @"duedate", @"components", @"versions", @"fixVersions", @"assignee", @"reporter", @"environment", @"description", @"attachment", @"labels"];
     NSMutableArray *tempKeys = [fieldsModels.allKeys mutableCopy];
     [tempKeys removeObjectsInArray:@[@"issuetype", @"project", @"timetracking", @"attachment", @"resolution"]];
+    for (NSString *key in tempKeys.copy) {
+        if ([sortedKeys indexOfObject:key] == NSNotFound) {
+            NSLog(@"key not found:%@", key);
+            [tempKeys removeObject:key];
+        }
+    }
     self.allModelKeys = [tempKeys sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
         NSInteger idx1 = [sortedKeys indexOfObject:obj1];
         NSInteger idx2 = [sortedKeys indexOfObject:obj2];
