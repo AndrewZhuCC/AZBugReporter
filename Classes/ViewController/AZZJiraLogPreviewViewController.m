@@ -46,9 +46,17 @@
         make.right.equalTo(self.view);
         make.bottom.equalTo(self.view);
     }];
+    
+    UIBarButtonItem *action = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(actionButtonClicked:)];
+    self.navigationItem.rightBarButtonItem = action;
 }
 
 #pragma mark - Actions
+
+- (void)actionButtonClicked:(id)sender {
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:@[self.fileNode.filePath] applicationActivities:nil];
+    [self presentViewController:activityVC animated:YES completion:nil];
+}
 
 - (void)loadLogToPreview {
     if (self.fileNode) {
