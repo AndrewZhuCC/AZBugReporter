@@ -15,11 +15,13 @@
 
 #import <Masonry/Masonry.h>
 #import "NEShakeGestureManager.h"
+#import <IQKeyboardManager/IQKeyboardManager.h>
 
 typedef NS_ENUM(NSUInteger, AZZJiraSettingsCell) {
     AZZJiraSettings_NetworkEye = 0,
     AZZJiraSettings_Battery,
     AZZJiraSettings_TouchCollector,
+    AZZJiraSettings_KeyboardManager,
     AZZJiraSettings_PerformanceSwitch,
     AZZJiraSettings_PerformanceCPU,
     AZZJiraSettings_PerformanceRunLoop,
@@ -83,6 +85,21 @@ typedef NS_ENUM(NSUInteger, AZZJiraSettingsCell) {
             }
             NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
             [(UISwitch *)cell.accessoryView setOn:[userDefaults boolForKey:AZZJiraSettingsTouchCollectSwitch]];
+            break;
+        }
+        case AZZJiraSettings_KeyboardManager:
+        {
+            if ([cell.accessoryView isKindOfClass:[UISwitch class]]) {
+                cell.accessoryView.tag = indexPath.row;
+                cell.textLabel.text = @"Keyboard Manager";
+            } else {
+                UISwitch *switchButton = [[UISwitch alloc] initWithFrame:CGRectZero];
+                switchButton.tag = indexPath.row;
+                [switchButton addTarget:self action:@selector(switchActionValueChanged:) forControlEvents:UIControlEventValueChanged];
+                cell.accessoryView = switchButton;
+                cell.textLabel.text = @"Keyboard Manager";
+            }
+            [(UISwitch *)cell.accessoryView setOn:[[IQKeyboardManager sharedManager] isEnabled]];
             break;
         }
         case  AZZJiraSettings_NetworkEye:
@@ -177,6 +194,11 @@ typedef NS_ENUM(NSUInteger, AZZJiraSettingsCell) {
         {
             NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
             [userDefaults setBool:switchButton.isOn forKey:AZZJiraSettingsTouchCollectSwitch];
+            break;
+        }
+        case AZZJiraSettings_KeyboardManager:
+        {
+            [[IQKeyboardManager sharedManager] setEnable:switchButton.isOn];
             break;
         }
         case AZZJiraSettings_PerformanceSwitch:
